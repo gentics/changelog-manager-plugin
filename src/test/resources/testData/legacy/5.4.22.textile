@@ -1,0 +1,19 @@
+h2. Changes with Gentics Content.Node 5.4.22
+
+endprologue.
+
+----
+
+WARNING: *Manual Change* In version **5.4.19** the template mimetype was changed from text/js to text/javascript. This change was reverted due to an incompatibility with Gentics Portal.Node. This incompatibility was resolved for Gentics Portal.Node releases that were made after **Update 11927 2012-03-02**. 
+
+Once you have updated your Gentics Portal.Node installations you can execute the following sql statement within your node database to apply the change. The incompatibility caused pages that were created with the text/javscript mimetype to be displayed incorrectly within any portal that serves pages using the GenticsContentPortlet.
+
+<shell>
+UPDATE ml SET contenttype = 'text/javascript' WHERE name='JavaScript';
+</shell>
+
+----
+
+NOTE: For changes to Aloha Editor please see the "Aloha Editor Changelog":https://github.com/alohaeditor/Aloha-Editor/blob/4314730b48fc03407d3f21a37976a84be287efda/CHANGELOG.md. This Gentics Content.Node version includes the Aloha Editor 0.20.10 - 2012/04/17.
+
+----

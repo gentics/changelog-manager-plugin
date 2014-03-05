@@ -1,0 +1,132 @@
+h2. Changes with Gentics Content.Node 5.5.1
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Some javascript guards were added to prevent javascript errors that could occure when a cached javascript file was not directly updated after the system update.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed differential page import to remove folders that are no longer present in the filesystem.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The link browser window will now open centered. The lightbox color of the link browser was also changed to a more consistant white.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed handling of requests to the REST API with an invalid nodeId: If 0 is given, this is handled like if no nodeId was given. If an invalid nodeId is given, the client will get an error response.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+A bug within the object list was fixed. Previously the language of the last visited folder was displayed within the assistant when opening a folder in a node with no assigned languages. 
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed exceptions like "com.gentics.api.lib.exception.NodeException: languageid not set" while publishing. Those exception had no functional consequences other than filling the publish logs.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed error while exporting a contentrepository with a tagmap entry of type 4 (which is deprecated), when the new export mechanism was used.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed exporting datasource with the new export mechanism, so that the export bundle can be imported on systems using the old import without errors.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The folder rest method create will now no longer throw a null pointer exception when no folderId parameter was specified.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+A small padding was added to the bottom area of the main tree. Some browsers show a info bar within that area.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed possible NullPointerException while publishing when using versioned publishing and multichannelling in combination.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed applying of folder object properties to subfolders, which did not work.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed setting of the folder startpage in folders that have been localized in channels.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed publishing of page variants, when versioned publishing is used. Before this fix, it was possible that published page variants still rendered the old content, although another page variant was modified and published.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed the handling of filenames within the gcn-fileupload plugin. Previously the filename was not determined correctly.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed quickjump. Previously pages that were opened using the quickjump did not update the internal folder id reference. This caused multiple issues. The page settings did not contain the correct list of templates within the templates dropdown. 
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed quickjump. Previously the assistant area between the free and the page was not shown. Now the assistant frame will be opened once a page is loaded.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a bug with the Repository Browser which would not allow to fill URL Parttypes of object properties.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed possible rendering error when rendering a templatetag, that links to an overview over pages if multichannelling is used.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Changed the flash & Aloha Editor file uploaders (Rest-API) to automatically replace not allowed characters with _.
+The following characters are allowed in a filename and will not be replaced: a-z A-Z 0-9 ,.-()[]{}$
+The umlauts &auml; &ouml; &uuml; &Auml; &Ouml; &Uuml; &szlig; are replaced with ae oe ue Ae Oe Ue ss.
+Filenames are now also cut automatically (silent) to not exceed the limit of 64 characters.
+
+----
+
+NOTE: For changes to Aloha Editor please see the "Aloha Editor Changelog":https://github.com/alohaeditor/Aloha-Editor/blob/fb79ade74b353fc9d938bfa0da6c2b5428a97cc2/CHANGELOG.md . This Gentics Content.Node version includes the Aloha Editor 0.20.12 - 2012/05/24.
+
+----

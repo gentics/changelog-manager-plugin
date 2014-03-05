@@ -1,0 +1,15 @@
+h2. Changes with Gentics Content.Node 5.11.4
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+A possible NPE was fixed that could occur while rendering overviews over pages.
+
+----
+
+NOTE: This Gentics Content.Node version includes the "Aloha Editor 0.22.7 - 2013/01/08":https://github.com/alohaeditor/Aloha-Editor/blob/alohaeditor-0.22.7-commercial/CHANGELOG.md
+
+----

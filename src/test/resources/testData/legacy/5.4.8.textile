@@ -1,0 +1,39 @@
+h2. Changes with Gentics Content.Node 5.4.8
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed missing related links in the assistant frame for Aloha edit and previde modes.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed maintenance stream not being reset after all user session are cleared (can happen during the new BlackPanther update).
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed searching of objects for creating links in Aloha when multichannelling is used: Always search objects in the correct channel now.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed IllegalAnnotationException when using the REST API to get XML data.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed bug that occured when uploading a file with the flash uploader. Internet Explorer 7 in combination with some versions of flash (incl. 11.1) previously passed cookie values to flash. The uploader will now no longer fail when a session secret previously was set using the passed cookie. Newer browsers won't pass the cookie because it was set to httponly uppon creation.
+
+----
+
+NOTE: For changes to Aloha Editor please see the "Aloha Editor Changelog":https://github.com/alohaeditor/Aloha-Editor/blob/1fdd7e44c6cf8cb28903502324614c0f2fcccddc/CHANGELOG.md. This Gentics Content.Node version includes the Aloha Editor 0.20.4 - 2012/01/24.
+
+----

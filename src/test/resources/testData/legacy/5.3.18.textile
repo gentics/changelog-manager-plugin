@@ -1,0 +1,231 @@
+h2. Changes with Gentics Content.Node 5.3.18
+
+endprologue.
+
+----
+
+WARNING: *Manual Change* Removed handling of magic image blocks. This affects the handling of gtxalohaimage tags. The inline image block handling and editing was replaced with the new <a href="http://www.gentics.com/Content.Node/infoportal/cms/wiki/Imagemanipulation2.en.php">imagemanipulation2 feature</a>. This change is only required when the feature aloha010 is enabled.
+
+----
+
+WARNING: *Manual Change* The gtxalohapagelink tag-type was updated.
+
+Please update the gtxalohapagelink tag-type according to <a href="http://gentics.com/Content.Node/infoportal/cms/Does-the-Aloha-Link-plugin-support-internal-links.en.php"> this definition</a>.
+
+This fixes a bug where additional whitespace is inserted around internal links.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a css bug with editicons in Firefox, where icons would have an unwanted offset. Also added zero border with to images within tagicons to prevent them from being outlined when inside an anchor tag. Therefore the following css classes have been changed: ".GENTICS_block .aloha-editicons button" (added borders and background) and .GENTICS_block .aloha-editicons button img (added border 0px).
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed: the REST-API will now correctly apply filters when querying for files.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a NPE in the REST-API when querying for pages with versioninfo=true.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The Repository Browser is now translated correctly.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Publishing a page from the Aloha wiki-mode only saved the page, but didn't publish it.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Entering a width or height in the imagemanipulation2 image size fields sometimes led to a reduction of the image size. Values that exceed the bounds of the image will now be correctly reduced to the defined limits of the image manipulation2. The aspect ratio will be preserved correctly.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The default setting of the imagemanipulation2 contained an error that disabled the keep aspect ratio button.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The imagemanipulation2 will now display a messagebox whenever the user enters a imagesize that exceeds the given bounds.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The customform_resolve_nodetags feature didn't work in the Portal.Node frontend
+
+If the customform_resolve_nodetags feature was activated, and the
+tag-fill dialog was opened in the Portal.Node frontend (by clicking on a
+tag) customform parts were rendered as the empty string.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Some i18n translations were missing for the imagemanipulation2 feature. Those missing translations were added.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The imagemanipulation2 will now automatically resize images to a size that does not exceeds the given bounds.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The ribbon will now no longer toggle between visibe and invisible mode when entering the edit mode. The ribbon will now only be shown when using the realedit mode"
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The type of objects which are listed in the URL field of the link plugin, and in the repository-browser, can now be configured in the node.conf.
+
+For example, the default configuration of the URL field of the link plugin will list only pages:
+
+<shell>
+$ALOHA_SETTINGS['plugins']['link']['objectTypeFilter'] = array('website');
+</shell>
+
+The repository browser will list files in addition to pages:
+
+<shell>
+$ALOHA_SETTINGS['plugins']['gcn-linkbrowser']['objectTypeFilter'] = array('website', 'files');
+</shell>
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+When a page-import is performed, the user of all active sessions will be set to the user of the page-import.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The Aloha Editor's format plugin functionality "removeFormat" may now be configured to remove more than the standard set of formattings. By default it will only remove the following html tags: 'strong', 'em', 'b', 'i', 'cite', 'q', 'code', 'abbr', 'del', 'sub', 'sup'. You can however provide a different set of tags to be removed by adding your configuration as an array to the format plugin's Aloha settings:
+
+<shell>
+$ALOHA_SETTINGS['plugins']['format']['removeFormats'] = array('strong', 'em', 'b', 'i', 'cite', 'h1', 'h2', 'h3');
+</shell>
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The table and commands plugin were added to the list of default aloha plugins. A guide on how to add additional plugins can be found <a href="http://www.gentics.com/Content.Node/infoportal/cms/Configuring-Aloha-Plugins-in-Gentics-Content.Node.en.php">here</a>.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The GCN repositories used by alohaeditor now provide metainformation to support better paging in the browser.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Templates that don't have a doctype will get a default html5 doctype. The doctype will only be added when viewing the page in editmode. Preview and livemode are not affected. For more information please read <a href="http://www.gentics.com/Content.Node/infoportal/cms/Aloha-and-Internet-Explorer.en.php">this FAQ</a>.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+In &lt;xnl if&gt;, there are now two new functions to determine whether rendering is done in the backend or frontend: &lt;xnl if(isBackend())&gt; and &lt;xnl if(isFrontend())&gt;
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The sidebar can now be disabled using the following setting: <pre>$ALOHA_SETTINGS['sidebar']['disabled'] = 'true';</pre> For more information please take a look at the aloha editor changelog.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed: Clean-up of Aloha editables during initialization
+
+Earlier, the generic and the santize content-handler were used to
+clean-up an editable when it was initialized. Now, no clean-up will be
+performed on initialization.
+
+In particular, the generic content-handler performed transformations
+like turning a strong tag into a b tag, which was undesired.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The #nodeViews container in the assistant frame was set to a fixed width.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The Aloha Editor gcn plugin will now deliberately ignore magic links with a data attribute data-gcnignore="true"
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+When using the Repository Browser in Aloha to get pages and files, the paging will now work correctly.
+                                                                                                                  
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Searching for files from the Aloha-Link-Plugin URL-attribute-field will find files that don't match the search text.
+
+The Bug only occurred if file-search was configured for the URL-attribute-field.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+When using Aloha 0.20 for editing, the language for Aloha UI is now the the CMS UI language for the current user.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The REST API calls to get objects in folders will now return numItems (total number of items) and hasMoreItems (true if more items are available), to support client side paging
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+When using the Repository Browser in Aloha to find pages, the sorting of folders was different than in the tree: folders starting with '[' were sorted first in the Repository Browser, while they are sorted last in the tree. This has been fixed now, the sorting should be identical now.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+When using the DiffResource of the REST API to calculate diffs between given HTML codes, using either method diff/html or diff/source, the templates used to render differences are now restricted to accessing Object Properties. It is no longer possible to invoke Methods of objects.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The REST API FolderResource has a new method getItems to get a paged,sorted list of pages,images and files
+
+----
+
+NOTE: For changes to Aloha Editor please see the "Aloha Editor Changelog":https://github.com/alohaeditor/Aloha-Editor/blob/c14adf2a193538bf0b0633f27ba0bbc7e6d75987/CHANGELOG.md . This Gentics Content.Node version includes the Aloha Editor 0.20 Beta release (2011).
+
+----
+

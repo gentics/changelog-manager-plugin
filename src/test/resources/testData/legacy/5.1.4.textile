@@ -1,0 +1,94 @@
+h2. Changes with Gentics Content.Node 5.1.4
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed ProxyServlet Exception (invalid uri / invalid query) which occurred when performing an edit operation on a content tag from Gentics Portal.Node in Aloha mode.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed UI issue within the tagtype edit view. If a part is defined as liveeditable the editable checkbox will be enabled as well now.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed an error (SGB) that occurs if the validation the feature is turned on and a tag is edited in the context of Gentics Portal.Node / Aloha.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Removed versioned publishing, which does not work reliable.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Performance enhancement and fixed timeout for Live-Editor page-save.
+
+The performance enhancement concerns pages with many live-editable
+tags. Tests showed, that saving a page with 260 live-editable tags took
+35 seconds originally, which was reduced to 6 seconds if the page had
+changes, or 3 seconds if the page had no changes.
+    
+The timeout-fix was made so that no timeout will occur, if saving a page
+should take longer than 30 seconds.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed item-list column resizing in IE
+    
+When certain columns in an item-list, such as the one for the name of a
+page, were wider than the base column width, the column was first
+rendered with the correct (wider) size, but collapsed immediately to the
+base column width when the mouse was moved to hover over the item-list.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed assistant frame. Aloha will now also add history entries to the assistant frame.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed bug in overviews over pages, which were selected and ordered individually, that prevented correct rendering of pages. 
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed NoClassDefFoundError during validation of style attributes.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Added render messages to the Aloha settings, such that they will be logged in Aloha, when the page is rendered. The log level can be configured by setting it to log4j.logger.com.gentics.aloha in nodelog.properties.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed Rendering of Velocity Parts: Velocity must not be rendered in edit mode. That means that if a Tag is rendered e.g. like $cms.page.tags.test or a Part is rendered via $cms.tag.parts.test it will NOT be editable. If Tags/Parts must be editable inside Tags that render Velocity, the  Notation must be used (like in the pre-Aloha Era).
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed Bug that prevented overviews to be republished when a page was published using time management and multithreaded publishing was used.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed navigation parttype. The navigation parttype will now apply correct sorting over ALL objects.

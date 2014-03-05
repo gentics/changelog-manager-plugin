@@ -1,0 +1,151 @@
+h2. Changes with Gentics Content.Node 5.8.0
+
+endprologue.
+
+----
+
+WARNING: *Manual Change* Aloha Editor 0.20.x was removed from GCN
+
+Aloha Editor 0.20.x was removed from Gentics Content.Node. Now only the latest version of Aloha Editor will be included.
+
+The features __aloha__ , __aloha_010__ and __aloha_jqueryui__ are no longer being used and should be removed from the node.conf configuration file.
+
+----
+
+WARNING: *Manual Change* The function descriptor of the function PageAPI.createTag() in the GCN JS API has changed.
+
+It will no longer support calls like
+<shell>
+page.createTag([construct], [magicvalue], [success], [error]);
+</shell>
+
+Instead, the call has to written as
+
+<shell>
+page.createTag(
+   {
+      constructId: [construct],
+      magicValue: [magicvalue]
+   }, [success], [error]);
+</shell>
+
+(parameters specifying what tag has to be created have to be given as object).
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The new feature _copy_tags_ allows Copy & Paste of tags between pages.
+Please read the documentation of this feature in the Gentics Content.Node Guides (section "Features").
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The REST-API method <code>/CNPortletapp/rest/page/newtag/{id}</code> now also supports creation of a tag as copy of another tag (in the same page or in another page).
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Added option "update" to REST API calls for loading folders, images or files
+to load them for the purpose of updating. Currently, folders, iamges and files
+are not locked in the backend, but it is still recommended to set the "update"
+parameter to true, when the returned object shall be modified. This will ensure
+that the object contains all possible object tags, even if they are not yet filled.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Modified the Gentics Content.Node Javascript API to load also folders, images and
+files for updating them. This will ensure that the API objects will have all
+possible object tags set (even if they are not yet filled in the backend).
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#51544*
+
+When creating new files using the REST API, the returned file will now contain all possible object tags.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#51584*
+
+Changed the status message displayed when running a data check of a contentrepository that is not linked with any nodes.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#51673*
+
+Fixed a bug that caused folders created in a derived node over the Rest API to be added to the wrong node.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#48547*
+
+The folder versions menu entry was removed because the folder versions feature was removed. The removal of the feature itself happend within a previous release of Gentics Content.Node.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RM#3829*
+
+The flash uploader button will now also work in nativ Internet Explorer 9 mode. Previously the flash uploader was not working due to Internet Explorer 9 security options regarding flash applications.
+
+----
+
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed behaviour of assistant history to be consistent with multichannelling. This
+also fixes creation of "hidden" pages if creating new pages directly after switching
+into a folder of another node using the assistant history.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Adds addDeleteButton() to Aloha Blocks to allow implementors to dynamically add
+a delete button to a GCN Aloha Block even if the block had originally been
+determined to be un-deletable.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed javascript error that occured when leaving the tagtype/node assignment dialog. Previously jquery was loaded twice and that caused a javascript error while initialising the tipsy tooltips in the tagtype list.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+A image include within the page property view was fixed.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Multiple javascript errors within the adminstrativ interface were fixed. Previously the tooltip plugin caused javascript errors within the tagfill dialog when a new tagtype was created. jQuery 1.4.2 was replaced with jQuery 1.6.1 in various places. Live editor page editing will still use jQuery 1.4.2 due to compatibility reasons.
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+A missing image was added to the imagemanipulation2. Previously the image resize handle image was not loaded. 
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The image manipulation 'Ok' button behaviour was fixed. Previously the button click would not work within Internet Explorer 7 due to missing json extensions of that browser.  
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Some messages for the file uploader will now be displayed in the correct langauge. 
+
+----
+
+NOTE: This Gentics Content.Node version includes the "Aloha Editor 0.22.2 - 2012/10/08":https://github.com/alohaeditor/Aloha-Editor/blob/alohaeditor-0.22.2-commercial/CHANGELOG.md
+
+----

@@ -1,0 +1,94 @@
+h2. Changes with Gentics Content.Node 5.3.11
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed issue with aloha page links. Previously only pages from the node with folder_id 1 (GCN5 Demo); where displayed within the dropdown list.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed isses with the publish queue. Now it is no longer impossible to select multiple users across multiple pages when assigning pages to to users in the publish queue.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed javascript error within the new imagemanipulation2 that occured on pageload.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed error that occured when changing the template of multiple pages at once.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+
+A velocity inline scope setting was turned off because it may cause too much memory consumption.
+    
+If the following Velocity setting is activated, macros will be saved in the namespace for each tag instead of the global namespace. Velocity apparently doesn't clean up namespaces, which will cause too much memory consumption if there are many tags that use macros.
+
+<shell>    
+velocimacro.permissions.allow.inline.local.scope
+</shell>
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a bug in the purgelogs task that prevented the jobrun table to be cleaned.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed bug in permission checking system (when trying to delete all languages of a page with no language set).
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed bug where it does not check if contentset_id is 0 in the mini browser (it sometimes didn't show all pages in page selection tags).
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a bug that caused the filename extension to be appended to the filename on every save.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed possible NPE when performing the action "Change Template". This NPE could further lead to DB locks remaining open.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a bug in the REST API when a page with an overview is loaded and subsequently saved. If no selectedItemIds element is provided for an overview in a tag, it will be assumed to be the same as an empty selectedItemIds element.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Added css class 'gtx-diff' to CN's &lt;ins&gt; and &lt;del&gt;, so they can be distincted from normal html code.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+A new page diff algorithm was introduced:
+
+The new Daisydiff algorithm can be enabled through the feature "useDaisyDiff".
+It will than replace the standard linear-diff algorithm.
+
+The difference between the algorithms is that the Daisydiff algorithm
+tries hard to preserve the tree-structure of the HTML page, while the
+linear diff will not.

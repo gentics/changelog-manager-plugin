@@ -1,0 +1,97 @@
+h2. Changes with Gentics Content.Node 5.4.1
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed two errors when opening an Aloha page in IE7
+
+# A JavaScript error occurred when clicking the Live-Preview menu item when insde an Aloha page
+# When leaving an Aloha page, for example by clicking on a folder in the tree, instead of changing the 
+location of the existing frame, a new window opened.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed inconsistent display, on the start page, of pages to be published / remaining to be published
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed loading and saving of images with the imagemanipulation2 feature.
+
+The URL for loading and saving images had one slash too much which resulted in a 404 Not Found HTTP response.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed linking and unlinking of nodes from content repositories.
+
+The nodeobject cache was not cleared when a node was linked to or unlinked from a contentrepository.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Follow-up tasks have a new checkbox called "Follow on success". If checked, the task will only run if the preceding task exits successfully. If not checked, the task will run regardless of the exit status of the preceding task.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed the quickjump autocompletion not working on the start page.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Removed the ability to hide the top stream because it is not compatible with the new Blackpanther UI
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+NOTE: The current update resets all user sessions.
+
+This is being done because the ability to minimize stream was removed because of incompatibility with the new Black Panther UI.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed the quickjump autocompletion not working on the start page.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed tables not being placed under the paging navigation under certain cirumstances in firefox.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The left assistent won't be hidden anymore when viewing/editing a page and Alohaeditor is enabled
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Removed the minimize button in the tree because it has no use anymore.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The width of the left navigation tree will be saved from now on after resizing.
+
+----
+
+NOTE: For changes to Aloha Editor please see the "Aloha Editor Changelog":https://raw.github.com/alohaeditor/Aloha-Editor/ea93ad864619b1824ed4a99795f26462766578d0/CHANGELOG.md . This Gentics Content.Node version includes the Aloha Editor 0.20.1 - 2012/01/13.
+
+----

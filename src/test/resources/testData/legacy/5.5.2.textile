@@ -1,0 +1,19 @@
+h2. Changes with Gentics Content.Node 5.5.2
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+NOTE: This feature is considered stable even though the full testcycle has been omitted to be able to add it to release 5.5.2.
+
+Added features "redirect_check_referer" and "redirect_assume_https" for redirecting the request to load the latest version of Aloha Editor with an URL like /CNPortletapp/latest/..., if using an additional Apache to handle SSL.
+Normally, the redirect would be done relative to the incoming request, but if an additional Apache is used to handle SSL, the incoming request to the backend would not know about https:// and the redirect would be done to http://.
+To avoid this, it is possible to use the feature "redirect_check_referer", which would let the redirector check the referer URL and use the schema and hostname from it. In cases, where it is not sure, whether the referer is always available, it is possible to also use the feature "redirect_assume_https" to always do the redirect to https:// and the hostname sent in the request header "Host".
+
+----
+
+NOTE: For changes to Aloha Editor please see the "Aloha Editor Changelog":https://github.com/alohaeditor/Aloha-Editor/blob/fb79ade74b353fc9d938bfa0da6c2b5428a97cc2/CHANGELOG.md . This Gentics Content.Node version includes the Aloha Editor 0.20.12 - 2012/05/24.
+
+----

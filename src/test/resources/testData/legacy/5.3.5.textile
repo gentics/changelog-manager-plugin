@@ -1,0 +1,15 @@
+h2. Changes with Gentics Content.Node 5.3.5
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed the following issue: If the versiondiff (source-mode) processes a page where an opening angle bracket occurs in an HMTL comment or an HTML Tag, it will not be escaped, causing the result diff to break.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Aloha Editor Table plugin now features all-new table cell merge and split functionality

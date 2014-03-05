@@ -1,0 +1,140 @@
+h2. Changes with Gentics Content.Node 5.7.0
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The context path of Gentics Content.Node can now be configured.
+Please take a look at the context feature within the guides.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The REST-API has been extended to support creation of local pages and folders by adding the property nodeId to the create request objects.
+
+Additionally, the new REST-API calls /CNPortletapp/rest/page/localize/{id}, /CNPortletapp/rest/file/localize/{id}, /CNPortletapp/rest/image/localize/{id} and /CNPortletapp/rest/folder/localize/{id} allow localization of pages, files, images and folders.
+
+---
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+A group mapping was added to the __HTTP_AUTH_LOGIN__ feature. 
+<shell>$HTTP_AUTH_LOGIN["group-mapping"]</shell>
+
+Take a look at the http auth guides page a detailed explanation and example.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The i18n translation implementation within the Gentics Content.Node interface was changed.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The GCN JS API api methods have been made more error resilient.  It was
+previously the case the exceptions that occurred during the invocation of
+callback functions that were passed to the GCN JS API by the user of the
+library would prevent the library from completing any further calls that it has
+in is call queue; content objects would be left in unusable state from there
+on. The enhancement provides and internal means to allow the library to catch
+exceptions that occur in user-given callbacks so that the library is able to
+continue processing its queued invocations.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Added support to the GCN JS API for dealing with property names that have dots in them.  Such
+support is especially needed in order to deal with object property tags which
+have names like "object.myprop".
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed clicking tag edit icons activates the image plugin
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed issue in gcn-repository.js, console.warn() made RepositoryManager unfunctional in IE
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed detection of image dimensions for .ico files, when they are uploaded
+using the REST API or imported. When .ico files were imported, the import
+failed with an "Internal Error".
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed possible NPE in new Import, when importing tags based on tagtypes that have a part with keyword "name".
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed Aloha-Editor block/tag initialization.
+
+Sometimes, after returning from a Tagfill-Dialog, duplicate tagicons
+were either displayed doubled, or were missing.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a bug that allowed inadmissible characters in forms if the corresponding error message was not available in the current language.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a problem where jQuery would not be properly declared when working with
+the GCN JS API in NodeJS environment.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixes the Rest API to respond with object data that has object tags
+mapped in the correct way. They keys will now be 'object.[name]' instead of just '[name]'.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixes a bug in the GCN Intergration Plugin where after closing the tagfill
+dialogue, the tag date of the edited tag would no longer be consistent.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed resolving issue when rendering tags of "foreign" objects in velocity tags. E.g. when rendering the object tag of a folder in a page's velocity tag, where the folder is different from the page's folder, the object tag will now be able to resolve its containers name via <node folder.name>.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed an issue when attempting to edit and view tagtypes fill without the necessary permissions.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed an issue when using tagtype names containing curly braces.
+
+----
+
+NOTE: This Gentics Content.Node version includes the "Aloha Editor 0.21.4 - 2012/09/03":https://github.com/alohaeditor/Aloha-Editor/blob/alohaeditor-0.21.4/CHANGELOG.md and "Aloha Editor 0.20.23 - 2012/08/23":https://github.com/alohaeditor/Aloha-Editor/blob/alohaeditor-0.20.23/CHANGELOG.md  
+
+----

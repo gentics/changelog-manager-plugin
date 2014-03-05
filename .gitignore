@@ -1,0 +1,10 @@
+target/
+.settings/
+.project
+.classpath
+*.orig
+velocity.log
+staging
+output
+.checkstyle
+5.13.27*

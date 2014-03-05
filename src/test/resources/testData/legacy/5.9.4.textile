@@ -1,0 +1,27 @@
+h2. Changes with Gentics Content.Node 5.9.4
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The ribbon will no longer be shown when the setting __Aloha.setting.ribbon__ has been set to false.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+A SGB error within the construct tagfill view was fixed. Previously the value of an image url part type could not be set. This issue was introduced in 5.9.0.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed the construct list method response for channel nodes. Previously a construct list call for a channel would reveal an empty list. Now the constructs for the master node will returned when a channel node_id was specified for the list request.
+
+----
+
+NOTE: This Gentics Content.Node version includes the "Aloha Editor 0.22.3 - 2012/10/08":https://github.com/alohaeditor/Aloha-Editor/blob/alohaeditor-0.22.3-commercial/CHANGELOG.md
+
+----

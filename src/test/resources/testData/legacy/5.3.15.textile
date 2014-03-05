@@ -1,0 +1,118 @@
+h2. Changes with Gentics Content.Node 5.3.15
+
+endprologue.
+
+----
+
+WARNING: *Manual Change* Please update the gtxalohapagelink tag-type according to "this definition":http://gentics.com/Content.Node/infoportal/cms/Does-the-Aloha-Link-plugin-support-internal-links.en.php.
+
+Two new parts are avaialbe, "title" and "target". The parts can be accessed by an editor either through the tagfill-dialogue or through the Aloha-Editor sidebar.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+ 
+The topnav menu for the imagemanipulation2 view was fixed. Its now possible to access the object properties of the image.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Previously the pageimport didn't delete files/pages when importing using the import_diff setting.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+If the Tidy feature was used with the Live Editor, sometimes additional spaces were inserted into the content. 
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+ 
+A OutOfMemory error did not release a database connection properly.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Its now possible to delete a contenttag with a new tag button within the edit view. The html structure of that tag icon container has changed. <b>This will affect custom css that modify the tag icon position/behaviour.</b>
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Permissions on the root folder of a node are handled incorrectly
+
+There are usually two entries in the perm table for the root folder of a node: an entry with o_type = T_FOLDER and an entry with o_type = T_NODE (both with o_id = <folder id of the node>). The bug was caused by a missing T_NODE entry.
+
+A quick workaround for this bug is clicking OK once on the page that lists the permissions for the root folder of a node.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+When pages are published no notification messages are sent.
+
+Notifications were only sent when a page was published from the publish-queue. Notifications were not sent when the user clicked on the page in the publish-queue, or navigated to the page, and published it
+outside of the publish-queue page (through the page-menu for example).
+
+The new behaviour will always send notifications, no matter where the page is published or saved (put into revision), as long as the page is visible in the publish queue.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Templates that don't have a doctype will get a default html5 doctype. The doctype will only be added when viewing the page in editmode. Preview and livemode are not affected. For more information please read <a href="http://www.gentics.com/Content.Node/infoportal/cms/Aloha-and-Internet-Explorer.en.php">this FAQ</a>.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Enhanced UI: Icons for disabled tags are displayed with a translucent style
+
+The change was made for the tag-list of templates and pages, to more quickly identify disabled tags.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+SQLException during CRSync causes inconsistency
+
+When a SQLException occurred during the attribute-prefetching phase of a CRSync, some attributes were not synced correctly.
+
+The inconsistency can be repaired by updating the objects in the source repository.
+
+The bug was fixed by aborting the CRSync should an Exception occur during the attribute-prefetching phase.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Viewing the differences between two version of a Page takes very long
+
+An inefficient regex in the code that implements the DaisyDiff algorithm caused the Page that shows the differences to take a long time to load.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The DaisyDiff algorithm is now only used for pages with the text/html mimetype
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Saving pages with the REST API will ignore selected options
+
+Saving the selection of single-select and multi-select part is now implemented.
+
+During this change, the ID, for options of single-select and multi-select parts, were changed to refer to an internal ID (called internally the "dsid").
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Query parameter "keyword" to the NewTag page REST Resource
+
+You can either specify a constructId or a keyword now as query parameter (but not both).

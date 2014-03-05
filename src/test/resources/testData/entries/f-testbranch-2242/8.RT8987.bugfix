@@ -1,0 +1,1 @@
+A bug within the new tagfill dialog was fixed. Previously a random SGB error occurred that caused massive dataloss on every affected system.

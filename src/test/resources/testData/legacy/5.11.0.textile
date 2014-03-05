@@ -1,0 +1,26 @@
+h2. Changes with Gentics Content.Node 5.11.0
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement RT#52344*
+
+It is now possible to sync Gentics Content.Node user-groups with CAS-SSO. 
+After creating the user, the groups will be syncronized between CAS-Server and Gentics Content.Node.
+
+See "Authentication methods for REST API":http://www.gentics.com/Content.Node/guides/rest_auth.html for more information.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The cas login functionallity was enhanced. It is now possible to add a cas post login handler that allows the modification of the user and the assigned groups.
+
+See "HTTP Auth SSO Configuration":http://www.gentics.com/Content.Node/guides/sso_http-auth.html for more information.
+
+----
+
+NOTE: This Gentics Content.Node version includes the "Aloha Editor 0.22.6 - 2012/12/06":https://github.com/alohaeditor/Aloha-Editor/blob/alohaeditor-0.22.6-commercial/CHANGELOG.md
+
+----

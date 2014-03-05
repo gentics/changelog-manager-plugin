@@ -1,0 +1,165 @@
+h2. Changes with Gentics Content.Node 5.6.2
+
+endprologue.
+
+----
+
+WARNING: *Manual Change* Disabled Aloha Editor block-plugin drag and drop feature
+
+The block-plugin drag and drop feature is now disabled by default. The
+feature may be re-enabled with the following setting in the node.conf
+configuration file:
+
+    $ALOHA_SETTINGS['plugins']['block']['dragdrop'] = 'true';
+
+Changing this setting requires a tomcat restart.
+
+Please note that the block drag and drop functionality is experimental
+and still in development.
+
+----
+
+WARNING: *Manual Change* Tagtypes implementation and Aloha Editor block-plugin
+
+In order for tagtype implementations to be compatible with the block-plugin
+of Aloha-Editor (not loaded by default), they must either have a div or span
+root element.
+
+If a tagtype implementation does not have a div or span root element, it
+will be automatically wrapped with a div, and an error will be logged in
+the browser console.
+
+Due to the automatic wrapping, tagtypes may still work, even if they do
+not have a div or span root element, however, it is still an error, and
+tagtype implementations must be updated accordingly.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed rendering a part from another tag in a velocity tag. The part will now be rendered in the scope of its container tag, so that resolving other parts via the <node partname> notation will work now.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixes bug in GCN Integration Plugin allowed contain-in rules to be broken when
+inserting GCN Tag blocks into editables.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed evaluation of $tag.empty for tags in a velocity tag, which always returned 1 (pretending that the tag was empty).
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed saving pages after a tag was modified using the tagfill dialog. Before this fix, a page could not be properly saved after the tagfill dialog was used. When publishing the page, the user was notified about unsaved changes (even though the page should have been saved before). This issue only affected systems with the __aloha_jqueryui__ feature enabled.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed clicking on a folder in the tree frame after saving the page,
+which would open in a new window instead of inside the correct frame.
+
+This error was only caused it the Aloha Editor undo-plugin was active.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed issue with opening the tagfill dialog in nested form elements. Previously the edit and delete icons for tags within form elements could not be used due to a issue with the click event handling. This issue only affected systems with the __aloha_jqueryui__ feature enabled.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed an issue when leaving a page using the Aloha Editor. Previously, informing the user about unsaved changes did not display correctly in Chrome and Safari. 
+
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+A caching issue within the Gentics Content.Node Aloha Integeration Plugin was fixed. Previously newly inserted tags could not be found when a tag was edited using the tagfill dialog. A error was shown when the aloha block was beeing reloaded. This issue that only affected system with the __aloha_jqueryui__ feature enabled is now resolved.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Corrected syntax error in generated response XML file for the Scheduler Control API.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed appearance of unwanted empty paragraphs with the class "aloha-editing-p", when using drag & drop to drag tags at the very beginning or end of an editable. This issue only affected systems with the __aloha_jqueryui__ feature enabled.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Removed the delete icon for tags, that should not be deleted, because they are included in the template. This issue only affected systems with the __aloha_jqueryui__ feature enabled.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed concurrent creation of multiple tags. For example, creating two links and saving would break at least one of the links.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed possible Internal Error due to a DB lock wait timeout when importing Templates with the new Import Mechanism.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+When the same live editable tag (which is a tag, that only contains a single part, which is live editable) is inserted more than once into the page's template, only the first occurrance of the tag will be made editable. Before this fix, some occurrances were also turned into blocks, which lead to unexpected behaviour. This fix only affects systems with the __aloha_jqueryui__ feature enabled.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+A bug in the image file upload was fixed. Previously the uploader did not use the custom filename. Additionally some special characters within the filename resulted in a SGB error. 
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Added more detailed label descriptions to the form for creating overview Tag Types.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed vanishing object properties of master object when localizing pages.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed problems when translating pages that have localized copies using the REST API. Before this fix, not all of the language variants were shown in the page list.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed sorting pages by last edit time, which did not work anymore.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Omit saving the currently edited page twice, when it is published from within the edit mode. This issue only affected systems with the __aloha_jqueryui__ feature enabled.
+
+----
+
+NOTE: This Gentics Content.Node version includes the "Aloha Editor 0.21.3 - 2012/08/23":https://github.com/alohaeditor/Aloha-Editor/blob/alohaeditor-0.21.3/CHANGELOG.md and "Aloha Editor 0.20.23 - 2012/08/23":https://github.com/alohaeditor/Aloha-Editor/blob/alohaeditor-0.20.23/CHANGELOG.md  
+
+----

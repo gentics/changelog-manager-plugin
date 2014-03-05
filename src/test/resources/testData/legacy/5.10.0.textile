@@ -1,0 +1,173 @@
+h2. Changes with Gentics Content.Node 5.10.0
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement RM#5826 / RT#52022*
+
+An additional column was added to the page publish queue. The node name will now be listed within the publish queue.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement RT#5682*
+
+Adding validation of editables before saving.  If validation is enabled, validation will be performed on all editable at the offset of the saving
+process.  If any editable fails validation, the saving process will be aborted with an error message.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The new feature _cr_filesystem_attributes_ allows publishing specific tagmap entries into contentrepository attributes that are stored in the filesystem.
+The feature is disabled by default.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#51642*
+
+The "maximize tree"-icon was fixed within the Gentics Content.Node tree frame. Previously the icon was not being shown at a fixed position and therefore was probably not visible if the tree
+was not scrolled to top.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#52396*
+
+The paging functionality within the page list was fixed. Previously the page list would only display 5/10/20/50 items depending on the configured paging setting.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#52405*
+
+Fixed pasting with LiveEditor to avoid JavaScript error, and to insert content into the editor when performing Rechtsklick &gt; "Einfügen (ohne Formatierungen)".
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#52297*
+
+Fixed SGB error occuring when applying an object property to sub folders. This is caused by duplicate object properties in the database. This update deletes those duplicate entries.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#52442*
+
+Fixed Aloha.ready() being fired too early (before frontend editing is finished initializing editables).
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#52191*
+
+Using publish handlers together with instant publishing did not work as expected: When triggering instant publishing (by publishing a page or creating/editing an image, file or folder) before
+a regular publish run, the publish handlers were not triggered.
+Additionally, the destroy() method of the publish handler was called for every transaction commit (for every published object), and not only when the publish handler was taken out of service (as intended).
+The lifecycle of publish handler instances has been modified, in a way that instances of publish handlers will now stay in service until either the server is shut down, or the publish handler entry is either
+changed or removed.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#52491*
+
+At the start of every publish process, that SQL statements issued to detect, when a specific node was published the last time were very inefficient and slow, because
+they used the very large table logcmd.
+The implementation has now been changed to store the timestamp of the last publish run for a specific node in the table 'node' instead, which will decrease the
+time necessary to initialize the publish process with a large number of nodes and a big logcmd table.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#52413*
+
+When saving a page where only the case of some letters changed, it didn't create a new page version.
+This has been fixed now and new page versions are created now when the case of letters change.
+This is important when versioned publishing is enabled.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#51972*
+
+The creation of page versions has been improved to be much faster, even if the page already has many versions. This increases the performance of saving and publishing the page via Java (REST API).
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#52202*
+
+A caching issue within the purge versions job was fixed. In some cases this issue could cause the creation of lower version numbers for pages when a page was edited.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+A SGB error was fixed within the file upload dialog. Previously the SGB error was displayed when a user tried to upload a new file in frontend editing mode.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Added missing error message when setting hostname and publish directory of a node to settings of another node.
+Before this fix, the changes were just not saved, but no error message was shown.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#52572*
+
+An issue that caused an exception to be thrown in some cases when checking for quick column definitions was fixed by adding handling for the deprecated binary attribute type.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#52597*
+
+The permission check on root folders of nodes/channels worked differently in Java and PHP, which could cause some nodes/channels to appear in the Repository Browser although
+the user should not have permissions, when the permission entries in the database were inconsistent.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Bugfix RT#51974*
+
+When a user did not have create permission for pages in any of his groups, but had the create permission for all languages in at least one of his roles, copying pages failed
+with a SGB. This is fixed now, so that the user will now be able to copy pages.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Bugfix RT#52622*
+
+When using the new export mechanism to export a construct that used a datasource (in a part) with datasources generally excluded, but the single datasource included, the datasource
+was excluded from the export but should have been included. This has been fixed now, so that objects that are manually included are exported in all cases, even if the type has been excluded.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Bugfix RT#51756*
+
+When filtering pages using the REST API or using the page list in the Gentics Content.Node backend, it was not possible to filter pages with status "Publish At"
+(pages that are scheduled to be published at a specific point in time in the future). This has been fixed now.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#52416*
+
+Removed unnecessary entry "Real Editor" in the folder context menu.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RM#5993*
+
+Following an internal link will now cause the top menu to be updated so that
+the top menu links will operate on the newly opened page, and not the
+refererring page.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RM#5993*
+
+Prevent "Object doesn't support this property or method..." error when opening
+Preview or Live Preview in IE8.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#52715*
+
+Fixed canceling of a published page over the REST API: When a page is published (and not changed afterwards) and then canceled, the page status is not changed.
+
+----
+
+NOTE: This Gentics Content.Node version includes the "Aloha Editor 0.22.6 - 2012/12/06":https://github.com/alohaeditor/Aloha-Editor/blob/alohaeditor-0.22.6-commercial/CHANGELOG.md
+
+----

@@ -1,0 +1,16 @@
+h2. Changes with Gentics Content.Node 5.3.24
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed missing CHANGELOG type (SQL) in system.CHANGELOG and some missing ';'. Those issues caused a problem with database updates. The previously missing database update did not affect operation since it was just a regular performance optimisation.
+
+----
+
+NOTE: For changes to Aloha Editor please see the "Aloha Editor Changelog":https://github.com/alohaeditor/Aloha-Editor/blob/74d68c2f03a06cee7b483e4b0f1e1d47848a6d0d/CHANGELOG.md . This Gentics Content.Node version includes the Aloha Editor 0.20.0-RC8
+
+----
+

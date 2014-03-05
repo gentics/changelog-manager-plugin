@@ -1,0 +1,28 @@
+h2. Changes with Gentics Content.Node 5.4.11
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Enhanced the Content.Node menu on dark/black backgrounds (pages, templates). It now has a light border around it.
+Also made the main menu highlighting stay when the submenu is currently open.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed SGB error appearing when viewing the taglist of a template with tags that don't have a tagtype.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed SGB error when setting a page language.
+
+----
+
+NOTE: For changes to Aloha Editor please see the "Aloha Editor Changelog":https://github.com/alohaeditor/Aloha-Editor/blob/f3c8e86da47b6a08c33e57b9bc52c5314aa88f0e/CHANGELOG.md . This Gentics Content.Node version includes the Aloha Editor 0.20.5 - 2012/02/09.
+
+----

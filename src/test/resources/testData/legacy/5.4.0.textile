@@ -1,0 +1,153 @@
+h2. Changes with Gentics Content.Node 5.4.0
+
+endprologue.
+
+----
+
+WARNING: *Manual change* The FTP configuration within the node settings was removed. Please use scheduler tasks instead.
+
+Here is an example task template that will sync a Node and the GenticsImageStore folder for that node:
+
+<shell>
+/Node/bin/lftp -u "%user%,%password%" -e "mirror -R -L -e /Node/node/content/publish/pub/%ordner.node.host%%ordner.node.pub_dir% ./%wwwRoot%%ordner.node.pub_dir%;mirror -R -L -e /Node/node/content/publish/pub/%ordner.node.host%/GenticsImageStore ./%wwwRoot%/GenticsImageStore;exit" %targetHost% 2>&1
+</shell>
+
+----
+
+WARNING: *Manual change* Fixed page-import doesn't fill parts with cn_value keyword bug
+
+The previous behaviour during a page import filled either a visible or
+editable part of an imported tag with the element contents. When the
+feature cn_page_import_fill_editable_part was true, an editable part was
+filled. Otherwise a visible part was filled.
+
+This behaviour was contrary to the documentation, which states that the part with keyword "cn_value" is filled with the element contents.
+
+The behaviour was fixed, so that "cn_value" will be filled, if it exists. If no such part exists, the import will fall-back to the old behaviour.
+
+All tag-types that are used with the page-import must be checked for compatibility with the new behaviour. It must be ensured that, if there is a part with keyword "cn_value" in a tag-type, that it really is the
+part that should be filled during page-import, and not one of the other editable or visible parts.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The Gentics Content.Node backend ui was overhauled. This includes multiple changes on ui css and on some backend dialogs.
+
+# All user related information are located at the top right cornor. Users may upload an avatar image to gravatar.com using their registered email adress.
+# When navigating through folders changing the folder views has become more intuitive.
+# Above page, file and image list a breadcrumb helps navigating.
+# The main tree view can now be adjusted in width. The tree can also be closed permanently.
+# Structure of rightclick submenues on page, file and image lists have been reorganized.
+# Access to the real editor  from the page menu has been removed.
+
+----
+
+h4. !images/changelog_types/security_24.png! *Security Update*
+
+Fixed security issues.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed non-transactional delete of tagtypes that caused data inconsistency.
+
+When a tagtype was deleted, it was possible that template-tags or content-tags referring to the tagtype were left in the system, causing problems with the import/export feature.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed system messages when a page is put back into revision.
+Only the ID of the pages that were put into revision were shown in the system message, now the name (incl. full path) + ID are shown.
+Additionally, too many messages were sent to the editor of the page: one message that lists all pages, and one additional messaeg for each page. Now, only the first message, that lists all pages, will be sent.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed url generation within imagemanipulation2. Previously image/css/js urls were only working within cms and not within the portal.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+<p>Fixed omissions in user list when pages are being assigned for revision.</p>
+<p>A previous fix to disable the paging of the list in the "assign for revision" dialog caused some users to be omitted from the list.</p>
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed rare case when filename is ~62 characters long and the automatically added file extension was cutted (example: *.php -> *.ph)<br/>It now cuts the filename first so the file extensions always can be fully added.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The LDAP login field for groups can now be mapped with a string which should match the description of the appropriate CMS group.  
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed the "publish" menu entries not being shown in the page menu when it was shown in the page list context menu (inconsistent behavior). It is now always shown.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The default maximum size of tag-values has been increased to from 100KB to 1MB.<br/>
+
+
+This maximum is only in effect if the validation feature is turned on and configured correctly. The setting may be changed in the antisamy.custom.xml with the maxInputSize directive.
+
+See "this article":http://www.gentics.com/Content.Node/infoportal/cms/wiki/Validation.en.php for more information about the validation feature.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed bug in GenticsImageStore which sometimes didn't round calculcated proportional widths or heights of images correctly when doing image resizing.<br/>
+
+Example: 
+<shell>
+/CNPortletapp/GenticsImageStore/150/auto/cropandresize/prop/22/0/964/674/
+</shell>
+
+The resulting proportional height has been 104,87... which was incorrectly cutted down to 104px instead of 105px
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed: opening a WebDAV folder didn't work with some OS and browser configurations<br/>
+
+WebDAV folders are now opened with the IE Web Folder API. On Windows 7
+IE8 file:// URLs are still used as the Web Folder API didn't work in
+this configuration. The three methods to open a WebDAV folder are
+
+# folder is opened automatically immediately on clicking open on a folder in the tree
+# folder is opened by clicking the "here" link
+# folder is opened by copying the "here" link and pasting it manually into a new browser window
+
+These three methods were tested and work in the following configurations:
+
+# Windows XP IE7
+# Windows XP IE8
+# Windows 7 IE8
+# Windows 7 IE9
+
+To force the use of the Web Folders API the feature webdav_use_file_url can be set to false (default true).
+To force the old behaviour of opening WebDAV folders the feature webdav_use_web_folders can be set to false (default true).
+The default is to use the Web Folders API except on Windows Vista IE8 and Windows 7 IE8.
+
+If opening a folder doesn't work on Vista or Windows 7, try installing "this update":http://www.microsoft.com/download/en/details.aspx?id=15123
+
+----
+
+NOTE: For changes to Aloha Editor please see the "Aloha Editor Changelog":https://github.com/alohaeditor/Aloha-Editor/blob/89d28d44a5c305ee6f120800f5b9466aebe69bd2/CHANGELOG.md. This Gentics Content.Node version includes the Aloha Editor 0.20.0 - 2011/12/29.
+
+----
+

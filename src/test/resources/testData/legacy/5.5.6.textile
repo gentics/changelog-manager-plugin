@@ -1,0 +1,41 @@
+h2. Changes with Gentics Content.Node 5.5.6
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Added new feature "liveeditorsavelog" for detection of possible data loss when saving page contents with the live editor. If turned on, and the new saved tag value is less than the old one (by a configurable percentage - $LIVEEDITORSAVELOG_PERC, default is 10%),
+the contents in the different stages of transformation is logged in the DB. By default, this feature is off.
+
+Configuration example:
+<shell>
+$FEATURE["liveeditorsavelog"] = true; // detect possible data loss
+$LIVEEDITORSAVELOG_PERC = 5; // log in case of at least 5% less data
+</shell>
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+When using Aloha Editor, handling of empty block elements (like paragraphs) has been fixed now. All block elements will contain a single <br class="aloha-end-br"/> when saved. This <br class="aloha-end-br"/> tags will only be present while editing, if not using Internet Explorer.
+Additionally, the behaviour of creating empty paragraphs will now be consistent across all browsers, and regardless of whether the metaview plugin is turned on or off.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The group permission view was fixed. Previously permission settings were also displayed for localized folders. Those folders will now be handled like inherited folders within a channel. No permission information will be displayed for those folders.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The quickjump will now also update the tree menu for pages in nodes that use the liveeditor for editing.
+
+----
+
+NOTE: For changes to Aloha Editor please see the "Aloha Editor Changelog":https://github.com/alohaeditor/Aloha-Editor/blob/1a5f504f13afd917af7f58210801046ebb32e2c5/CHANGELOG.md . This Gentics Content.Node version includes the Aloha Editor 0.20.17 - 2012/07/09.
+
+----

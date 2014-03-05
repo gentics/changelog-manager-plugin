@@ -1,0 +1,21 @@
+h2. Changes with Gentics Content.Node 5.4.5
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Removed stars from Content.Node &lt;title&gt; because they are sometimes corrupted for unknown reasons.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed the top left logo and the blackpanther stream position.
+
+----
+
+NOTE: For changes to Aloha Editor please see the "Aloha Editor Changelog":https://github.com/alohaeditor/Aloha-Editor/blob/6f211a422886e31a62aedb117b4dc24ec2d36ffe/CHANGELOG.md. This Gentics Content.Node version includes the Aloha Editor 0.20.3 - 2012/01/24.
+
+----

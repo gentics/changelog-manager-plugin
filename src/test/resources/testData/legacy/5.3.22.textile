@@ -1,0 +1,63 @@
+h2. Changes with Gentics Content.Node 5.3.22
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed adding links with the gcn-linkbrowser plugin. Previously the highlight css was not removed when selecting an element with the link browser plugin.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed i18n file upload limit reached message. Instead of showing the full bytesize we'll now show human readable values.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The gcn repository will now state an error message and log to the console, if an error occurs while querying the Gentics Content.Node backend for files and pages.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed instant messages not showing new lines and htmlentities correctly and also sometimes not showing the message at all.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Aloha Editor's gcn-plugin will now compare the construct id instead of the tagname when searching for magic link constructs.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The rest api will now return translated messages for copy and file upload actions. 
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a bug with $cms.page.versions.major attribute which would not be initialized correctly.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed an exception thrown when accessing the REST API method /CNPortletapp/rest/folder/getItems/... with Content-Type:text/xml. It has to be noted, that the REST API method /CNPortletapp/rest/folder/getItems/... currently is not fully supported when using Content-Type:text/xml. The response currently will not contain all available data (like for Content-Type:application/json).
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Aloha Page Servlet will now also provide construct id via Aloha.plugins.gcn.blocks[].constructid for Gentics Content.Node blocks.
+
+----
+
+NOTE: For changes to Aloha Editor please see the "Aloha Editor Changelog":https://github.com/alohaeditor/Aloha-Editor/blob/a8fc9aae1d9c8e5b1208ba52190c6486e1f67194/CHANGELOG.md . This Gentics Content.Node version includes the Aloha Editor 0.20.0-RC6 - 2011/11.
+
+----

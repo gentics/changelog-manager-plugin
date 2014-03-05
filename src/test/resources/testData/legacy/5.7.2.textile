@@ -1,0 +1,298 @@
+h2. Changes with Gentics Content.Node 5.7.2
+
+endprologue.
+
+----
+
+WARNING: *Manual change* for Aloha Editor
+
+Gentics Content.Node will use Aloha Editor Blocks to render tag icons
+in your page. Aloha Blocks currently only support div and span as valid
+root tags.
+
+If your tagtype implementation uses other root tags than a div or a span
+or if you do not have a single root tag at all your html code will
+will be wrapped by a div tag to make them editable for the user.
+
+You can however configure your own root tags for the Aloha Editor Block
+Plugin: http://www.aloha-editor.org/guides/plugin_block.html#changing-the-root-tags
+
+NOTE: Drag/Drop functionality for Aloha Blocks is only supported when 
+using div and span as root tags. If you configure other root tags and
+use them along with Drag/Drop functionality you may encounter problems
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The tooltips within the node properties view were extended. They now include the information that the 'Publish into the Filesystem' checkbox state will only be updated after the next publish run.
+
+-----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a JavaScript error that occurred when closing tag field dialog after a tag was inserted into another tag.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed the GCN JS API so that the element that is passed into the edit() method
+as the container for the rendered tag contents is also appropriated as the root
+element of the rendered tag.
+
+Beforehand, an new root element would be generated during the render call to
+wrap the contents of the tag, and this would result in unwanted nested
+containers wrapping the contents of the tag.
+
+*ie*: Given:
+<javascript>
+	tag.edit('#content');
+</javascript>
+
+The outerHTML of HTMLElement#content will now be:
+<html>
+	<div id="#content">
+		My tag content
+	</div>
+</html>
+
+Rather than:
+<html>
+	<div id="#content>
+		<div id="GENTICS_BLOCK_1234">
+			My tag content
+		</div>
+	</div>
+</html>
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed Gentics Content Node Intergration Plugin to not through an error if
+webappPrefix is not provided via an external settings.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed an issue which caused page filenames containing invalid characters to be allowed. 
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed the buttonimage of the gcnfileupload plugin. The image was not visible when the aloha_jqueryui feature was enabled.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a bug which caused tag types to become unlinked from all nodes if users cancelled editing a tag type after deselecting all nodes from it.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The dababase table mappedglobalidsequence, which is used to generate unique global id's for object is changed from engine InnoDB to MyISAM.
+This will avoid DB locks caused by long running transactions, that insert new objects (like the Import).
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed opening a page in edit mode, that was already locked by another user. The check for locks failed and the page was opened in edit mode. However when trying to save changes,
+the check for locks succeeded, the user could not save the changes but got a message instead.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed possible problem when deleting a tagtype that is used in object properties.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed encoding problem in rendering UTF-8 values in custom form parts, if the feature customform_resolve_nodetags was activated.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Make sure, the cache of a folder is cleared, when creating files or images in it. This fixes the problem, that after a page import, created images or files are not shown in the target folder (although they exist), until the cache of the folder is cleared because of other reasons.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The Repository Browser will now hide the search field and search button unless a node or folder is selected (and the search is possible).
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed paging in the Repository Browser of the Tagfill dialog.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed getting a sorted and paged list of folders via the REST API. Before this fix, the sorting was not correct.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Paging through templates in the repository browser was previously not possible
+because the REST API method "/getTemplates" did not handle the `maxItems' and
+`skipCount' query parameters.  With these now implemented, paging works.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixes the GCN mini browser to correctly fetch tags when clicking on a
+search result in the browser list pane.
+
+The fix involves resetting the search parameters before proceeding to
+query the GCN repository for resources so that tags are not filter
+against the last search criteria.
+Fixed getting a sorted and paged list of folders via the REST API. Before this fix, the sorting was not correct.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Added folder information to the object lists in the repository browser so that search results can better be identified.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed the permission check for editing templates in localized folders. The menu entries to edit templates were shown (if the user had edit permission), but when trying to edit the template a SGB occurred.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed display of pages, that have a language set, but are not part of a contentset (have contentset_id = 0 in the database). Before this fix, such pages would hide each other and only one of that pages would be shown.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed triggering workflows when a page was published using the the UI.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The output of an i18n translation string was corrected within the template creation dialog.  
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Exports (using the new mechanism) are no longer done in single, long running transactions, as this is not necessary (exports don't modify object data) and could possibly lead to DB locks. As a result, before this fix, starting an export build,
+while another build was still running could cause an SGB.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed the height of the repository browser in the tagfill dialog to better match the height needed to display 10 elements, so that vertical scrolling is not needed.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed SGB and generation of corrupted page (having no content) when copying pages that have duplicate tags. Now, when a page with duplicate tags is copied, the first occurrance of each tagname is copied, all duplicates are just ignored.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed the listing of pages (using the REST API or in the backend) in folders where a corrupt page exists. Before this fix, an error occurred and the page list was empty, now an error is logged but the call succeeds with the corrupt pages just ignored.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed problem with the tag.edit() method in the GCN JS API wich would only add the first DOM node of tagtype implementations containing multiple DOM nodes to the desired editing location.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+When a timeout occures during querying the backend in the repository browser, the user will now see a message.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Added ID to the row help (tipsy) of objects listed in the export selection dialog to help identifying them (if the name is ambigous).
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix #50992*
+
+The liveeditor will no longer insert &lt;p&gt;&#38;nbsp;&lt;/p&gt; tags in front and after a newly inserted tags. Please note that this behavior only applies to places where enough space in front and after the insered tag exists. Inserting a tag directly after an existing tag will result in a &lt;p&gt;&#38;nbsp;&lt;/p&gt; tag. This tag is used to allow the user to navigate inbetween both tags.
+ 
+-----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix #50931*
+
+Fixed a bug that caused some settings selected when filling tag values in a page to be applied even after the user pressed the cancel button in the tag fill dialog.
+ 
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix #50537*
+
+When switching from preview mode to edit mode for an inherited page (when using multichannelling), the user will now be asked whether to edit
+the inherited page or to first localize the page in the channel. This is now the same behaviour as if the user had edited the inherited page
+from within the page list.
+
+-----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix #51261*
+
+Fixed an issue that caused an uncaught exception to be thrown when using a tagpart for selecting a folder upload when the folder was not yet selected.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed setting properties for objects in the GCN JS API to empty string (or 0), which did not work before.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed canceling the edit process when using aloha_jqueryui feature.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix #51257*
+
+Fixed sending messages that contain folder paths of pages in multichannelling: Always show the channel specific folder paths (instead of the folder paths of the master node).
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixes the tag.edit() method to correctly insert content into the target DOM element.
+Script tags contained in incoming content will be evaluated, and inserted into the DOM as well.
+
+-----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix #51511*
+
+Fixed dirting of navigation pages, when pages are created in localized copies of folders that are listed in the navigation.
+
+----
+
+NOTE: This Gentics Content.Node version includes the "Aloha Editor 0.22.1 - 2012/09/26":https://github.com/alohaeditor/Aloha-Editor/blob/alohaeditor-0.22.1/CHANGELOG.md and "Aloha Editor 0.20.24 - 2012/09/26":https://github.com/alohaeditor/Aloha-Editor/blob/alohaeditor-0.20.24/CHANGELOG.md
+
+----

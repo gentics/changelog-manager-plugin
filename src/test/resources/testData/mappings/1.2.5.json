@@ -1,0 +1,16 @@
+{
+  "version": "1.2.5",
+  "date": "01.03.2013",
+  "changeLogEntryFileNames": [
+    "7.bugfix",
+    "5.bugfix",
+    "8.RT8987.bugfix",
+    "4.bugfix",
+    "2.RT3424.bugfix",
+    "9.RM2213.enhancement",
+    "1.RT2213.manualchange"
+  ],
+  "genericProperties": {
+    "alohaeditor-version": "0.9.3"
+  }
+}

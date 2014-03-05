@@ -1,0 +1,14 @@
+h2. Changes with Gentics Content.Node 5.9.3
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RM#5650*
+
+The formatless paste plugin default configuration was fixed. Previously the formatless paste plugin did not work and no formatting was removed when content was pasted. The formatless paste handler was added to the list of default contenthandlers for insertHtml.
+----
+
+NOTE: This Gentics Content.Node version includes the "Aloha Editor 0.22.3 - 2012/10/08":https://github.com/alohaeditor/Aloha-Editor/blob/alohaeditor-0.22.3-commercial/CHANGELOG.md
+
+----

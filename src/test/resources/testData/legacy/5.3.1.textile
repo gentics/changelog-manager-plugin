@@ -1,0 +1,156 @@
+h2. Changes with Gentics Content.Node 5.3.1
+
+endprologue.
+
+----
+
+WARNING: *Optional manual change* A new Aloha Editor major version was added
+
+Added new Version 0.10 of Aloha Editor to Gentics Content.Node, which brings a load of new features like plugin bundles, dependency loading with requirejs and other improvements to your editing experience. Please refer to http://www.github.com/alohaeditor/Aloha-Editor or http://www.aloha-editor.org for additional and more detailed information.
+
+Aloha Editor 0.10 may be activated by setting $FEATURE["aloha010"] = true; and $FEATURE["aloha"] = true; in your node.conf. You may continue to use Aloha Editor 0.9.3 though without enabling the new feature.
+		
+---
+
+WARNING: *Manual Changes* The Aloha Editor plugin API was changed
+
+# Aloha Editor 0.10 will no longer expose it's internal jQuery object through the $ and/or jQuery variables. You have to include your own version of jQuery if you relied on Aloha Editor's version prior to this update.
+
+# The "GENTICS_" prefix for CSS class names has been replaced by "aloha-". If you targeted those specific class names in your implementation those need to be updated.
+
+# The "GENTICS.Aloha" namespace for Aloha Editor's JavaScript objects has been reduced to "Aloha" alone.
+
+
+*Please note:*
+
+# If you want to edit your pages using Aloha Editor a valid doctype has to be specified.
+
+# As the plugin system has been fully rewritten in Aloha Editor 0.10 plugins you wrote for 0.9.3 will not work with the new version. <a href="/Content.Node/infoportal/cms/Configuring-Aloha-Plugins-in-Gentics-Content.Node.en.php">See our documentation on how to edit plugin settings</a>.
+
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Please follow the steps that are described in our FAQ <a target="_self" class="tabletxtorangekl" href="/Content.Node/infoportal/cms/How-do-i-enable-the-Gentics-Profiler-Webapplication.en.php">&raquo; "How do I enable the Gentics Profiler webapplication?"</a> to enable the profiler webapp. Activation of the profiler is <b>optional</b>.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Added parameter "versioninfo" to REST API call /rest/page/load/ to get version information
+
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Resolving node tags in custom-forms only worked in the tag-fill dialogue
+of content tags (pages). For template tags (templates) or tag-types, the
+entire custom-form was rendered as the empty string if the
+customform_resolve_nodetags feature was activated.
+
+Now, if the custom-form is rendered as part of the tag-fill dialogue for
+template tags or tag-types, all  will resolve to the empty
+string. Special custom-form tags (e.g. <nodename>) will be resolved
+normally.
+    
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed possible deadlocks when publishing into contentrepositories that use Instant Publishing.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed detection of deleted/moved/offline objects when publishing into ContentRepository: It was possible that object being deleted, moved or taken offline while a publish process was running, would not be removed from the contentrepository at all.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed: when a Node had no languages assigned, and a user had the delete
+permission on only some, but not all folders, and the user tried to
+delete a page on which he had permissions, he was incorrectly informed
+that he didn't have any permissions.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed language management: It is no longer possible to delete page languages, if pages with that language exist.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The autoupdate dialog will now display the selected update policy which can be configured via the update_policy feature.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed possibly misaligned top menu when switching multiple times between page preview (aloha mode) and taglist.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed Import Errors when Importing from older Systems
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Reduced z-index of resize handle for resizable lists. This prevents the handles shining through actions dropdown.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Linking a template to a new folder will now check for templates with the same name in the target folder and abort with an error message.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed problems with template source view in IE6 and IE7
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Aloha Editor package is no longer provided by Gentics Content.Node's integrated Apache webserver, as it has been moved to the CNPortletapp
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The autoupdate dialog will now display the selected update policy which can be configured via the update_policy feature
+	
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed possible JS error when saving pages after changing an internal link to an external one using Aloha Editor
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed setting links to files using Aloha Editor: When pages are edited, that have links to files, the file information is correctly loaded and thus the link will be preserved
+
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a bug with Aloha Editor that prevents internal links from being created
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The Crop'n'Resize Plugin is no longer available for Aloha.Editor 0.10 as it was replaced by the Image Plugin

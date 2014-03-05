@@ -1,0 +1,79 @@
+h2. Changes with Gentics Content.Node 5.9.1
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+A bug was fixed that occured when creating new task events. Previously the new task events dialog would not open correctly.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed multiple methods in the RestAPI folder ressource, where a general exception would not be logged with a stacktrace.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RM#4624*
+
+Fixed the search for objects (pages, ...) in the GCN folder advanced search page and in the RestAPI not working
+correctly when a date like the creation date or last modification date was set.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RM#4147*
+
+The quickjump permission check was fixed. Now only the pages that can be viewed by the current user will be shown within the autocompletion.
+Previously all pages that matched the given query would show up.
+The pages could be clicked but they would not open because of the insuffient permissions.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RM#3811*
+
+The cancel button within the new scheduler task view was fixed. Previously the cancel button did not return the user to the scheduler list. The order of buttons was changes so that the cancel button is right side of the view.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RM#5395*
+
+The page list will now skip pages that have a detectable data inconsistency. Previously all pages for a folder would not show when at least one data inconsistency was detected. This also affects the getPages rest method.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RM#5550*
+
+The Gentics Content.Node JavaScript API edit() method fixed to correctly render tags onto elements when a class name is specified as the selector rather than an id.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RM#5478*
+
+A constraint check for the name property of a page was added to the Gentics Conent.Node JS API. It will now no longer be possible to invoke a save call for a name that exceeds 255 characters in length. Additionally a error callback was added to the prop() method. The Gentics Content.Node Integration Plugin will now handle this situation as well. 
+Saving pages that use an editable content to specifiy the page name will now no longer be possible. The user will be informed that the save action could no be performed due to the constraint violation. 
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The Gentics Content.Node JavaScript API will now save file urls correctly. Previously file urls would not be saved to the correct file url part type. The url will now be saved to the part with the keyword 'fileurl'.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The Gentics Content.Node JavaScript API will remove all "aloha-*" classes from links before saving them.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Prevented circular references in object chains in GCN JS API from resulting in infinit recursion.
+
+----
+
+NOTE: This Gentics Content.Node version includes the "Aloha Editor 0.22.3 - 2012/10/08":https://github.com/alohaeditor/Aloha-Editor/blob/alohaeditor-0.22.3-commercial/CHANGELOG.md
+
+----

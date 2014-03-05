@@ -1,0 +1,77 @@
+h2. Changes with Gentics Content.Node 5.4.7
+
+endprologue.
+
+----
+
+WARNING: *Manual Change* The permission check for the start-page setting for a folder was changed 
+
+Previously, the user only needed permission to modify the object property (object.startpage) to be able to set the startpage.
+Now, a user needs to have edit permission on the object property as well as edit permissions on the folder.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Removed old newsurl from the gentics login that caused a https security warning in Internet Explorer.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed changing the stream in the user settings not updating the top left logo frame.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed quickjump sometimes not loading pages correctly and stating that the searched page could not be found.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Aloha Editor's gcn-plugin will now compare the construct id instead of the tagname when searching for magic link constructs.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed the positions of the Content.Node buttons. Previously some buttons were not aligned correctly.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed connection pool limit for the urlincludeimp. Previously the url include imp did only allow two connections per host. We increased that limit to 20 by default.
+
+The default connection limit can be changed by the following java system properties:
+<shell>
+  -Dhttp.connection-manager.max-per-host=20
+  -Dhttp.connection-manager.max-total=40
+</shell>
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed english translation of warning message.
+The previously untranslated message was "aloha_msg_no_write_perm_opened_readonly".
+
+Additionally, this message will now only be displayed if the page is opened in edit mode when the user has no permission to edit the page. Previously the message was also displayed when a page was opened in preview mode.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed null pointer exception in REST API
+
+When a page was retrieved with the REST API (or displayed with Aloha)
+Overview Tags that were inserted but never modified caused a null
+pointer exception.
+
+----
+
+NOTE: For changes to Aloha Editor please see the "Aloha Editor Changelog":https://github.com/alohaeditor/Aloha-Editor/blob/1fdd7e44c6cf8cb28903502324614c0f2fcccddc/CHANGELOG.md . This Gentics Content.Node version includes the Aloha Editor 0.20.4 - 2012/01/24.
+
+----

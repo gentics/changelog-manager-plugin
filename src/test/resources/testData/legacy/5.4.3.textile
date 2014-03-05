@@ -1,0 +1,46 @@
+h2. Changes with Gentics Content.Node 5.4.3
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed javascript error when viewing the properties (name, description) of an image file.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed alignment of multiple form buttons for Internet Explorer.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed scrolling position in the tree navigation not being remembered.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed tipsy balloons sometimes not getting hidden again in forms.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a bug that could cause publishing errors when the java cache was empty. The publisher error was caused by issuing multiple streaming resltsets for one connection.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a bug in the image manipulator which resulted in broken images when resizing or cropping images with uppercase file extensions.
+
+----
+
+NOTE: For changes to Aloha Editor please see the "Aloha Editor Changelog":https://github.com/alohaeditor/Aloha-Editor/blob/6f211a422886e31a62aedb117b4dc24ec2d36ffe/CHANGELOG.md . This Gentics Content.Node version includes the Aloha Editor 0.20.3 - 2012/01/24.
+
+----
+

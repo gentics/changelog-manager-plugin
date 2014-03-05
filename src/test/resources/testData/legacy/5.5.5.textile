@@ -1,0 +1,58 @@
+h2. Changes with Gentics Content.Node 5.5.5
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The Gentics "Content.Node Guides":http://www.gentics.com/Content.Node/guides/ are now available.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The Rest API construct/list method will now be used by the Gentics Content.Node JavaScript API. Previously the construct/load method was used. The json format for the success handler of getConstructs and getConstructCategories was changed.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed exporting and importing assignment between Object Tag Definitions and Nodes.
+Export bundles, that were created on systems using the new Export mechanism before this bugfix might be incompatible with Systems still using the old Import mechanism:
+Importing might fail with an "Internal Error". In such cases, the Export bundle should be recreated with this fix applied.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Hide master nodes from the channel synchronization dialog, if the user has no permission to see it.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed clearing caches, when the name of a node was changed. This fixes display of the breadcrumb after changing the node name.
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed restricting overviews with the configured maximum, when using multichannelling.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+When pages from the publish queue were published, the inbox messages were always sent in english. This has been fixed now, the inbox messages will now be sent in the correct language.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+A NullPointerException within the RestAPI is now handled. Previously a NPE occured when trying to save a page using a request object that contained tags without specifying the *name* attribute of the tag. We now throw an exception in those cases. 
+
+----
+
+NOTE: For changes to Aloha Editor please see the "Aloha Editor Changelog":https://github.com/alohaeditor/Aloha-Editor/blob/20ec20546b21acd637c446396b3532575e41646c/CHANGELOG.md . This Gentics Content.Node version includes the Aloha Editor 0.20.16 - 2012/07/04.
+
+----

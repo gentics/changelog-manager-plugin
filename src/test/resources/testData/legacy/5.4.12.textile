@@ -1,0 +1,98 @@
+h2. Changes with Gentics Content.Node 5.4.12
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed missing buttons for Repository Browser and Fileupload in Aloha Editor.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed possible SGB when listing templates in channels, were one of the templates was initially created in a folder, that no longer exists.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed another situation, where the display of conflicting pages was wrong in a multichannel environment.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Added some missing icons in the Content.Node menu.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed permission error when translating pages without create permission.
+When a role only had the translate permission, but no the create permission, a fatal error was reported.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed display of node list for users with restricted permissions.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed javascript error in tagfill dialog.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+It is now possible to recursively search for folders containing a given search string in the name.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed quick recursive translation feature.
+The quick recursive translation feature allows the fast creation of language variants ("Create translations" menu item in the page list). The feature is not enabled by default. The feature stopped working because of a recursive dependency being declared resulting in a page load error.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed the fileuploader fallback not working in Internet Explorer.
+There has been a problem with the mimetype which has been fixed. We have also removed a Quicktime plugin check which wasn't necessary.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Changed the publication links to be more consistent across pages.
+The "publish approve" link will now be always shown in the menu and the assistant when the user has the rights for it.
+The "publish" and "publish at" links are also also always shown, no matter if the user has the rights or not.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed progressbar not disappearing when saving or editing an aloha page.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Added FileUploadManipulator for files that are being created via REST API. Fixed possible NPE when no transaction is available.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed authentication error in fileuploader when the session secret was provided via cookie instead of placing it in the multipart payload.
+
+----
+
+NOTE: For changes to Aloha Editor please see the "Aloha Editor Changelog":https://github.com/alohaeditor/Aloha-Editor/blob/22877a6f4547e0cd7011135849a42e533a70241a/CHANGELOG.md. This Gentics Content.Node version includes the Aloha Editor 0.20.6 - 2012/03/01.
+
+----

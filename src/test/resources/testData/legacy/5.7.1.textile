@@ -1,0 +1,35 @@
+h2. Changes with Gentics Content.Node 5.7.1
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a bug in the handling of escape characters in i18n strings.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Missing i18n entries were added.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+A bug that occured when handling the __ALOHA_PLUGINS_NODE__ setting was fixed. 
+Previously some alohaeditor jqueryui specific plugins were not added to the final list of plugins. 
+This issue only affected systems where the __aloha_jqueryui__ feature was enabled.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+An SGB that occured when opening the usage view for images was fixed.
+
+----
+
+NOTE: This Gentics Content.Node version includes the "Aloha Editor 0.21.4 - 2012/09/03":https://github.com/alohaeditor/Aloha-Editor/blob/alohaeditor-0.21.4/CHANGELOG.md and "Aloha Editor 0.20.23 - 2012/08/23":https://github.com/alohaeditor/Aloha-Editor/blob/alohaeditor-0.20.23/CHANGELOG.md  
+
+----

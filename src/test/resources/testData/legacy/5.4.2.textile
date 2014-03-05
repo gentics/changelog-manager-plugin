@@ -1,0 +1,81 @@
+h2. Changes with Gentics Content.Node 5.4.2
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Made the frame resizing borders of the tree more pretty
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed frame resizing bug in chrome when tree was being collapsed
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed frame flickering bug when resizing the tree in Internet Explorer
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed an user-error when creating a new tagtype, trying to view the tagtype properties and trying to create a new template
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed the left top logo frame getting messed up when minimizing the tree
+
+----
+
+h4. !images/changelog_types/security_24.png! *Security Update*
+
+The multipart flash upload got a security fix.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed issue with the generation of the Folder (Upload) tag part that caused the following tag part form elments to be hidden when no folder was selected.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Replaced the stars in the CMS title (Enterprise CMS) to their none-encodede version to fix them sometimes getting broken.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed the position of the submenu sometimes not being calculated correctly when resizing the tree frame very small
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Removed not very commonly used feature to move the assistant frame to the bottom
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Added "Black Panther" highlighting style to the breadcrumb navigation when hovering the links
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed stream images not being displayed in Internet Explorer in the user settings
+
+----
+
+NOTE: For changes to Aloha Editor please see the "Aloha Editor Changelog":https://raw.github.com/alohaeditor/Aloha-Editor/a0cc385a019df9fb237df7b40c91bcee3c433dee/CHANGELOG.md . This Gentics Content.Node version includes the Aloha Editor 0.20.2 - 2012/01/19.
+
+----

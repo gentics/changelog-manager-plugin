@@ -1,0 +1,21 @@
+h2. Changes with Gentics Content.Node 5.9.5
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+A SGB error was fixed within the imageurl part type. This bug was introduced within version 5.9.4.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+A SGB error was fixed within the Gentics Content.Node Image Import. Previously an error occured when a user tried to import a image into the system. This bug was introduced within version 5.9.4.
+
+----
+
+NOTE: This Gentics Content.Node version includes the "Aloha Editor 0.22.3 - 2012/10/08":https://github.com/alohaeditor/Aloha-Editor/blob/alohaeditor-0.22.3-commercial/CHANGELOG.md
+
+----

@@ -1,0 +1,417 @@
+h2. Changes with Gentics Content.Node 5.9.0
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Reduced left padding of the tree from 30px to 10px to be able to display more information
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The REST API call FolderResource.getFolders() has new options to get folders as trees and to do the recursion only for specified folders.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+It's now possible to search for folders by their ID and their description additionally to the name.
+Also a change was made for all kind of objects that the object ID will not be matched partially anymore.
+
+-----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Instead of just a generic image icon, the minibrowser will now show a thumbnail
+in each image result row in the list pane. Inherited content objects will have
+white-washed thumbnails with a small arrow to indicate multi-channelling.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement RM#2372*
+
+The GenticsImageStore will now also be able resize images in foreign nodes. A page in node A may now contain the following image url:
+
+<shell>http://www.node-b-hostname.tdl/GenticsImageStore/300/auto/prop/Content.Node/images/flower.jpg</shell>
+
+Such an url will be identified by the GenticsImageStore during the publish process. 
+The imagestore identifies the referenced node by examing the hostname within the found url. 
+The image within node B will be resized when the GenticsImageStore determined that the referenced 
+node (in this case node b) is publishing into the filesystem. Resizing will otherwise be omitted.
+
+The image tag must be adapted to include the node B hostname. 
+
+Example velocity implementation:
+<javascript filename="velocity example">
+#if($cms.rendermode.publish) 
+<img  src="http://${cms.tag.parts.src.target.folder.node.host}/GenticsImageStore/300/auto/prop/${cms.tag.parts.src.target.folder.node.path}${cms.tag.parts.src.target.folder.pub_dir}/${cms.tag.parts.src.target.name}"/>
+#else
+<img src="/GenticsImageStore/300/auto/prop/$cms.tag.parts.src.target.url" />
+#end 
+</javascript>
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+It is now possible to configure the list of available tagtypes for adding new tags into pages using the Live Editor, the Tagfill Dialog or Aloha Editor, by setting the "View Permission" flag on Construct Categories for specific Groups.
+It has to be noted, that although the flag is presented as "Permission Flag" it only modifies the Ui components, but does not prevent users with advanced knowledge of the REST API to add tags of other tagtypes using the REST API.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The Repository Browser will now adapt the pagesize to the available space.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Modified the exception handling for starting publishing transactions.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The Repository Browser will now remember the last open state and the last selected folder, even when the page is refreshed.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The styling of the Repository Browser has been modified to better fit into the general UI style.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Pages returned from the REST API will now also contain the languageName, if they have a language set.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The REST API has a new resource to fetch node information (from /CNPortletapp/rest/node/...). See the REST API Documentation for details.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The REST API has a new option to not create a new page version when saving a page. See the REST API Documentation for details.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The file fetch feature will now store imported images into the default image folder of the current node. The default behaviour will take place when no default image folder was specified.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The Gentics Content.Node JavaScript API was enhanced. The folder method multipartUploadURL was added to the folder API.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The gcn fileupload plugin will now use the Gentics Content.Node JavaScript API for handling uploads.
+The default upload folder for images and files will be used when one was specified for the current node.
+When no default upload folder was selected the parent folder of the page will be used.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+It is now possible to load various properties of a node using the Gentics Content.Node JavaScript API. 
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+create of page versions and cancel editing the page has been improved.
+Page versions will only be created for save requests that were manually triggered by users.
+When a user cancels editing a page, the last page version will be restored.
+The REST request /rest/page/save/{id} has a new option to omit creation of page versions.
+Creation of new page versions is now logged (together with the version number).
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The GCN Intergration plugin will now preselet the node in which the use is working in.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+REST-API now fully supports multichannelling methods for File and Image content objects.
+
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Added more descriptive information to logged errors that may occur when publishing to content repositories.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement RT#52125*
+
+Corrected the standard error message displayed to users when page loading is halted.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement RT#51866*
+
+Changed the Runtimeprofiler to initialize the timer dynamically, this allows the timer to be deleted.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Added more descriptive information to logged errors that may occur when publishing to content repositories.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement RT#52133*
+
+Added the disable_version_diff_choice feature, which disables the selection of a version when creating new language 
+translations of a Page and automatically selects the most recent version to be shown in the split view for translation. 
+This feature is disabled by default.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#51889*
+
+Fixed timeout problems when publishing multiple pages from the queue or the page list which could result in an error message.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed the Repository Browser to correctly show multichannelling icons.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed the Repository Browser to not show any objects in the list, when the Root Node ("Content.Node") is selected.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed how links are saved to ensure that all link parts are saved as well.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The __File (Upload)__ part type was fixed. Previously the upload button was not visible and the i18n string was not translated properly.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The file fetch feature will now correctly check the needed permissions for the used import folder. Previously create permissions were not checked correctly.
+
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed multithreaded publishing in conjunction with instant publishing into content repositories, which lead to longer publishing times, without using CPU time.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The repository browser and minibrowser will now use localized translations for various messges and texts.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#51912*
+
+When inserting a constuct using Aloha Editor the list of constructs to choose from was unsorted. The REST API will now sort the list of constructs by default.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#51707*
+
+Fixed a bug in tagfill which would cause an error when switching text parts of a tagtype to tag (page) parts.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#51638*
+
+Fixed a bug that caused image data to be set incorrectly when uploading a new image while editing a page when the target folder of the image was set outside of the current node.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#51674*
+
+Fixed releasing a semaphore when the publish process fails while starting a transaction for publishing into a contentrepository. If the semaphore was not released, the following publish process could hang indefinitely.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#51757*
+
+Fixed premature evaluation of &lt;script&gt; tags that occured in IE when rendering
+tags for editing that contained &lt;script&gt; tags.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#51863*
+
+REST API call /CNPortletapp/rest/page/render is fixed to be able to detect root
+elements with uppercase tag names.
+
+Therefore, given:
+
+&lt;DIV id="myeditable"&gt;&lt;node tag&gt;&lt;/DIV&gt;
+and
+&lt;div id="myeditable"&gt;&lt;node tag&gt;&lt;/div&gt;
+
+In both cases the #myeditable should be identified as the root element which is
+to contain the rendered contents of &lt;node tag&gt;.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#51863*
+
+REST API call /CNPortletapp/rest/page/render is fixed to be able to detect ids
+of root elements even if they are not wrapped in quotes (as is the case with
+IE).
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#51855*
+
+Fixed bug that the page was locked twice in the top menu of a page.
+This also caused the page to not get unlocked when doing this the first time.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#51872*
+
+Fixed SGB error when the tagfill dialog (when a tag in a page is edited) was saved,
+while the original page - the dialog belonged to - wasn't loaded anymore.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#51953*
+
+Fixed importing of tagtypes that already exist on the target system, but have less parts in the export file. Due to a bug, the superfluous parts where not removed during the import.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#51959*
+
+Fixed reading permissions for users. The database is now forced to use specific indices, because it sometimes decides against them (and doing a full table scan on the perm table instead),
+which drastically decreases the request performance.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#51638*
+
+Fixed a bug that caused image data to be set incorrectly when uploading a new image while editing a page when the target folder of the image was set outside of the current node.
+
+----
+
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#51674*
+
+Fixed releasing a semaphore when the publish process fails while starting a transaction for publishing into a contentrepository. If the semaphore was not released, the following publish process could hang indefinitely.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#51687*
+
+Fixed the default gravatar picture not working anymore due to changes from gravatar.com. Also disabled loading images from gravatar when using https://.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#52004*
+
+Fixed the feature logout_page not showing the text "Logout successful" because of a broken translation.
+Also added the ability to set an actual URL instead of just true to this feature.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#51971*
+
+fixes #51971 with workaround for when ie7 sometimes results in dom elements
+having corrupted attributes references.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#52023*
+
+The feature Versioned Publishing, which has been disabled is now enabled by default.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#51486*
+
+solved issue #51486, where closing a TagFill in IE7 for a block which is not
+rendered inside an editable would result in the user no longer being able to
+make any selections on the page.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#51554*
+
+Fixes bug in GCN/Aloha Blocks implementation which required the editor to click
+twice into an editable in order to bring up the floating toolbar after closing
+the TagFill dialog.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#52055*
+
+Fixed PHP Fatal error:  Class 'CNFolderObject' when executing a workflow timer trigger that moves a page.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#51637*
+
+Fixes tag copying.  Copied tags are no longer lost.  The copy placholder will
+not inadvertently change markup around the copied block.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#51641*
+
+Copied link tags will no longer be blockified.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#51740*
+
+Fixed possible performance problem when editing a tagtype that has many parts and is used by many tags.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#51433*
+
+When a page was requested to be opened in edit mode (using Aloha Editor), but was instead opened in readonly mode,
+because the user had insufficient privileges to edit the page or the page was locked by another user, the settings for
+$cms.rendermode still pretended, that the page was opened in edit mode. This caused specific edit mode implementations
+to fail in such cases. This has been fixed now, so that the setting for $cms.rendermode will always be correct.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#52044*
+
+Added the feature advanced_parallel, which makes sure that a scheduler task is not started as long as any of its following tasks is still
+running, even if they are set to run parallel. The feature is turned on by default.
+
+----
+
+NOTE: This Gentics Content.Node version includes the "Aloha Editor 0.22.3 - 2012/10/08":https://github.com/alohaeditor/Aloha-Editor/blob/alohaeditor-0.22.3-commercial/CHANGELOG.md
+
+----

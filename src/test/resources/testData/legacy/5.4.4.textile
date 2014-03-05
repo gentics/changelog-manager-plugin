@@ -1,0 +1,68 @@
+h2. Changes with Gentics Content.Node 5.4.4
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The new Feature "Multichannelling" allows creation of Channels, that inherit Folders, Pages, Images, Files and Templates from another Node.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Added PPTX mimetype mapping to page import.
+
+Also, custom mime-type mappings can now be configured through the
+node.conf $CN_MIME_TYPES variable. For example, to add a mapping for
+files with the .pptx extension:
+
+<shell>
+  $CN_MIME_TYPES["PPTX"] = "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+</shell>
+
+The name of the extension must be all uppercase characters, otherwise it
+will be ignored.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed: Live preview for pages in multichannelling will now render page in the correct scope (channel)
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Extended LDAP functionality so LDAP groups with unique users as attributes can be used.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed: Problem with extended LDAP functionality.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Improved error handling if user is not assigned to any usergroup.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The new Feature "Channel Synchronization" allows easy synchronziation of channels with their master node (in Multichannelling).
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed output textboxes being too small in the scheduler
+
+----
+
+NOTE: For changes to Aloha Editor please see the "Aloha Editor Changelog":https://github.com/alohaeditor/Aloha-Editor/blob/6f211a422886e31a62aedb117b4dc24ec2d36ffe/CHANGELOG.md . This Gentics Content.Node version includes the Aloha Editor 0.20.3 - 2012/01/24.
+
+----

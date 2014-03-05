@@ -1,0 +1,177 @@
+h2. Changes with Gentics Content.Node 5.11.1
+
+endprologue.
+
+----
+
+WARNING: *Manual Change* The login url for sso logins was changed within the Gentics Content.Node JavaScript API
+
+The JavaScript API method __loginWithSSO__ now uses the rest API url __/rest/auth/ssologin__. Previously the  __/rest/auth/login__ url was used.
+
+See "Authentication methods for REST API":http://www.gentics.com/Content.Node/guides/rest_auth.html for more information.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement RT#52864*
+
+Improved documentation for gtxalohapagelink (http://www.gentics.com/Content.Node/guides/aloha_gcn_alohapagelink.html) as suggested.
+Now the class attribute won't be added if empty.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Added method /CNPortletapp/rest/auth/ssologin as alternative to /CNPortletapp/rest/auth/login, so that the SSO filters can be mapped to /CNPortletapp/rest/auth/ssologin
+and login by posting user credentials to /CNPortletapp/rest/auth/login is still possible.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Refactored the global JavaScript object named GCN to GCNREST in tagfill and object tag dialogs. 
+This internal object would provide the Repository Browser with access to the REST backend services,
+creating a naming conflict with the GCN JS API. The GCN JS API may now be used in tagfill and
+object property dialogs using a custom form tag, as the naming conflict is resolved with this change. 
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#52746*
+
+Fixed check for duplicate node names and hostname/publish directory settings when creating or updating nodes.
+Before this fix, the create/update operation was not done, but no error was shown either.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#52259 RT#52605*
+
+Inserting tags into editables using the Internet Explorer sometimes moved the selection into a non-editable area in the tag. As a result, when another tag was inserted
+with the incorrect set selection, the new tag was inserted into the other tag, not into the editable area.
+This has been fixed now, when tags are inserted with an invalid selection, the selection will first be corrected to be in a proper place (after the non-editable area).
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#52290 RT#52043*
+
+Fixed dirting of dependent objects when the filename of a file or image was changed using the backend properties dialog.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#52634*
+
+When multiple pages were created in the same script using the GCN JS API, the PageAPI were indistinguishable and e.g. tags created in them could get mixed up.
+This has been fixed now, so that it is now possible to create multiple pages in the same script.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#52762*
+
+When translating a page into another language (which was not created before), the translation split-screen view showed a diff instead of the current page to be translated (in the upper frame).
+This has been fixed now. The diff view will only be shown, if the translation was synchronized with an older version of the page and is continued now.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT##52712 RT#52660*
+
+When exporting objects, for which no global IDs have been generated, a NullPointerException was thrown (and the export failed). This has been fixed now to throw a more descriptive error message (including the object name and id).
+Additionally, every time the server is started, missing global IDs are generated in a background job.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#52776*
+
+Fixed an error that occurred when uploading files with special characters in the filename.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#50625*
+
+Under certain preconditions, fields of page properties stayed empty. This has been fixed now.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#52368*
+
+When $FEATURE["logout_page"] is set to a URL and multiple browser-windows are used at once, there was a problem when the user logged out of the system in one window and tried to continue browsing - in that case, the logout-page was only shown in the current frame. After the fix, logout-pages are always displayed in the whole page.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#51051*
+
+When viewing the tooltip for the tagtype-part URL(page), two overlapping tooltips were sometimes shown. Furthermore, when more than one parts with the type URL(page) were present, only the first showed a tooltip. This has been corrected, and only one tooltip is shown at any time.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#52876*
+
+Fixed user/profile form stating that the description must be not empty in the tooltip.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#52830*
+
+A bug within the custom form tagpart node tag parsing was fixed. Previously the node tags within the source of a custom form tag were only parsed when a custom form tag was editied within a page. It is now also possible to use node tags within the context of object properties for folders, pages, templates, files and images. 
+Please note that only a small subset of tags can be evaluated when viewing the tag type within the tag type edit dialog due to the missing context of a page, file, template, image, folder.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#51911*
+
+Added missing german translation for "add elements" when selecting objects in a overview tag"
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#51642*
+
+Fixed the "maximize tree"-icon in the GCN tree frame not being at a fixed position and therefore was probably not visible if the tree
+was not scrolled to top.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#52516*
+
+Fixed confirmation-alerts in the context-menu to be displayed for critical actions like delete or publish, and omitted otherwise.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#52573*
+
+A permission check within the rest api login method was fixed. Previously it was possible to login when the maintenance mode was enabled. Now login is only allowed for users that can enable/disable the maintenance mode.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#52964*
+
+Ensured that clicking on an internal link will result in the floating menu
+and/or sidebar to be shown appropriately--even if the editable inwhich the link
+is rendered is inside an aloha block.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#52759*
+
+Fixed a problem with menu-items being unreachable on small screens or in large lists. If a submenu has more content than can be shown inside the browser window, menu-items are now arranged in a two-column-design.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#52751*
+
+Fixed rendering order of pages in page overviews, where the pages are selected and sorted manually.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RT#52987*
+
+Ensure that content tags are created for external links as well as internal links.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The edit() method within the Gentics Content.Node JavaScript API was fixed to correctly render tags onto elements when a class name is
+specified as the selector rather than an id. Previously the edit() method would not work when a css selector was used to select the dom element that should be edited.
+
+----
+
+NOTE: This Gentics Content.Node version includes the "Aloha Editor 0.22.7 - 2013/01/08":https://github.com/alohaeditor/Aloha-Editor/blob/alohaeditor-0.22.7-commercial/CHANGELOG.md
+
+----

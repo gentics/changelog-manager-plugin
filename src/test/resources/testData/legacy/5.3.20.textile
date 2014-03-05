@@ -1,0 +1,9 @@
+h2. Changes with Gentics Content.Node 5.3.20
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The gcn repository will now only provide 100 results for autocompletion when using the link plugin to link files or pages. This prevents huge downloads for ambigous search terms.

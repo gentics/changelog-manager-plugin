@@ -1,0 +1,81 @@
+h2. Changes with Gentics Content.Node 5.1.6
+
+endprologue.
+
+----
+
+WARNING: *Manual Change* Changes for updating Aloha Link plugin
+
+Fixed Aloha Link plugin. It is now possible to set links to internal files. To enable linking of files the Aloha Link tagtype has to be adapted. See "&raquo; Aloha Link plugin support FAQ":http://www.gentics.com/Content.Node/infoportal/cms/Does-the-Aloha-Link-plugin-support-internal-links.en.php
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Removed duplicate dependency that caused ClassNotFound exceptions and therefore stalled the background job tasks.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Now templates that have only one linked folder can only be unlinked if there are no pages that reference this template. This fix was introduced to fix a bug that caused templates that were included within an export file to be hidden from the user.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed an issue within the import that caused imports to fail due to wrong permission check of constructs.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixes error when using the "Assign for revision" functionality. This error was introduced when the changes made in Content Node 4 were merged into Content Node 5. In both branches identical do numbers were used for different features.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The tagname header within the tag edit dialog will now no longer be omitted if the feature tagfill_light is activated. Otherwise the tagname can be viewed by examining the head title. (Mouseover titel)
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Now only pages that have the contenttype 'text/html' can be edited with aloha. For other pages the editing will automatically fallback to the oldstyle editing. 
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a bug that caused autoupdate to ignore the doupdate parameter. The autoupdate executed the update even if the feature was disabled via the autoupdate menu. Updates that include manual changes were not and will not be applied automatically.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The sizcache and sizset attributes that appeared when using the liveditor will be now be removed automatically.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Added cleanup of sizset sizcache attributes that were set by sizzle and not removed when using internet explorer with aloha editor.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed adding of language extension to filename when updating with an empty filename and Feature "contentgroup3_pagefilename" is set.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed deletion of imports: Do not show objects, which were ignored (or copied) in the last import in the list of objects to be deleted.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Upgraded CodeMirror (syntax highlighter used for template editing) to most recent version to fix copy/paste. Pasted contents would be duplicated before this fix.

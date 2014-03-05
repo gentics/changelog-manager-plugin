@@ -1,0 +1,15 @@
+h2. Changes with Gentics Content.Node 5.6.3
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+A bug that occurred during the building of 5.6.2 was fixed.
+
+----
+
+NOTE: This Gentics Content.Node version includes the "Aloha Editor 0.21.3 - 2012/08/23":https://github.com/alohaeditor/Aloha-Editor/blob/alohaeditor-0.21.3/CHANGELOG.md and "Aloha Editor 0.20.23 - 2012/08/23":https://github.com/alohaeditor/Aloha-Editor/blob/alohaeditor-0.20.23/CHANGELOG.md  
+
+----

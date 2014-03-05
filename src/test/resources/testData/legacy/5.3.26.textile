@@ -1,0 +1,82 @@
+h2. Changes with Gentics Content.Node 5.3.26
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Changed the Node and Content Repository select field in "maintenance" to not have "All" as first item selected automatically.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed: scheduler task execution during winter-time<br/>
+A scheduler task with a start date during summer-time was scheduled during winter-time at every minute of the hour leading up to the actual execution-time. This means that the task potentiall executed 60 times instead of only once.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed: inconsistency in value table<br/>Deleting a tag-part by importing a tag-type, or restoring a page version, possibly resulted in an inconsistency in the value table. The inconsistency was an entry in the value table that referenced a part that didn't exist.
+
+This change fixes the deletion of tag-parts, so that whenever a tag-part is deleted, all values will be removed from both the current and the versioned value tables.
+
+Additionally, the update procedure will remove all inconsistent values from both the current and the versioned value tables, to fix any existing inconsistency. Only unreachable values will be removed.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Added timeout for UrlIncludeImp connection pool. In rare cases the urlinclude imp could create a deadlock situation when the connection pool is full and no connection is avialiable for pending include actions. In that case the urlincludeimp waited until a connection was freed. In rare cases the connections were never freed thus causing a deadlock situation.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed: A wrong error message which occured when trying to move a page into another folder where a page with the same filename already exists.<br/>
+It now renames the file instead if printing an error message (in most cases).
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a bug when publishing pages with timemanagement using the REST API: If page had a timemanagement set and was published using the REST API, it was published regardless of the current timeframe of the timemanagement. This is fixed now, timemanagement will now also be honoured when publishing pages using the REST API.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a bug where the Gentics ImageStore sometimes fails because of missing image mime type mappings.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The filepublisher will now fetch batches of pages instead of all pages at once. This will increase performance and reduce the memory footprint when writing files into the filesystem.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed resolving of parts within the get method of custom part types.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed file uploader not checking filesizes correctly (it always added ~600bytes to the actual filesize)
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Add missing startPageId to folder returned from RestAPI
+
+----
+
+NOTE: For changes to Aloha Editor please see the "Aloha Editor Changelog":https://github.com/alohaeditor/Aloha-Editor/blob/52d203da3b71874f71cda704340cd26bbccdbc2f/CHANGELOG.md . This Gentics Content.Node version includes the Aloha Editor 0.20.0-RC9 - 2011/12/07.
+
+----
+

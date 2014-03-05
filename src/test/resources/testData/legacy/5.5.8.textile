@@ -1,0 +1,196 @@
+
+h2. Changes with Gentics Content.Node 5.5.8
+
+endprologue.
+
+----
+
+NOTE: Potential Issue: A memory leak in the jQuery 1.7 feature detection that affects Internet Explorer 8 was detected.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The CRSync will now log the number of removed obsolete objects per type.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Some typos within a javascript warnings have been fixed.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The aloha editor basic contenthandler was activated by default. The contenthandler sanitizes the html that is fetched though the Aloha Editor getContents method. For more information please refer to the Aloha Editor Changelog.
+
+----
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed unnecessarily high memory consumption (possibly leading to OutOfMemory Exceptions) when rendering a page containing (many) editables for Aloha Editor.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Added error message to import log of differential pageimport, when objects cannot be removed (e.g. due to insufficient permissions).
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed exclusion mechanism for objects while exporting with the new export: If e.g. constructs were generally excluded, but a single construct was included, the construct was incorrectly excluded from the export, if it was found as dependency in a template tag (meaning: if a template was exported that contained a tag based on the construct).
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed the "Download URL" and "Password" fields in the "New Import" dialog losing focus when being clicked into using Firefox.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed encoding and translation of error message in Scheduler, when trying to delete a Task Event, that cannot be deleted because another Task Event depends on it.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Some CSS definitions that might interfere with project specific styles have been prefixed with "gentics_" or removed.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed listing of pages, that use another page (either by being a page variant, or by containing a pagetag to the other page): Correctly show language icons, template and folder information.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Added styles to &lt;pre&gt;-Tag around source code diff between page versions, to have line breaks.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+When a template cannot be deleted, because it is still used by some pages, the user will now be informed with a message.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a bug in the experimental version of the gcn integration plugin. Previously a javascript error occured when no tagtype with no assigned category existed.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Modified the tooltip position of the source code textarea for templates, so that the tooltip is now visible.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a bug in the experimental version of the Gentics Content.Node Javascript API that caused on construct category to be left out the sortorder array.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The gcnfileupload aloha plugin design was modified so that it matches the Gentics Content.Node UI. The plugin css can be customized in frontend applications to change the ui style.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The scrollbars within the edit view of a page were fixed. Previously the vertical scrollbar was displayed with an offset. In rare cases even two scrollbars were displayed next to eachother.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+While a page is imported using the page import, the page will be locked now. Additionally, the md5sum of the imported page source will be written when the page was successfully imported (not earlier).
+This will help in cases, where importing the page does not succeed (e.g. due to a timeout), because the page will be imported again, when tried again with the same source.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+A misplaced call to javascript alert was removed. Previously this alert was displayed when previewing a page in the liveeditor.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed permission checks when trying to create a folder in the root folder of a channel that is derived directly from a master, the user is not allowed to see.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+When pages in the publish queue are assigned to users (i.e. the publish request is denied), the pages are no longer marked as last being edited by the assigning user.
+This behaviour possibly also caused creation of new page versions (with the assigning user), although the assigning user never edited the page.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+If AJAX requests fail during editing with Aloha Editor, because the CMS backend is no longer accessible (due to network problems, session timeouts, etc. ...), the shown error message will now be displayed properly.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed deleting of folders during a differential page import: If deleting a folder takes long (because it contains a lot of subobjects), the deletion is not sent to the background, which caused strange behaviour in the page import (e.g. that the folders could not be deleted).
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed some style issues with the repository browser. Previously the tree icons were not correctly displayed within Internet Explorer 7 and 8. The searchfield size was slightly increased.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed javascript errors occuring when using regex characters in the repository browser search field.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed incorrect disabling of the button for pushing objects into the master in the channel synchronization dialog, when switching to another tab.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+It is now possible to configure Aloha Editor settings in the node.conf, that contain array with keys containing , (comma) and spaces.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The links to load Aloha Editor files for editing pages will now contain the current build timestamp (and not the path /latest/ any more). This avoids unnecessary redirects (additional browser requests), if the correct paths to Aloha Editor files are known anyway.
+The path containing /latest/ will still work (and redirect to the path containing the current build timestamp) for applications that need to load Aloha Editor files without knowledge of the current build timestamp.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a bug that prevented automatic republishing of overview pages, when the objects were taken from the current or from selected folders and multichannelling was used. This fix will automatically re-publish all currently published overview pages that might be affected by this bug. Therefore, the first publish run after the update might take longer than expected.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+A Javascript error within the scheduler task creation dialog was fixed. 
+
+----
+
+NOTE: This Gentics Content.Node version includes "Aloha Editor 0.20.20 - 2012/07/25":https://github.com/alohaeditor/Aloha-Editor/blob/a6e4ed193b2191334d19f8f230ae85f12006178b/CHANGELOG.md
+
+----

@@ -1,0 +1,15 @@
+h2. Changes with Gentics Content.Node 5.11.3
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed possible NPE, that lead to empty rendered overviews over pages, when multichannelling is not activated.
+
+----
+
+NOTE: This Gentics Content.Node version includes the "Aloha Editor 0.22.7 - 2013/01/08":https://github.com/alohaeditor/Aloha-Editor/blob/alohaeditor-0.22.7-commercial/CHANGELOG.md
+
+----

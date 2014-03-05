@@ -1,0 +1,91 @@
+h2. Changes with Gentics Content.Node 5.4.15
+
+endprologue.
+
+----
+
+WARNING: *Manual Change* The Apache HTTPD package has to be updated to the latest version.
+
+# Download the <a href="https://secure.gentics.com/custom/apache-update-2.2.22.run">self-executing installer package</a>
+# Execute the installer package with the <b>root user</b>
+# The installer will ask whether the new configuration should be installed - please skip this step by pressing enter (the current configuration will be kept).
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed errors that were caused by missing folder or template objects during
+a publishrun with versioned publishing enabled.
+
+Versioned publishing will render and publish the published content of
+pages that are included in other pages, for example via an Overview, or
+a Tag (page), or similar TagTypes that can include content from other
+pages, or via a Page variant.
+
+<p>Additionally, there were some changes concerning the versioning of pages.</p>
+
+<p>First, the folder of a page has ben excluded from versioning. This means
+that the page will always be rendered in its current folder. For
+example, Changelog will render the name of the current folder
+even in an older version of the page. Before this change, the name of
+the folder where the page was when the version was created was renderd.</p>
+
+<p>Second, the template of a page is still versioned, but should the
+template of an older version of the page have been deleted, the current
+template will be used as a fallback and a warning will be logged. To
+avoid this, never delete a template that may be used by older versions
+of a page.</p>
+
+<p>These changes apply even when the versioned publishing feature is turned
+off.</p>
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed the old file/image uploader default filename containing a space which causes the validation to print an error.
+
+Seperated the headline and the filename translations.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The REST API page/restore restore versions was optimized to be more consistant.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed internationalization in Aloha-Editor assistant frame.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Inserted an input validation for HTML for the tagtype properties when the "validation" feature is turned on.
+<p>See: <a href="http://www.gentics.com/Content.Node/infoportal/cms/wiki/Validation.en.php">Validation</a></p>
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The page copy action performance was enhanced.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed setting of filetype when uploading Files via the REST API. If the filetype is sent from the client, there is no auto-detection done on server side.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed the action icons (for multiple item actions) not being shown anymore in some folder views (images, templates, ...)
+
+----
+
+NOTE: This Gentics Content.Node version includes "Aloha Editor 0.20.7 - 2012/03/07":https://github.com/alohaeditor/Aloha-Editor/blob/2adfc4ba1353db67b9a0cb22b0945f02e492cbce/CHANGELOG.md
+
+----

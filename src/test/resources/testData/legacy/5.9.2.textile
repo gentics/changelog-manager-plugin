@@ -1,0 +1,45 @@
+h2. Changes with Gentics Content.Node 5.9.2
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RM#5611*
+
+Some imageurls for the repository browser that can be opened within the tagfill dialog were fixed. 
+Previously a css and some images could not be loaded when the tagfill dialog was opened within the frontend editing mode.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix RM#5624*
+
+A bug within the tagfill dialog imageurl and fileurl part handling was fixed. 
+Previously the tagfill dialog views that contained imageurl or fileurl parts caused SGB errors when opening. 
+This issue was introduced within 5.9.0 and did only occure when using the frontend editing mode.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The preview thumbnails in the repository browser were fixed when using frontend editing mode. 
+Previously the proxyprefix parameter was not added to the thumbnail imageurls.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed rendering of tags to no cause a JavaScript exception. Also ensures that
+ids in template strings are correctly extracted and listed in the REST-API
+renderer response.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed folder highlighting within the main Gentics Content.Node folder tree within channels. Previously the master node folder was highlighted when a channel page was opened.
+
+----
+
+NOTE: This Gentics Content.Node version includes the "Aloha Editor 0.22.3 - 2012/10/08":https://github.com/alohaeditor/Aloha-Editor/blob/alohaeditor-0.22.3-commercial/CHANGELOG.md
+
+----

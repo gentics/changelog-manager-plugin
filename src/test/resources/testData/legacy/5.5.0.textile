@@ -1,0 +1,305 @@
+h2. Changes with Gentics Content.Node 5.5.0
+
+endprologue.
+
+----
+
+WARNING: *Manual Change* Enable the hardlink feature
+
+The 'hardlink_files' feature is only working on 64Bit systems when the correct libgtx_fileutils library is enabled. We noticed that some systems have this feature enabled but the wrong library is enabled. Please check your 'libgtx_fileutils' file within '/Node/lib'.
+
+Enabling the 64bit library will increase the publish performance and reduce load on most systems. Please note that enabling hardlinks may result in changed permissions of files that are beeing created within the /Node/node/content/publish/pub directory. 
+
+A faq which describes how to enable the fileutils can be found here:
+"64 Bit FAQ (German)":http://www.gentics.com/Content.Node/infoportal/cms/faq/Wie-passe-ich-JVM-zu-64-Bit-an.php
+
+----
+
+WARNING: *Manual Change* Adapt multilevel publish workflow implementations
+
+Publishing a page using the REST API used a multilevel publish workflow, while publishing a page in the backend used the old single-level publish workflow.
+The publish behavior has been unified now. The default behavior is now, that publishing the page over the REST API or the backend will use the old single-level publish workflow.
+Implementations that required the multilevel publish workflow need to add the configuration setting
+
+<pre>
+$MULTILEVEL_PUB_WORKFLOW[nodeId] = true;
+</pre>
+
+in the _/Node/etc/node.conf_ for all nodes.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The workflow event "on page publish" and the event reaction "cn_page_proof"
+have been discontinued.
+
+Existing workflows will be unaffected by this change. However, it is not
+possible to create new "on page publish" events or "cn_page_proof"
+reactions.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed rendering of page versions that contain tags that have been deleted after the version was created.
+
+Rendering of page versions with deleted tags resulted in an empty page
+to be displayed and an exception similar to the following to be thrown:
+
+com.gentics.api.lib.exception.InconsistentDataException: Data inconsistent: Container {xxx} of Value {xxx, xxx} does not exist!
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed menu in the channel synchronization (Details) being wrapped at the folder menu item.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed message dialog overlay in the tree navigation (instant messaging, system messages) always being on
+top of the frame instead on top of the current scrolling position.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed problems when uploading files using the File Upload Plugin in Aloha Editor with Internet Explorer (any version) and a certain security level. Internet Explorer sometimes sends the full local path as filename when posting file uploads. Additionally, the path is not sent standard conformant, so that the receiving component is unable to determine the filename and will respond with an error.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed the RestAPI Resource /rest/folder/getTemplates/ not having default values for the values sortby and sortorder.
+The default value for sortby is now "name" and for sortorder it's "asc".
+This also fixes the template ordering when creating a new page in Content.Node (alphabetical).
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a but in Multichannelling, that caused data inconsistencies for folders, when they were created in localized folders and pushed into master folders.
+As a result of this data inconsistency, affected folders were no longer shown in the tree. This bugfix also repairs the data inconsistencies and will make the folders reappear. 
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+After channel synchronization is done, the tree is reloaded to reflect possible changes in the folder structure.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+When localizing object takes too long and is continued in the background, the user is now notified with an alert box.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed many of the administration pages in the Portal.Node module throwing a SGB-error (pages including form elements).
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed duplicate globalid entries in the database that came with the release-package and can cause conflicts when importing exports.
+This bugfix removes the duplicate globalid entries
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed creation of unnecessary big statements during processing of dependencies that could possibly generate high load on the db server.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Modified handling of REST API requests without sid or with invalid sid. The response to such requests will now have http status 200 (OK), but will contain a responseInfo with responseCode AUTHREQUIRED. 
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The restapi fileupload parameters for methods /rest/file/createSimple and /rest/file/create were unified. The folderID parameter is now called folderId, nodeID is now called nodeId. Additionally you may now specifify a 'databodypart' parameter to tell the upload backend logic in which bodypart contains the upload data. The upload backend logic now also supports the blueimp jquery file uploader.  
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The gcn fileupload will now correctly encode the 'filter-contenttype' parameter. Previously this parameter was not encoded. Without encoding fileupload would not work when using the plugin through a Portal.Node bea weblogic application server.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The restapi can now be used to retrieve objects by using either the localid or the globalid.
+This affects the loading of pages, folders, file, images and templates
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+It is now possible to import and export Channel specific data.
+
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The tooltip show timeout was increased. The tooltips will now display when 900ms of time have passed.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The menu transparency was decreased. Previously the background content was visible through the menu entries.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The tagfill lightbox size was extended. It will now be wider and higher. Previously the lightbox had a larger border space which made it hard to read the lightbox tagfill content due to the implied size limitation.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The gravatar images can now be switched off by enabling the feature 'no_gravatar'
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The gcn context menu css was slightly modified. Previously the first context menu entry did not have a border at the top.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The item lists styles were slightly adjusted to allow the tooltip to be read when examing the last item within the itemlist. Previously the tooltip could not be read because it was shown outside of the visible area.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed javascript error that occured within the new page dialog field. 
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The file, folder, image, page and template filelist search will now also update the displayed count in the assistant. Please note that the search is only affecting the current list type. This means searching within the page list will not update the count for images in the assistant.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The itemlist (e.g scheduler task list) now displays correctly in firefox. A firefox bug caused some rendering error when the item rows were highlighted. This bug was now workarounded.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+A special Internet Explorer behaviour was workarounded in the multipart fileupload fallback. Previously the Internet Explorer 7 was posting the full path to the uploaded file instead of just the filename. The full path that contained special characters triggered the character filter on filenames and the upload was aborted.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The page name and page language (if existing) will now be displayed within the assistant when viewing a page.
+
+---- 
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+ 
+The folder name and content language will now be displayed within the assistant when viewing a folder page list.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The assistant will now be hidden once the tagfill lightbox opens. The assistant will restored once the tagfill lightbox closes.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed resolving of other parts in the get() method of an ExtensiblePartType Implementation when this is done in velocity (like $cms.page.tags.[tagname].parts.[partname].[property]).
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Some i18n messages were corrected within the Gentics Content.Node UI.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed creation of page variants when multichannelling is used. It is now possible to select pages from channels or inherited folders in channels.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed display of new uploaded files, when using the multifileupload: Uploaded files will now be immediately visible in the file list, after clicking OK in the file upload dialog.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed possible SGB when opening a page out of an inbox message and then starting to edit it.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed display of channels in the repository browser: Sometimes channels were shown in the repository browser (but not in the tree), although the user did not have sufficient permissions on that channel.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The way the changelog is structured was changed. We'll now only include the latest changelog in the update view all other changelog entries can be viewed "here":http://www.gentics.com/Content.Node/changelog/index.html
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a javascript error that ocurred when changing the language of a content page.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed permission check for editing images within file list and tagfill dialog. The image manipulation button will only be displayed when the user has edit permissions on the folder in which the current image resides.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed rendering of navigation or breadcrumb in an editable page: like rendering velocity parts, navigation and breadcrumb parts are rendered in a "non-editable" state.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Besides the already existing quicksearch for folders, it is now also possible to use the extended folder search, that can be found in the main menu (Search|Folders).
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+A resizing issue with the tree was fixed. Previously the tree collapsed when editing some pages. This bug only occrred when the aloha010 feature was disabled.
+
+
+----
+
+NOTE: For changes to Aloha Editor please see the "Aloha Editor Changelog":https://github.com/alohaeditor/Aloha-Editor/blob/fb79ade74b353fc9d938bfa0da6c2b5428a97cc2/CHANGELOG.md . This Gentics Content.Node version includes the Aloha Editor 0.20.11 - 2012/05/10.
+
+----
+

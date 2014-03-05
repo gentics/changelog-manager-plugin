@@ -1,0 +1,67 @@
+h2. Changes with Gentics Content.Node 5.1.3
+
+endprologue.
+
+----
+
+WARNING: *Manual change* The JDK was updated
+
+*Please perform this step before performing the update of Gentics Content.Node.* 
+This change can be omitted it the installation alredy uses JDK 1.6.0_14.
+   
+Examine the symlink /Node/java to check which jdk version is currently in use.
+Version 1.6.0_01 became incompatible with Gentics Content Node due to
+the JAXB Library version bundled with the JDK.
+    
+To update the JDK version to 1.6.0_14, please download the
+<a href="https://secure.gentics.com/service/updates/jdk-update-1.6.0_14.run">
+update script</a> and execute it as a shell script.
+    
+The script will ask for the Node folder (defaults to "/Node") and
+whether to use the 64bit version of the JDK (the default will be
+autodetected).
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed rendering of pages that render information of other pages (like overviews, links to other pages, page-tags, ...):
+
+If the other page was modified but not yet published, the first page would publish the current data, but not the published data of the other page. This behaviour has been fixed now: When a page is published and renders information of other pages, it will always get the published version of the other page.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixes CRSync NoClassDefFound RuntimeProfiler Exception
+    
+The ProfilerServlet has a dependency on HttpServlet. The servlet-api is
+only on the classpath, if the RuntimeProfiler is used in the context of
+a webapp.
+    
+A workaround is to specify the servlet-api.jar in the classpath of the
+CRSync command line.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Added property .istag for objects to determine whether they are tags
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed problem with custom streams which would not be displayed
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed issues with page list when flapping the tree - the page list will now reclaim all available space
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed unexpected behaviour in list of object properties of pages: Opening this list locked the page, but leaving with 'Back' button did not unlock.

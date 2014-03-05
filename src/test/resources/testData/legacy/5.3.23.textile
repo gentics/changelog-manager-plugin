@@ -1,0 +1,9 @@
+h2. Changes with Gentics Content.Node 5.3.23
+
+endprologue.
+
+----
+
+NOTE: For changes to Aloha Editor please see the "Aloha Editor Changelog":https://github.com/alohaeditor/Aloha-Editor/blob/dce535ccac4e6d817b1ca7e6950aba94240136cd/CHANGELOG.md . This Gentics Content.Node version includes the Aloha Editor 0.20.0-RC7 - 2011/11/21.
+
+----

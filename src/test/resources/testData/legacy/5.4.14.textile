@@ -1,0 +1,116 @@
+h2. Changes with Gentics Content.Node 5.4.14
+
+endprologue.
+
+----
+
+WARNING: *Manual Change* The tagfill dialog will now only contain jquery version 1.6.1. 
+
+Previously two different jquery versions were loaded. This change may affect existing custom form tagtype implementations. Please note that loading a second jquery version by means of a custom form tag may cause unexpected issues with existing javascript features of Gentics Content.Node. We suggest using the new jquery version 1.6.1.
+
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed possible errors (EmptyStackException) during publish process when using multithreaded publishing together with multichannelling.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed resolving of tag parts in custom part types, when the custom part type is not editable.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed performing an import or deleting a part of a TagType hangs because of a missing index on the value_nodeversion.part_id column.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Removed most of the action icons from the page list view again (at the right side of the actionlist)
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed the old singlefile Content.Node 4 Uploader not taking file extensions with numbers in account.
+For example: sound.mp3, it didn't add and check the file extension of the file automatically.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Added a search field and button to the repository browser for linking pages and files in Aloha Editor.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed filling of tags with the new Minibrowser in the tagfill dialog when multichannelling is used: When an item is selected in the Minibrowser, the form will be posted and the tagfill dialog re-rendered.
+This is necessary for custom form tag implementations that need to be re-rendered whenever some other parts change.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+A logout link was added to the selfupdate dialog. It is now advised to logout and login again after the update was completed. This step ensures that the interface of the update user will be loaded correctly after the system was updated.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+When adding links to internal pages or files using Aloha, the path information of the pages in the search dropdown will no longer start with the Node name, because this is redundant information.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed two SGB's within the tagfill dialog. The first one occured when accessing the overview tagfill dialog. The second one occured when trying to upload file using the old file uploader dialog. These errors only occred while editing in frontend mode.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed Gentics Content.Node redirecting to the login page when pressing the enter button in the Imagemanipulation properties sidebar.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Added name 'inserttag' for insert tag button for Aloha Editor's gcn plugin to make it configureable.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+When using firefox 10: The construct properties view will require Firefox 10.0.0.2 or later to display correctly. Older Firefox version (>10) contain a bug that prevents correct display of that particular view.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed SGB that occured when accessing the node creation dialog directly after login.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed links in the assistant frame open in the lower frame of the translation split-view when a page is translated.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed the tooltip speech bubbles in dialogs sometimes messing up the page by adding whitespace at the top (resulted in annoying jittering)
+
+This mostly happened in Firefox 10.
+
+----
+
+NOTE: For changes to Aloha Editor please see the "Aloha Editor Changelog":https://github.com/alohaeditor/Aloha-Editor/blob/2adfc4ba1353db67b9a0cb22b0945f02e492cbce/CHANGELOG.md. This Gentics Content.Node version includes the Aloha Editor 0.20.7 - 2012/03/07.
+
+----

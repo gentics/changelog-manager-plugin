@@ -1,0 +1,327 @@
+h2. Changes with Gentics Content.Node 5.5.3
+
+endprologue.
+
+----
+
+WARNING: *Manual Change* When using Aloha Editor the AlohaRenderer will now also
+accept span-tags as valid root-tags
+
+Prior to this change span-tags where not considered to be valid root tags thus the 
+tags contents where automatically wrapped in a div. If you rely on this functionality 
+this might now result in multiple tags being listed on the same line and lead to 
+overlapping tag icons. Add wrapping div-tag to your tag implementations
+to solve this issue.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Added functional description for the Gentics Content.Node Integration Plugin.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The tag insert buttons within the gcn plugin can now be configured per editable. A whitelist configuration is used to show/hide specific tag insert options. The whitelist uses the tagtype keyword to filter the buttons/menu.
+
+Example:
+<shell>
+$ALOHA_SETTINGS_NODE[1]['plugins']['gcn']['config'] = array("tagtypeWhitelist" => array("link", "wikilink", "formspace", "htmllang", "myuncategorizedtagtype"));
+
+$ALOHA_SETTINGS_NODE[1]['plugins']['gcn']['editables'] = array(
+								"#customEditableId" => array("tagtypeWhitelist" => array("myuncategorizedtagtype")),
+								".header" => array("tagtypeWhitelist" => array("link", "seitentag", "download", "upload")),
+								"#GENTICS_METAEDITABLE_page_name" => array("tagtypeWhitelist" => array("fileurl", "breadcrumb", "lswitch"))
+							);
+</shell>
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Changed the single file uploader (and the file properties) to not print an error anymore when the filename length exceeds the limit of 64 characters.
+The filename will be cut automatically now. Also over-worked the character handling to be consistent with the character handling of the Rest-API file uploader (see the GCN 5.4.19 changelog).
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The Media Library Integration ($FEATURE['file_fetch']) has been enhanced: By setting $FILE_FETCH_EVAL = true; it is now possible to add dynamic part specific data to the FILE_FETCH_URL, like e.g. $FILE_FETCH_URL="http://mediaserver/medialibrary.php?postback=".urlencode($FILE_FETCH_POSTBACK_URL)."&keyword={\$part['keyword']}";
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Set the feature force_javaparser_post to true in node.conf.
+This features forces PHP-requests to the javaparser to be sent as POST because there can be
+problems (for example really long custom form tagtype part templates not being rendered) when this is not enabled.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Enhanced the conflict message in the import when an object was excluded in the export and could not be found
+on the target system. It now includes the globalid of the object.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The workflow event "on page publish" and the event reaction "cn_page_proof"
+have been discontinued.
+
+Existing workflows will be unaffected by this change. However, it is not
+possible to create new "on page publish" events or "cn_page_proof"
+reactions.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed rendering of page versions that contain tags that have been deleted after the version was created.
+
+Rendering of page versions with deleted tags resulted in an empty page
+to be displayed and an exception similar to the following to be thrown:
+
+com.gentics.api.lib.exception.InconsistentDataException: Data inconsistent: Container {xxx} of Value {xxx, xxx} does not exist!
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed menu in the channel synchronization (Details) being wrapped at the folder menu item.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed message dialog overlay in the tree navigation (instant messaging, system messages) always being on
+top of the frame instead on top of the current scrolling position.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed problems when uploading files using the File Upload Plugin in Aloha Editor with Internet Explorer (any version) and a certain security level. Internet Explorer sometimes sends the full local path as filename when posting file uploads. Additionally, the path is not sent standard conformant, so that the receiving component is unable to determine the filename and will respond with an error.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed the RestAPI Resource /rest/folder/getTemplates/ not having default values for the values sortby and sortorder.
+The default value for sortby is now "name" and for sortorder it's "asc".
+This also fixes the template ordering when creating a new page in Content.Node (alphabetical).
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a but in Multichannelling, that caused data inconsistencies for folders, when they were created in localized folders and pushed into master folders.
+As a result of this data inconsistency, affected folders were no longer shown in the tree. This bugfix also repairs the data inconsistencies and will make the folders reappear. 
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+After channel synchronization is done, the tree is reloaded to reflect possible changes in the folder structure.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+When localizing object takes too long and is continued in the background, the user is now notified with an alert box.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed many of the administration pages in the Portal.Node module throwing a SGB-error (pages including form elements).
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed duplicate globalid entries in the database that came with the release-package and can cause conflicts when importing exports.
+This bugfix removes the duplicate globalid entries
+
+---
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed creation of unnecessary big statements during processing of dependencies that could possibly generate high load on the db server.
+
+---
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed permission check for WebDAV: The command "Open" (for opening a folder in WebDAV) will only be shown for folders, where the user has permission to view, create, update and delete pages/files/images. This also fixes SGBs when users with insufficient permissions could open the folder in WebDAV.
+
+---
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed uploading images or files via WebDAV: If another image/file with the same name already exists in another folder with the same publish directory, an SGB occurred and the upload failed. This has been fixed now. In cases of naming conflicts, the new images/files will be renamed by appending numbers (before the extension).
+
+---
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed some of the page menu functions (like editing) not referencing to the right page when the page was opened via the history.
+
+---
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed language icon being broken when translating a page and Gentics Content.Node doesn't use the default .Node/ URL prefix.
+
+---
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed Media Library Integration in the Tagfill dialog, when more than one Image URL Part exists.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed cancelling a running export: During a long running calculation of dependencies, cancelling the export process did not work reliably. This has been fixed now, so that cancelling a long running export is possible at any time without much delay.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The performance of getting the list of constructs has been improved if a large number of constructs exist in the system.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed the style of the special characters menu in the live editor menu not showing the special characters.
+
+----
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a javascript error that occured in some portal implementations within the frontend editing mode due to existing frameset layouts.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed invalid channel_id for objects (pages/templates/files) that were copied in a master node, that caused some objects to not show in the export selection dialog.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed exporting of channels with local templates that are only assigned to inherited folders. Such export bundles could not be imported, because there was always a conflict "Object does not have a target folder".
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed display of pages, images and files that exist locally in channels and are exported.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed follow on success checkbox didn't show up as checked.
+
+A follow-up scheduler task can be set to only run if the preceding task
+was a success. The checkbox for this setting is called "Follow on
+success". Submitting the properties form for a scheduler task with the
+checkbox set (or unset) did update the internal setting, but when the
+properties form was opened again, the checkbox wasn't checked. It was
+therefore not possible to determine whether the setting was enabled or
+not.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The changelog which will be displayed in the autoupdate dialog will now again show all changelog entries. 
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The scheduler autoupdate task will now fail when a manual change was detected.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed bug in the Gentics Content.Node nodectl start/stop script to not stop the mysql server when ENABLE_MYSQL is set to 0.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed the permission check on constructs while doing an import, which incorrectly denied permission on constructs.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed exporting of the "inline editable" flag of construct parts, which always was exported as "false".
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed importing of construct part names, which were missing. 
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed exporting of constructs in channels: The constructs were incorrectly assigned to the channels, not the master nodes. This caused permission checking problems, after the construct was imported into another system. This fix also corrects the incorrectly set assignements.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed display of pages when creating a new page variant, if multichannelling is used: The icons for the language variants of the pages did not have the language icons, which were now added.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Re-added the user and date, when a page was locked to the list of pages, when multichannlling is used.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a possible database deadlock, when pages were published (or put into the publish queue), while a publish process was running at the same time. 
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed importing of localized language variants, which were incorrectly always detected as conflict (conflicting with their master). 
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed importing of local channel pages that use an inherited template that is not present on the target system. This will be detected as conflict now. 
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed SGB when trying to create new nodes after having selected a (non-root) folder of another node.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed moving of pages,images and files into localized/local folders in channels.
+
+----
+
+NOTE: For changes to Aloha Editor please see the "Aloha Editor Changelog":https://github.com/alohaeditor/Aloha-Editor/blob/a557862c54a102256e886cf3acff11051f47cb84/CHANGELOG.md . This Gentics Content.Node version includes the Aloha Editor 0.20.13 - 2012/06/15.
+
+----

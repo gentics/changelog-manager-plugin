@@ -1,0 +1,27 @@
+h2. Changes with Gentics Content.Node 5.4.16 
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed an error that prevented restoration of page versions.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed NullPointerException that occurred when pages were created through the REST API.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed edit page link in the Assistant of the Aloha-Editor mode broke the page layout.
+
+----
+
+NOTE: For changes to Aloha Editor please see the "Aloha Editor Changelog":https://github.com/alohaeditor/Aloha-Editor/blob/2adfc4ba1353db67b9a0cb22b0945f02e492cbce/CHANGELOG.md. This Gentics Content.Node version includes the Aloha Editor 0.20.7 - 2012/03/07.
+
+----

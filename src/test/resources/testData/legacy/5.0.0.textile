@@ -1,0 +1,129 @@
+h2. Changes with Gentics Content.Node 5.0.0
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Integrated Aloha Editor, which can be enabled via a node's properties.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Removed internal Portal.Node Webapp which simplifies architecture
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Removed Todo Management (discontinued)
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Removed ImageManipulation (Aloha CropNResize plugin and the GenticsImageStore are available as a replacement for crop and resize functionality) See &raquo; CropNResize.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Restructured backend to honor new architecture, also resulting in a new package structure
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Unused/discontinued core modules have been removed, only system.node and content.node remain
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Aloha's GCNIntegrationPlugin will now honor wrapper settings for each tag as the live editor did (wrapping a contenttag in div or span tags)
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Editor's email adresses may now be displayed in the publish queue by enabling the feature "pubqueue_email"
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed broken topmenu entries in tag list (save, publish) when working in Aloha mode
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Replaced sh reference in nodectl script wich caused problems on systems without bash 
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed editing of object properties from Aloha mode, which would occasionally log you out
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Added ajax gateway whitelist
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fix to Handle multi-line HTTP headers correctly
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fix for Incorrect content-length of gzipped output
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Added contentrepository option to automatically publish permission information
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Added contentrepository option to automatically add language information to pages published into the contentrepository
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Added new multi file upload
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Added GCNAuthentication do for connection with Gentics Portal.Node
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Added new feature instant_cr_publishing which allows to configure contentrepositories for instant publishing: modified (publishied) objects are immediately written into the contentrepository, dependencies are handled in the publish process, like always
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Added tagfill_light feature, which will open the tagfill dialog in a lighbox instead of popups
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Updated to JAXB 2.2

@@ -1,0 +1,137 @@
+h2. Changes with Gentics Content.Node 5.2.4
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed performance problems with too many failing backend logins.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+When the GCNAuthenticationManager was configured as a secondary authentication system, it retried unsuccessful logins to the GCN backend on every request.<br/><br/>
+ Logins to the GCN backend are unsuccessful if the user authenticated with the primary authentication system doesn't have a GCN account (e.g. read-only privileges for the content in the portal, but no editing privileges in the GCN backend). Another reason may be that the GCN backend may be temporarily unavailable.<br/><br/>Retrying unsuccessful logins may cause performance problems if there are many users that can be authenticated with the primary authentication system but can't be authenticated with the GCNAuthentication manager each request by the user (browser) would cause an additional internal authentication request.<br/><br/>A configurable interval parameter "backendLoginRetryInterval" has been added to the GCNAuthenticationManager configuration, which specifies how many seconds to wait before a failed backend login request is retried.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed possible deadlocks when publishing into contentrepositories that use Instant Publishing.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed an erroneously reports of insufficient permissions when trying to delete pages.<br/><br/>When a Node had no languages assigned, and a user had the delete permission on only some, but not all folders, and the user tried to delete a page on which he had permissions, he was incorrectly informed that he didn't have any permissions.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed language management: It is no longer possible to delete page languages, if pages with that language exist.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Introduced new translation workflow feature. This feature enables the editor of pages to manage the translation tasks. A editor can for example synchronize a page. This mean the editor accepts the translation job and marks the page therefore as synchronized. A overview is provided to review the current state of all translation tasks.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Introduced new versioned publishing feature which will change the publishing behavior.<br/><br/>
+Before this feature was introduced the publish process would render the current version of a a page not the last published one. 
+
+Example:
+There are two pages, a simple content page (A) and an overview page (B). The overview page contains an overview, page url, page tag or any thing else that references to the simple content page. An editor changes page (A) and will therefore modify its contents and change the current version of that page. A publisher now publishes page (B). When publishing page (B) the modified contents of page (A) will be used for rendering. This undesired behaviour could lead to unpublished content or dead links.
+
+The versioned publishing feature corrects this behaviour. Now always the last published version will be used for rendering the page.
+
+Example:
+Now the last published version will be used instead of the current modified contents of page (A).<br/><br/>
+The new publishing behavior will only affect pages that have been published at least one time after the feature has been enabled. The page version information has to be created before it can be used. The feature is enabled by default.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed itemlist problems and adds more itemlist configuration options.
+Fixed: when the width of an itemlist was greater than the window size, the last column was not displayed.<br/>Fixed: resizing a column may alter the table width, which may break the page layout.
+
+New configuration options:
+<shell>
+    //If empty, the resizable itemlist feature is enabled for all pages.
+    //If non-empty, the resizable itemlist feature is enabled only
+    //for specific do numbers.
+    $RESIZABLE_ITEMLIST_DONUMS = array(16003);
+    
+    //Allows the itemlist Javascript to be loaded lazily based on whether the
+    //user-agent string matches this regex. The default will enable
+    //lazy-loading for Internet Explorer up to version 6.
+    $ITEMLIST_LAZY_LOADING_UA_REGEX = "/\bMSIE [1-6]\b/";
+</shell>
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed SQL validation error that occurred when the execution-list for a task was sorted by duration.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Allows a custom definition of the HTML doctype that appears in the application generated HTML.<br/>The application generated HTML wraps the HTML defined in the user-defined implementation of content pages. The application generated HTML wrapper has a doctype.
+Due to this circumstance, when a HTML5 doctype is defined for the user-defined implementation of a content page, the page may not display properly.
+As a workaround, the doctype for the application generated HTML may be configured in the node.conf configuration file in the following manner -  the doctype string should be equal to the one used in content-pages:
+<shell>
+ $CUSTOM_NODE_HTML_DOCTYPE = '&lt;!DOCTYPE HTML PUBLIC "..."&gt;';
+</shell>
+Please note that this will define the doctype of the wrapper-html, for all content-pages in the system, regardless of which node they belong to. *Changing the doctype might break the system or bring other problems. You might not be able to log in after changing the doctype. We do not advise to use this feature - only use this as a last resort.*
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed copying pages with syncinfo: The copy will have analogous sync information set.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed incorrect values displayed in tag-fill dialog.<br/>For multiple "Tag (Page)" parts, incorrect values were sometimes displayed in the tag-fill dialog, from the second part onwards. The values that were displayed were a concatenation of the values of all previous parts. Due to the limited size of the input-box that displays a value, this made it appeart as if all parts had the same value (the first value - the subsequent values being cut-off).<br/>This bug affected how the value was displayed in the tag-fill dialog, but did not affect how the value was stored in the database.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed assign-for-revision displays login-page.<br/>The do-number for the assign-for-revision action was incorrectly specified.<br/>There seems to be a certain range for do-numbers of a specific module.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed customform_resolve_nodetags feature in the tag-fill dialogue of tag-types and templates.<br/>Resolving node tags in custom-forms only worked in the tag-fill dialogue of content tags (pages). For template tags (templates) or tag-types, the entire custom-form was rendered as the empty string if the customform_resolve_nodetags feature was activated.
+Now, if the custom-form is rendered as part of the tag-fill dialogue for template tags or tag-types, all  will resolve to the empty string. Special custom-form tags (e.g. &lt;nodename&gt;) will be resolved normally.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed inability to assign view permissions on "View permissions" tree-item.<br/>The feature "view_perms" allows all users to see the permissions of other groups, if they have view permissions on the "View permissions" tree-item.<br/>However, assigning view permissions on the "View permissions" tree-item was not possible, and as such, only the "node" user was in a position to see this tree-item.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed display issue of the resizeable itemlist feature. Due to a bug the last colum of the tagtype part view was not visible if one part of the tagtype contained a longer name.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed path to phpCAS client logfile. The logfile can now be found at /Node/tmp/cas.log

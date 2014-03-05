@@ -1,0 +1,167 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.gentics</groupId>
+	<artifactId>changelog-manager-plugin</artifactId>
+	<version>2.2</version>
+	<packaging>maven-plugin</packaging>
+
+	<name>Changelog Parser Maven Plugin</name>
+	<description>Changelog Plugin is project for managing project changes.</description>
+
+	<properties>
+		<rootprop>value</rootprop>
+		<thebeer>Warsteiner</thebeer>
+	</properties>
+
+	<inceptionYear>2013</inceptionYear>
+
+	<contributors>
+		<contributor>
+			<name>Johannes Schüth</name>
+			<email>j.schueth@gentics.com</email>
+		</contributor>
+	</contributors>
+
+	<licenses>
+		<license>
+			<name>Apache Software License 2.0</name>
+			<url> http://www.apache.org/licenses/LICENSE-2.0</url>
+		</license>
+	</licenses>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-plugin-api</artifactId>
+			<version>3.0.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.plugin-tools</groupId>
+			<artifactId>maven-plugin-annotations</artifactId>
+			<version>3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-project</artifactId>
+			<version>2.0</version>
+		</dependency>
+		<dependency>
+			<artifactId>junit</artifactId>
+			<groupId>junit</groupId>
+			<version>4.8.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+		<dependency>
+			<artifactId>txtmark</artifactId>
+			<groupId>com.github.rjeschke</groupId>
+			<version>0.7</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.textile4j</groupId>
+			<artifactId>textile4j</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+			<version>1.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity-tools</artifactId>
+			<version>2.0</version>
+		</dependency>
+
+		<!-- <dependency> <groupId>net.sf.json-lib</groupId> <artifactId>json-lib</artifactId> 
+			<version>2.4</version> <classifier>jdk15</classifier> </dependency> -->
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-plugin-plugin</artifactId>
+				<version>3.2</version>
+				<configuration>
+					<skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
+				</configuration>
+				<executions>
+					<execution>
+						<id>mojo-descriptor</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>descriptor</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.gentics</groupId>
+				<artifactId>changelog-manager-plugin</artifactId>
+				<version>1.0-SNAPSHOT</version>
+				<configuration>
+					<baseDirectory>${basedir}/src/test/resources/testData</baseDirectory>
+					<outputDirectory>${basedir}/target/output</outputDirectory>
+					<changelogTitle>Gentics Content.Node Changelog</changelogTitle>
+					<changelogTypes>manualchange,feature,enhancement,bugfix</changelogTypes>
+					<changelogVersion>20.2.112</changelogVersion>
+					<strictRenderMode>false</strictRenderMode>
+					<allowEmptyChangelog>true</allowEmptyChangelog>
+					<includeProjectProperties>false</includeProjectProperties>
+					<overviewTemplateFileNames>index.vm, merged_changelog.vm, plain_merged_changelog.vm</overviewTemplateFileNames>
+					<properties>
+						<property>
+							<name>alohaeditor-version</name>
+							<value>0.9.3</value>
+						</property>
+						<property>
+							<name>alohaeditor-date</name>
+							<value>2012/12/12</value>
+						</property>
+					</properties>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>renejeschke-releases</id>
+			<url>http://maven.renejeschke.de</url>
+		</repository>
+	</repositories>
+
+	<distributionManagement>
+		<repository>
+			<id>archiva.lan.releases</id>
+			<name>Gentics Releases Repository</name>
+			<url>http://archiva-mirror.office:8080/archiva/repository/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>archiva.lan.snapshots</id>
+			<name>Gentics Snapshots Repository</name>
+			<url>http://archiva-mirror.office:8080/archiva/repository/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+</project>

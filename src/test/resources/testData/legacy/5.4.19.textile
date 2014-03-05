@@ -1,0 +1,163 @@
+h2. Changes with Gentics Content.Node 5.4.19
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/security_24.png! *Security Update*
+
+A security issue with the Gentics Content.Node session has been resolved. 
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed imagemanipulation window doesn't close automatically and causes an SGB in the main window when opened from the tagfill dialog.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed possible deadlock when (long running) job to change template of pages was running parallel to the publish process.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed out of memory error that occured when resizing image with the image store that exceeded a width or height of 20000 pixel and more. The genticsimagestore will now only allow resizing of images with a width and height of 10000 pixels max.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed page versioning creating a new version of a page when the page is moved to the publication queue (for users without publication rights)
+and the page wasn't modified.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed NullPointerException that occurred when pages were created through the REST API.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed changing the template of multiple pages in the background only changed the first template of the first selected page.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Made the Content.Node file uploader (including Rest-API) checks more consistent.
+
+They now all check if the filename length does not exceed 64 characters and
+if the characters in the filename are all valid (no whitespace, ...)
+Allowed characters in the filename are: a-z A-Z 0-9 - _ .
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed StackOverflowException during publishrun.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed Javascript error that occurred in the Live-Editor Wiki mode with IE7.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Removed double ; at the end of the SQL query when checking an empty content repository (CR creation).
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed html linebreaks being removed when opening a tag with a part of a HTML type which is inline editable and the feature "live-br2nl" is turned on.
+
+The feature "live-br2nl" is now only used for none-HTML tagtype-parts.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a bug that sometimes occurred when images were published into the content repository.
+
+The bug was caused by the wrong object type (10011 instead of 10008)
+being used when images were published into a content repository.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed tags inserted via the tag-fill-dialog and rendered via a Velocity part can't be edited after the tag-fill-dialog closes.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Changed the ETA displayed for the publish duration time in the Gentics Content.Node startpage to be more human readable.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Changed the outdated mimetype text/js (not used anymore) to text/javascript when creating new pages.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Revived the "edit in language" option in the menu of a page in the page view and also moved the object properties back to the main menu.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Tag icons are now directly visible. Previously tag icons were only visible once the mouse was moved.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+The tag fill lightbox will now no longer close once ESC key is pressed. Clicking in the shadow area of the lightbox will also no longer close the box. Previously the lightbox could be closed accedentialy by clicking in the wrong place. All changes were lost.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a bug within the multifile uploader which caused all uploads to be created with the default mime type application/octet-stream. The uploader will no determine the mimetype by examing the file extension and other information when no mimetype was specified by the browser.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a bug in multichannelling, that caused an SGB when deleting a channel and left inconsistent data in the database, that possibly caused other problems.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed current content is displayed in older page versions.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a bug in multichannelling, that prevented assigning of channels to contentrepositories.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a bug that cuased the Aloha page not to be rendered in Aloha mode (page can't be edited) if an extensible part type is used in the page to resolve properties.
+
+----
+
+NOTE: For changes to Aloha Editor please see the "Aloha Editor Changelog":https://github.com/alohaeditor/Aloha-Editor/blob/2adfc4ba1353db67b9a0cb22b0945f02e492cbce/CHANGELOG.md. This Gentics Content.Node version includes the Aloha Editor 0.20.8 - 2012/04/04.
+
+----

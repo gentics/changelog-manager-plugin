@@ -1,0 +1,11 @@
+{
+  "version": "5.12.11",
+  "date": "Mar 5, 2013 4:33:42 PM",
+  "changeLogEntryFileNames": [
+    "12.bugfix",
+    "13.bugfix"
+   ],
+  "genericProperties": {
+    "alohaeditor-version": "0.9.3"
+  }
+}

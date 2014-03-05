@@ -1,0 +1,27 @@
+h2. Changes with Gentics Content.Node 5.3.19
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed: The REST API FolderResource calls to fetch items in folders recursively has been improved to use more efficient SQL statements.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed a css bug with editicons in Firefox, where icons would have an unwanted offset. Also added zero border with to images within tagicons to prevent them from being outlined when inside an anchor tag. Therefore the following css classes have been changed: ".GENTICS_block .aloha-editicons button" (added borders and background) and .GENTICS_block .aloha-editicons button img (added border 0px).
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Increased the timeout for AJAX calls to the REST API to be 60s (formerly 10s)
+
+----
+
+NOTE: For changes to Aloha Editor please see the "Aloha Editor Changelog":https://github.com/alohaeditor/Aloha-Editor/blob/718e310c9cd329e3b7f9516622f93c41a618615a/CHANGELOG.md . This Gentics Content.Node version includes the Aloha Editor 0.20 0.20.0-RC3 - 2011/11.
+
+----

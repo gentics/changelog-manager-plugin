@@ -1,0 +1,22 @@
+h2. Changes with Gentics Content.Node 5.4.10
+
+endprologue.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed tag buttons sometimes jumping when clicking on it when editing pages with Aloha editor.
+This has been the case when there has been no content in the editable and the tag button was inside another editable.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed menubar not being in 100% width in the new chrome beta.
+
+----
+
+NOTE: For changes to Aloha Editor please see the "Aloha Editor Changelog":https://github.com/alohaeditor/Aloha-Editor/blob/f3c8e86da47b6a08c33e57b9bc52c5314aa88f0e/CHANGELOG.md. This Gentics Content.Node version includes the Aloha Editor 0.20.5 - 2012/02/09.
+
+----

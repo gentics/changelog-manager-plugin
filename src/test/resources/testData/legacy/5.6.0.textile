@@ -1,0 +1,132 @@
+
+h2. Changes with Gentics Content.Node 5.6.0
+
+endprologue.
+
+----
+
+WARNING: *Manual Change* Aloha Editor 0.9.3 was removed
+
+The legacy version of aloha editor was removed.
+
+----
+
+WARNING: *Manual Change* Aloha's ecma5.js was removed.
+
+The ecma5.js added the following functions to the environment if they didn't exist already.
+
+* Function.prototype.bind
+* String.prototype.trim
+* Array.prototype.indexOf
+* Array.prototype.lastIndexOf
+* Array.prototype.forEach
+* Array.prototype.map
+* Array.prototype.filter
+* Array.prototype.every
+* Array.prototype.some
+* window.compareDocumentPosition
+* window.getComputedStyle
+
+Also, the window.Node object was added to the environment containing
+DOM-Node type properties.
+
+Please make sure that custom javascript implementations don't rely on
+any of these properties being defined.
+
+Some of them are still provided by some browsers, but not by others.
+For example, String.prototype.trim and Array.prototype.indexOf will work
+on Chrome but not on older versions of IE.
+
+String.prototype.trim and Array.prototype.indexOf methods are the most
+often used functions, and, if custom implementations rely on some of
+these methods to be defined, it is most likely one those two.
+
+----
+
+WARNING: *Manual Change* Additional default plugins for new aloha editor version were added.
+
+The following plugins were added to the default plugin list for the jqueryui version of aloha.
+
+* common/ui
+* common/block
+* extra/ribbon
+
+NOTE: This only applies when the feature __aloha_jqueryui__ was enabled.
+----
+
+WARNING: *Manual Change* The policy-map schema used for the validation feature has been changed.
+
+If you have configured a custom policy map by following "these instructions":http://www.gentics.com/Content.Node/infoportal/cms/wiki/Validation.en.php please verify that your policy-map.custom.xml is still valid according to "the schema":http://www.gentics.com/Content.Node/infoportal/cms/wiki/policy-map.xsd .
+
+The custom policy map will automatically be validated during the restart of the tomcat while performing a GCN update. If the schema fails to validate, the update will likewise fail. If the update fails due to schema validation errors, it is sufficient to fix the validation erros and restart the tomcat afterwards.
+
+To validate the policy-map.custom.xml manually, you can download "the current schema":http://www.gentics.com/Content.Node/infoportal/cms/wiki/policy-map.xsd and perform the validation using a XML Schema validation tool. For example, using xmllint
+
+<shell>
+    xmllint --schema policy-map.xsd /Node/etc/policy-map.custom.xml
+</shell>
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The __aloha_jqueryui__ feature was added. You can enable the jqueryui version of aloha by enabling this feature. Please note that the plugin API was modified thus manual changes to existing plugins are required. Please refer to the aloha editor changelog for additional information.
+
+NOTE: The older version of aloha editor (0.20.x) will be discontinued as for __30.09.2012__. The upcoming October release will replace the 0.20.x version of aloha editor with the 0.21.x version.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Discontinued old folder versions dialog.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The Black Panther login screen has been tweaked to fit better with resolutions of 1024x768 and below.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+The flashuploader was updated to a newer version. The uploader will now also keep the displayed upload queue. The upload button will now display without time delay when loading the page.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Validation is now turned off when filling in tag-type defaults
+
+It was too awkward for implementers to work with automatic sanitation of
+inputs when creating and filling in the default values of tag-types in
+the Content.Admin area.
+
+Since only implementers have access to the Content.Admin area, and
+implementers are inherently trusted to only input valid content into the
+system, validation is now disabled when filling in tag-type defaults.
+
+----
+
+h4. !images/changelog_types/enhancement_24.png! *Enhancement*
+
+Some additional features were added to the __file_fetch__ feature. The feature is now called image import. See "image import feature":http://www.gentics.com/Content.Node/guides/feature_filefetch.html
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Fixed missing translated names while exporting constructs (or other objects that have translatable names). Export files with missing translated names caused an Internal Error while importing.
+The translated names were missing in very special situations: if e.g. a construct part was exported and the reference id of the translatable names happened to be exactly the same id of another construct part that was exported before, the translatable names were not exported.
+
+----
+
+h4. !images/changelog_types/bugfix_24.png! *Bugfix*
+
+Clicking publish from the page preview would result in an JavaScript error. This error was now fixed.
+
+----
+
+NOTE: This Gentics Content.Node version includes the "Aloha Editor 0.21.1 - 2012/08/06":https://github.com/alohaeditor/Aloha-Editor/blob/301ba92d6fc1cf9784043d76983ffaece0aef4c9/CHANGELOG.md and "Aloha Editor 0.20.21 - 2012/08/06":https://github.com/alohaeditor/Aloha-Editor/blob/255308a3be35d4377264caf8e4f68f5e6f6a0e3d/CHANGELOG.md  
+
+----
