@@ -153,15 +153,15 @@
 	</repositories>
 
 	<distributionManagement>
-		<repository>
-			<id>archiva.lan.releases</id>
-			<name>Gentics Releases Repository</name>
-			<url>http://archiva-mirror.office:8080/archiva/repository/releases</url>
-		</repository>
-		<snapshotRepository>
-			<id>archiva.lan.snapshots</id>
-			<name>Gentics Snapshots Repository</name>
-			<url>http://archiva-mirror.office:8080/archiva/repository/snapshots</url>
-		</snapshotRepository>
+                <repository>
+                        <id>archiva.com.gentics.public</id>
+                        <name>Gentics Public Repository</name>
+                        <url>http://archiva.gentics.com:8081/archiva/repository/com.gentics.public</url>
+                </repository>
+                <snapshotRepository>
+                        <id>archiva.com.gentics.public_snapshots</id>
+                        <name>Gentics Public Snapshots Repository</name>
+                        <url>http://archiva.gentics.com:8081/archiva/repository/com.gentics.public_snapshots</url>
+                </snapshotRepository>
 	</distributionManagement>
 </project>
