@@ -159,7 +159,7 @@
                         <url>http://archiva.office/repository/public_releases</url>
           </repository>
           <snapshotRepository>
-                        <id>archiva.com.gentics.public_snapshots</id>
+                        <id>archiva.lan.public_snapshots</id>
                         <name>Gentics Internal Public Snapshots Repository Stage</name>
                         <url>http://archiva.office/repository/public_snapshots</url>
           </snapshotRepository>
