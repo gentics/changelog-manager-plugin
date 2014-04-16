@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.Scanner;
 
 import net.sf.textile4j.Textile;
 
@@ -129,6 +130,40 @@ public class ChangelogEntry {
 	}
 
 	/**
+	 * Ugly hack that helps folding the content
+	 * 
+	 * @param content
+	 * @return
+	 */
+	private static String foldContent(String content) {
+		StringBuilder builder = new StringBuilder();
+		content = content.replaceAll("(?m)^[ \t]*\r?\n", "###REPLACEME###");
+		Scanner scanner = new Scanner(content);
+		boolean inCodeBlock = false;
+		boolean isList = false;
+		while (scanner.hasNextLine()) {
+			String line = scanner.nextLine();
+			if (line.matches(".*<code>.*") || line.matches("<pre>.*") || line.matches(".*<blockquote>.*")) {
+				inCodeBlock = true;
+			} else if (inCodeBlock && line.matches(".*</code>.*") || line.matches(".*</pre>.*") || line.matches(".*</blockquote>.*")) {
+				inCodeBlock = false;
+			}
+			boolean currentLineisList = line.matches("\\s*\\*.*");
+			if (isList == false && currentLineisList) {
+				line = "\n" + line + "\n";
+				isList = true;
+			} else if (!currentLineisList) {
+				line = line + " ";
+				isList = false;
+			} else {
+				line = line + "\n";
+			}
+			builder.append(line);
+		}
+		return builder.toString();
+	}
+
+	/**
 	 * Parses the given content
 	 * 
 	 * @param content
@@ -139,9 +174,7 @@ public class ChangelogEntry {
 	 */
 	private static String parse(String content, boolean foldNewlines) throws ChangelogManagerException {
 		if (foldNewlines) {
-			content = content.replaceAll("(?m)^[ \t]*\r?\n", "###REPLACEME###");
-			content = content.replaceAll("\n", " ");
-			content = content.replaceAll("###REPLACEME###", "\n");
+			content = foldContent(content);
 		}
 		ParserType type = ChangelogConfiguration.getParserType();
 		if (ParserType.TEXTILE == type) {
