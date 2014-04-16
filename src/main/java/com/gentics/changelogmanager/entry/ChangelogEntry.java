@@ -160,7 +160,9 @@ public class ChangelogEntry {
 			}
 			builder.append(line);
 		}
-		return builder.toString();
+		String output = builder.toString();
+		output = output.replaceAll("###REPLACEME###", "\n");
+		return output;
 	}
 
 	/**
