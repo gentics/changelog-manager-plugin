@@ -21,6 +21,7 @@ public final class ChangelogConfiguration {
 		TEXTILE, MARKDOWN
 	}
 
+	private static boolean isFoldNewlinesEnabled = true;
 	private static ParserType parserType = ParserType.TEXTILE;
 
 	private static File baseDirectory;
@@ -292,5 +293,23 @@ public final class ChangelogConfiguration {
 
 	public static void addPerMajorVersionOverviewTemplateFile(String name) {
 		perMajorVersionOverviewTemplateFileNames.add(name.trim());
+	}
+
+	/**
+	 * Set the flag for newline folding
+	 * 
+	 * @param flag
+	 */
+	public static void setFoldNewlinesEnabled(boolean flag) {
+		isFoldNewlinesEnabled = flag;
+	}
+
+	/**
+	 * Returns the config flag whether newlines should be folded during rendering of the changelog entry code
+	 * 
+	 * @return
+	 */
+	public static boolean isFoldNewlinesEnabled() {
+		return isFoldNewlinesEnabled;
 	}
 }

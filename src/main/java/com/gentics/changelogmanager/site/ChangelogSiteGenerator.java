@@ -42,7 +42,7 @@ public class ChangelogSiteGenerator {
 
 	public static final String LOGGER_NAME = "console";
 
-	private Logger log = Logger.getLogger(ChangelogSiteGenerator.class);
+	private static Logger log = Logger.getLogger(ChangelogSiteGenerator.class);
 
 	private String title;
 	private boolean strictMode = true;

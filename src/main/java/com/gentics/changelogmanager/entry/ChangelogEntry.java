@@ -42,7 +42,7 @@ public class ChangelogEntry {
 	 */
 	public String getHTMLHeadline() throws IOException, ChangelogManagerException {
 
-		String html = parse(getHeadline());
+		String html = parse(getHeadline(), ChangelogConfiguration.isFoldNewlinesEnabled());
 		// Ugly hack to remove <p></p>
 		// TODO use regex to remove this
 		ParserType type = ChangelogConfiguration.getParserType();
@@ -125,17 +125,24 @@ public class ChangelogEntry {
 	 * @throws ChangelogManagerException
 	 */
 	public String getHTML() throws ChangelogManagerException {
-		return parse(getSource()).replaceAll("[^\\x00-\\x7F]", "");
+		return parse(getSource(), ChangelogConfiguration.isFoldNewlinesEnabled()).replaceAll("[^\\x00-\\x7F]", "");
 	}
 
 	/**
 	 * Parses the given content
 	 * 
 	 * @param content
+	 * @param foldNewlines
+	 *            Whether the newlines should be folded
 	 * @return
 	 * @throws ChangelogManagerException
 	 */
-	public static String parse(String content) throws ChangelogManagerException {
+	private static String parse(String content, boolean foldNewlines) throws ChangelogManagerException {
+		if (foldNewlines) {
+			content = content.replaceAll("(?m)^[ \t]*\r?\n", "###REPLACEME###");
+			content = content.replaceAll("\n", " ");
+			content = content.replaceAll("###REPLACEME###", "\n");
+		}
 		ParserType type = ChangelogConfiguration.getParserType();
 		if (ParserType.TEXTILE == type) {
 			Textile textile = new Textile();
@@ -153,7 +160,7 @@ public class ChangelogEntry {
 	 * @throws ChangelogManagerException
 	 */
 	public String getHTMLWithoutHeadline() throws ChangelogManagerException {
-		return parse(getSourceWithoutHeadline()).replaceAll("[^\\x00-\\x7F]", "");
+		return parse(getSourceWithoutHeadline(), ChangelogConfiguration.isFoldNewlinesEnabled()).replaceAll("[^\\x00-\\x7F]", "");
 	}
 
 	public String getType() {

@@ -25,7 +25,7 @@ public class ChangelogSiteGeneratorTest extends AbstractChangelogTest {
 	public void testGCNChangelogRendering() throws IOException, ChangelogManagerException {
 		File testBaseDirectory = new File("src/test/resources/aloha-testdata");
 		ChangelogConfiguration.setBaseDirectory(testBaseDirectory, true);
-		File outputDirectory = new File("target/gcn_output");
+		File outputDirectory = new File("target/aloha_output");
 
 		ChangelogConfiguration.setOutputDirectory(outputDirectory);
 		ChangelogConfiguration.addOverviewTemplateFile("index.vm");

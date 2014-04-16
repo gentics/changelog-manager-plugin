@@ -45,20 +45,31 @@ the existing mappings to figure out which entries are unmapped.
 			</execution>
 		</executions>
 		<configuration>
+			<!-- Flag that changes the folding behaviour of newlines. When enabled newlines will be folded (Except newlines in empty lines) -->
+			<foldNewlinesInEntries>true</foldNewlinesInEntries>
+
 			<!-- Defines the base directory where the entries, mappings, templates and static folder exists -->
 			<baseDirectory>${basedir}/src/changelog</baseDirectory>
+
 			<!-- Defines the output directory for the created changelog files -->
 			<outputDirectory>${basedir}/target/output</outputDirectory>
+
+			<!-- Title of the changelog -->
 			<changelogTitle>Gentics Content.Node Changelog</changelogTitle>
+
 			<!-- This defines which entries types should be handled. Please note that the order of the entries also affects
 				the sorting of the entries within the final changelog. -->
 			<changelogTypes>manualchange,feature,enhancement,bugfix</changelogTypes>
+
 			<!-- Defines the version for the new mapping that will be created for changelog entries without an existing mapping -->
 			<changelogVersion>1.2.112</changelogVersion>
+
 			<!-- Should the velocity renderer fail when eg. a null assignment is performed? -->
 			<strictRenderMode>false</strictRenderMode>
+
 			<!-- The names of the overview template files -->
 			<overviewTemplateFileNames>index.vm, merged_changelog.vm, plain_merged_changelog.vm</overviewTemplateFileNames>
+
 			<!-- Should all project properties be included? Those properties can than be used within the velocity template -->
 			<includeProjectProperties>false</includeProjectProperties>
 			

@@ -26,6 +26,9 @@ public class GenerateChangelogMojo extends AbstractMojo {
 	private boolean includeProjectProperties;
 
 	@Parameter
+	private boolean foldNewlinesInEntries;
+	
+	@Parameter
 	private File baseDirectory;
 
 	@Parameter
@@ -69,6 +72,8 @@ public class GenerateChangelogMojo extends AbstractMojo {
 		if (outputDirectory != null) {
 			ChangelogConfiguration.setOutputDirectory(outputDirectory);
 		}
+
+		ChangelogConfiguration.setFoldNewlinesEnabled(foldNewlinesInEntries);
 
 		// TODO set and configure the parser (Textile or Markdown)
 
@@ -140,6 +145,7 @@ public class GenerateChangelogMojo extends AbstractMojo {
 			if (includeProjectProperties) {
 				genericProperties.putAll(mavenProject.getProperties());
 			}
+
 			changelog.setGenericProperties(genericProperties);
 
 			// Only create a new changelog mapping when the changelog contains at least one new entry and when we allow empty changelogs

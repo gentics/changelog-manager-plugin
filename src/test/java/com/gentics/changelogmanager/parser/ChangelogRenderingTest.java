@@ -17,4 +17,11 @@ public class ChangelogRenderingTest {
 		System.out.println(Processor.process(testText));
 
 	}
+	
+	@Test
+	public void testRenderingParagraphs() {
+		Textile textile = new Textile();
+		String testText = "This is a text\nWith\nLots\nof\nnewlines\n\nBut only one empty line\nJow\n";
+		System.out.println(textile.process(testText));
+	}
 }
