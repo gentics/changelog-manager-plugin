@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.gentics</groupId>
 	<artifactId>changelog-manager-plugin</artifactId>
-	<version>2.3.2</version>
+	<version>2.3.3</version>
 	<packaging>maven-plugin</packaging>
 
 	<name>Changelog Parser Maven Plugin</name>
@@ -151,14 +151,14 @@
 
 	<distributionManagement>
           <repository>
-                        <id>archiva.lan.public_releases</id>
-                        <name>Gentics Internal Public Repository Stage</name>
-                        <url>http://archiva.office/repository/public_releases</url>
+                        <id>lan.releases</id>
+                        <name>Gentics Repository Stage</name>
+                        <url>http://artifactory.office/repository/lan.releases</url>
           </repository>
           <snapshotRepository>
-                        <id>archiva.lan.public_snapshots</id>
-                        <name>Gentics Internal Public Snapshots Repository Stage</name>
-                        <url>http://archiva.office/repository/public_snapshots</url>
+                        <id>lan.snapshots</id>
+                        <name>Gentics Snapshots Repository</name>
+                        <url>http://artifactory.office/repository/lan.snapshots</url>
           </snapshotRepository>
 	</distributionManagement>
 </project>

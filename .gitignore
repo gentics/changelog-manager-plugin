@@ -8,3 +8,4 @@ staging
 output
 .checkstyle
 5.13.27*
+src/test/resources/aloha-testdata/mappings/5.14.1.json
