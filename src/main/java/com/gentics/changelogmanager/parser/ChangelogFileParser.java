@@ -22,7 +22,7 @@ public class ChangelogFileParser {
 	/**
 	 * Regex that should be used to validate ticket references within a changelog entry filename.
 	 */
-	private String ticketReferenceValidationRegex = "\\w\\w[\\d]+.*";
+	private String ticketReferenceValidationRegex = "\\w+-?[\\d]+.*";
 
 	/**
 	 * Regex to parse the changelog filename
