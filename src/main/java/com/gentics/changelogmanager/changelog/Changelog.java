@@ -1,12 +1,8 @@
 package com.gentics.changelogmanager.changelog;
 
-import java.text.SimpleDateFormat;
+import java.io.File;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Properties;
-
-import org.apache.commons.lang.StringUtils;
 
 import com.gentics.changelogmanager.ChangelogConfiguration;
 import com.gentics.changelogmanager.ChangelogManagerException;
@@ -19,12 +15,11 @@ import com.gentics.changelogmanager.entry.ChangelogEntryUtils;
  * @author johannes2
  * 
  */
-public class Changelog {
+public class Changelog extends AbstractChangelog {
 
-	private String version = new String();
-	private String date;
 	private List<String> changeLogEntryFileNames;
-	private Properties genericProperties;
+
+	private String componentVersion;
 
 	/**
 	 * Creates a new changelog
@@ -34,12 +29,7 @@ public class Changelog {
 	 * @throws ChangelogManagerException
 	 */
 	public Changelog(String version, List<ChangelogEntry> changelogEntries) throws ChangelogManagerException {
-		
-		// TODO parse the version and validate its format
-		if (StringUtils.isEmpty(version)) {
-			throw new ChangelogManagerException("The target version for the changelog was null or empty.");
-		}
-		this.version = version;
+		super(version);
 
 		if (changelogEntries == null) {
 			throw new ChangelogManagerException("Could not create changelog because the mapped changelog entry list was not specified.");
@@ -49,10 +39,6 @@ public class Changelog {
 		for (ChangelogEntry entry : changelogEntries) {
 			changeLogEntryFileNames.add(entry.getFile().getName());
 		}
-
-		String dateString = new SimpleDateFormat("dd.MM.yyyy").format(new Date());
-		date = dateString;
-		genericProperties = new Properties();
 	}
 
 	/**
@@ -66,61 +52,19 @@ public class Changelog {
 	}
 
 	/**
-	 * Gets the previously set date for this changelog. The date will normally be set when a changelog is created.
-	 * 
-	 * @return
+	 * Get the component version (if this is a component changelog)
+	 * @return component version
 	 */
-	public String getDate() {
-		return date;
+	public String getComponentVersion() {
+		return componentVersion;
 	}
 
 	/**
-	 * Sets the date for this changelog
-	 * 
-	 * @param date
+	 * Set the component version
+	 * @param componentVersion component version
 	 */
-	public void setDate(String date) {
-		this.date = date;
-	}
-
-	/**
-	 * Returns the target version for this changelog
-	 * 
-	 * @return
-	 */
-	public String getVersion() {
-		return version;
-	}
-
-	/**
-	 * Returns the minor version for the changelog version
-	 * @return
-	 */
-	public String getMinorVersion() {
-		return VersionUtils.getMinorVersion(version);
-	}
-
-	/**
-	 * Adds a new property to the collection of generic properties
-	 * 
-	 * @param key
-	 * @param value
-	 */
-	public void addGenericProperty(String key, String value) {
-		this.genericProperties.put(key, value);
-	}
-
-	public void setGenericProperties(Properties properties) {
-		this.genericProperties.putAll(properties);
-	}
-
-	/**
-	 * Returns the generic properties for this changelog
-	 * 
-	 * @return
-	 */
-	public Properties getGenericProperties() {
-		return this.genericProperties;
+	public void setComponentVersion(String componentVersion) {
+		this.componentVersion = componentVersion;
 	}
 
 	/**
@@ -130,7 +74,18 @@ public class Changelog {
 	 * @throws ChangelogManagerException
 	 */
 	public List<ChangelogEntry> getChangelogEntries() throws ChangelogManagerException {
-		return ChangelogEntryUtils.getChangelogEntryFiles(ChangelogConfiguration.getBaseDirectory(), changeLogEntryFileNames);
+		return getChangelogEntries(ChangelogConfiguration.getEntriesDirectory());
+	}
+
+	/**
+	 * Returns the mapped changelog entries for this changelog
+	 * 
+	 * @param entriesDirectory entries directory
+	 * @return changelog entries
+	 * @throws ChangelogManagerException
+	 */
+	public List<ChangelogEntry> getChangelogEntries(File entriesDirectory) throws ChangelogManagerException {
+		return ChangelogEntryUtils.getChangelogEntryFiles(entriesDirectory, changeLogEntryFileNames);
 	}
 
 	/**

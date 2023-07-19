@@ -12,6 +12,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.log4j.Logger;
 
 import com.gentics.changelogmanager.ChangelogConfiguration;
@@ -36,34 +38,48 @@ public class ChangelogUtils {
 
 	private static Logger logger = Logger.getLogger(ChangelogUtils.class);
 
-	private static List<Changelog> loadedChangelogs;
+	private static Map<Pair<File, String>, List<Changelog>> loadedChangelogs = new HashMap<>();
 
 	/**
 	 * Loads all changelog mappings
-	 * 
+	 *
 	 * @param mappingDirectory
 	 *            directory that contains the changelog mappings
+	 * @param prefix optional prefix of the changelog mappings files
+	 * @param forceReload true to force reloading
 	 * @throws IOException
 	 * @throws ChangelogManagerException
 	 */
-	public static List<Changelog> getChangelogs(File mappingDirectory, boolean forceReload) throws IOException, ChangelogManagerException {
+	public static List<Changelog> getChangelogs(File mappingDirectory, String prefix, boolean forceReload) throws IOException, ChangelogManagerException {
+		if (!StringUtils.isEmpty(prefix)) {
+			prefix = StringUtils.appendIfMissing(prefix, "_");
+		}
+
+		Pair<File, String> key = Pair.of(mappingDirectory, prefix);
+		if (forceReload) {
+			loadedChangelogs.remove(key);
+		}
 
 		// Only load the changelog mappings when they have not yet been loaded.
-		if (loadedChangelogs == null || forceReload) {
+		if (!loadedChangelogs.containsKey(key)) {
 			List<Changelog> mappingList = new ArrayList<Changelog>();
-			Collection<File> mappingFiles = FileUtils.listFiles(mappingDirectory, new String[] { CHANGELOG_MAPPING_FILE_EXTENSION }, true);
+			Collection<File> mappingFiles = FileUtils.listFiles(mappingDirectory,
+					new String[] { CHANGELOG_MAPPING_FILE_EXTENSION }, true);
 			for (File mappingFile : mappingFiles) {
+				if (prefix != null && !StringUtils.startsWith(mappingFile.getName(), prefix)) {
+					continue;
+				}
 				logger.debug("Loading mapping {" + mappingFile + "}");
-				String json = FileUtils.readFileToString(mappingFile);
+				String json = FileUtils.readFileToString(mappingFile, "UTF-8");
 				Gson gson = new Gson();
 				Changelog mapping = gson.fromJson(json, Changelog.class);
 				mappingList.add(mapping);
 			}
 
 			Collections.sort(mappingList, new ChangelogComparator());
-			loadedChangelogs = mappingList;
+			loadedChangelogs.put(key, mappingList);
 		}
-		return loadedChangelogs;
+		return loadedChangelogs.get(key);
 	}
 
 	/**
@@ -101,7 +117,7 @@ public class ChangelogUtils {
 			throw new ChangelogManagerException("The changelog entry file can't be null");
 		}
 		List<Changelog> foundChangelogs = new ArrayList<Changelog>();
-		List<Changelog> changelogList = getChangelogs(baseDirectory, false);
+		List<Changelog> changelogList = getChangelogs(baseDirectory, null, false);
 		for (Changelog changelog : changelogList) {
 			for (ChangelogEntry entry : changelog.getChangelogEntries()) {
 				if (entryFile.getName().equalsIgnoreCase(entry.getFile().getName())) {
@@ -115,18 +131,29 @@ public class ChangelogUtils {
 	/**
 	 * Creates a new changelog which will only contain those changelog entries that are currently not mapped by any other changelogs
 	 * 
+	 * @param mappingsDirectory
+	 * @param entriesDirectory
 	 * @param version
 	 *            the version that will be assigned to the new changelog
+	 * @param prefix optional prefix
 	 * @return created changelog
 	 * @throws ChangelogManagerException
 	 * @throws IOException
 	 */
-	public static Changelog createChangelogFromUnmappedEntries(File baseDirectory, String version) throws ChangelogManagerException, IOException {
+	public static Changelog createChangelogFromUnmappedEntries(File mappingsDirectory, File entriesDirectory,
+			String version, String prefix) throws ChangelogManagerException, IOException {
+		if (prefix == null) {
+			prefix = "";
+		}
+
+		if (!StringUtils.isEmpty(prefix)) {
+			prefix = StringUtils.appendIfMissing(version, "_");
+		}
 
 		Changelog changelog = new Changelog(version);
 
 		// 1. Collect all changelog entry files for every changelog entry that has already been mapped
-		List<Changelog> changelogList = getChangelogs(baseDirectory, false);
+		List<Changelog> changelogList = getChangelogs(mappingsDirectory, prefix, false);
 		List<File> mappedChangelogEntryFiles = new ArrayList<File>();
 		for (Changelog currentChangelog : changelogList) {
 			// Skip the changelog for the version we actually want to map.
@@ -143,18 +170,18 @@ public class ChangelogUtils {
 		// 2. Load the skiplist for the major version of the given version
 		String versionParts[] = parseVersion(version);
 		String majorVersion = versionParts[0] + "." + versionParts[1] + ".0";
-		String skipListFilename = "skiplist_" + majorVersion + ".lst";
+		String skipListFilename = prefix + "skiplist_" + majorVersion + ".lst";
 		logger.debug("Build skiplist filename {" + skipListFilename + "} from version {" + version + "}");
-		File skipListFile = new File(baseDirectory, "mappings/" + skipListFilename);
+		File skipListFile = new File(mappingsDirectory, skipListFilename);
 		List<String> skiplist = new ArrayList<String>();
 		if (skipListFile.exists()) {
-			skiplist = FileUtils.readLines(skipListFile);
+			skiplist = FileUtils.readLines(skipListFile, "UTF-8");
 		}
 
 		// TODO verify the changelog files and make sure there are no duplicates
 
 		// 3. Fetch all entries that can be found
-		Collection<File> allChangelogEntryFiles = ChangelogEntryUtils.getChangelogEntryFiles(new File(baseDirectory, "entries"));
+		Collection<File> allChangelogEntryFiles = ChangelogEntryUtils.getChangelogEntryFiles(entriesDirectory);
 
 		// 4. Assume that all those entries are unmapped by adding them to the unmappedFile array
 		Map<String, File> unmappedFiles = new HashMap<String, File>();
@@ -179,13 +206,12 @@ public class ChangelogUtils {
 
 				if (skipListFile.exists()) {
 					// Check whether the entry has been mapped in an older changelog
-					List<Changelog> changelogsContainingEntryList = getChangelogsForEntry(baseDirectory, file);
+					List<Changelog> changelogsContainingEntryList = getChangelogsForEntry(mappingsDirectory, file);
 					boolean entryIsMappedToNewerChangelog = false;
 					for (Changelog currentChangelog : changelogsContainingEntryList) {
-						ChangelogComparator comparator = new ChangelogComparator();
 						String majorVersionParts[] = parseVersion(majorVersion);
 						logger.debug("Comparing {" + majorVersion + "} with {" + currentChangelog.getVersion() + "}");
-						int compareValue = comparator.compareVersion(majorVersionParts, ChangelogUtils.parseVersion(currentChangelog.getVersion()));
+						int compareValue = ChangelogComparator.compareVersion(majorVersionParts, ChangelogUtils.parseVersion(currentChangelog.getVersion()));
 						if (compareValue >= 0) {
 							logger.debug("The entry {" + file.getName() + "} is mapped to an newer or equal changelog mapping for {" + majorVersion
 									+ "}");
@@ -222,19 +248,26 @@ public class ChangelogUtils {
 	/**
 	 * Saves the given changelog object to a json file within the mappings directory relative to the given directory
 	 * 
-	 * @param baseDirectory
 	 * @param changelog
+	 * @param prefix optional prefix
 	 * @throws IOException
 	 * @throws ChangelogManagerException
 	 */
-	public static void saveChangelogMapping(File baseDirectory, Changelog changelog) throws IOException, ChangelogManagerException {
+	public static void saveChangelogMapping(Changelog changelog, String prefix) throws IOException, ChangelogManagerException {
+		if (prefix == null) {
+			prefix = "";
+		}
+
+		if (!StringUtils.isEmpty(prefix)) {
+			prefix = StringUtils.appendIfMissing(prefix, "_");
+		}
 
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String json = gson.toJson(changelog);
 		String version = changelog.getVersion();
 
-		File changelogMappingFile = new File(ChangelogConfiguration.getChangelogMappingDirectory(), version + ".json");
+		File changelogMappingFile = new File(ChangelogConfiguration.getChangelogMappingDirectory(), prefix + version + ".json");
 
-		FileUtils.writeStringToFile(changelogMappingFile, json);
+		FileUtils.writeStringToFile(changelogMappingFile, json, "UTF-8");
 	}
 }

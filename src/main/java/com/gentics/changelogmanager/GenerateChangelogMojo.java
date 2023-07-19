@@ -2,6 +2,7 @@ package com.gentics.changelogmanager;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Properties;
 
 import org.apache.commons.lang.StringUtils;
@@ -35,6 +36,9 @@ public class GenerateChangelogMojo extends AbstractMojo {
 	private File outputDirectory;
 
 	@Parameter
+	private File entriesDirectory;
+
+	@Parameter
 	private String changelogTitle;
 
 	@Parameter
@@ -59,11 +63,18 @@ public class GenerateChangelogMojo extends AbstractMojo {
 	private boolean allowEmptyChangelog;
 
 	@Parameter
+	private Component[] components;
+
+	@Parameter
 	private Properties properties;
 
 	@Parameter(defaultValue = "${project}")
 	private MavenProject mavenProject;
 
+	/**
+	 * Configure the changelog generator
+	 * @throws MojoExecutionException
+	 */
 	private void configure() throws MojoExecutionException {
 		if (baseDirectory != null) {
 			ChangelogConfiguration.setBaseDirectory(baseDirectory, true);
@@ -71,6 +82,27 @@ public class GenerateChangelogMojo extends AbstractMojo {
 
 		if (outputDirectory != null) {
 			ChangelogConfiguration.setOutputDirectory(outputDirectory);
+		}
+
+		if (entriesDirectory != null) {
+			ChangelogConfiguration.setEntriesDirectory(entriesDirectory);
+		}
+
+		if (components != null) {
+			ChangelogConfiguration.setComponents(Arrays.asList(components));
+
+			for (Component component : components) {
+				getLog().info(String.format(
+						"Generating changelog for component %s, changelogversion %s. Entries taken from %s",
+						component.getName(), component.getVersion(), component.getEntriesDirectory().toString()));
+			}
+		} else {
+			try {
+				getLog().info(String.format("Generating general changelog, changelogversion %s. Entries taken from %s",
+						changelogVersion, ChangelogConfiguration.getEntriesDirectory().toString()));
+			} catch (ChangelogManagerException e) {
+				throw new MojoExecutionException("Error occured while handling configured directories.", e);
+			}
 		}
 
 		ChangelogConfiguration.setFoldNewlinesEnabled(foldNewlinesInEntries);
@@ -133,11 +165,17 @@ public class GenerateChangelogMojo extends AbstractMojo {
 
 	}
 
+	/**
+	 * Read the changelog entry files from the entries directory and put their names
+	 * into a new mapping file, if the entries were not contained in any of the
+	 * existing mapping files.
+	 * 
+	 * This is either done for each component (from the component specific entries directories) or from the global entries directory
+	 * 
+	 * @throws MojoExecutionException
+	 */
 	private void mapNewEntriesToChangelog() throws MojoExecutionException {
-		Changelog changelog;
 		try {
-			changelog = ChangelogUtils.createChangelogFromUnmappedEntries(baseDirectory, changelogVersion);
-
 			Properties genericProperties = new Properties();
 			if (properties != null) {
 				genericProperties.putAll(properties);
@@ -146,13 +184,27 @@ public class GenerateChangelogMojo extends AbstractMojo {
 				genericProperties.putAll(mavenProject.getProperties());
 			}
 
-			changelog.setGenericProperties(genericProperties);
-
-			// Only create a new changelog mapping when the changelog contains at least one new entry and when we allow empty changelogs
-			if (allowEmptyChangelog || changelog.getChangelogEntries().size() != 0) {
-				ChangelogUtils.saveChangelogMapping(baseDirectory, changelog);
+			if (components != null) {
+				for (Component component : components) {
+					Changelog componentChangelog = ChangelogUtils.createChangelogFromUnmappedEntries(ChangelogConfiguration.getChangelogMappingDirectory(),
+							component.getEntriesDirectory(), changelogVersion, component.getId());
+					componentChangelog.setGenericProperties(genericProperties);
+					componentChangelog.setComponentVersion(component.getVersion());
+					// Only create a new changelog mapping when the changelog contains at least one new entry and when we allow empty changelogs
+					if (allowEmptyChangelog || componentChangelog.getChangelogEntries().size() != 0) {
+						ChangelogUtils.saveChangelogMapping(componentChangelog, component.getId());
+					}
+				}
+			} else {
+				Changelog changelog = ChangelogUtils.createChangelogFromUnmappedEntries(
+						ChangelogConfiguration.getChangelogMappingDirectory(),
+						ChangelogConfiguration.getEntriesDirectory(), changelogVersion, null);
+				changelog.setGenericProperties(genericProperties);
+				// Only create a new changelog mapping when the changelog contains at least one new entry and when we allow empty changelogs
+				if (allowEmptyChangelog || changelog.getChangelogEntries().size() != 0) {
+					ChangelogUtils.saveChangelogMapping(changelog, null);
+				}
 			}
-
 		} catch (Exception e) {
 			throw new MojoExecutionException("Error occured while mapping new changelog entries to version {" + changelogVersion + "}", e);
 		}
@@ -175,6 +227,7 @@ public class GenerateChangelogMojo extends AbstractMojo {
 		}
 	}
 
+	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
 		configure();
 		validateConfiguration();

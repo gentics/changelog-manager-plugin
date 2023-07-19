@@ -1,0 +1,12 @@
+{
+  "version": "8.0.1",
+  "date": "19.07.2023",
+  "componentVersion": "6.0.1",
+  "changeLogEntryFileNames": [
+    "3.cms-3.enhancement"
+  ],
+  "genericProperties": {
+    "alohaeditor-date": "2012/12/12",
+    "alohaeditor-version": "0.9.3"
+  }
+}
