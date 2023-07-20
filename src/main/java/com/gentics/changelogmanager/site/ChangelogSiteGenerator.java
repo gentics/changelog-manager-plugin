@@ -343,6 +343,7 @@ public class ChangelogSiteGenerator {
 		for (AbstractChangelog changelog : changelogSubSet) {
 			VelocityContext context = new VelocityContext();
 			context.put("changelog", changelog);
+			context.put("changelogsSubset", changelogSubSet);
 			context.put("components", ChangelogConfiguration.getComponents());
 			File templateFile = ChangelogConfiguration.getChangelogTemplateFile();
 			File outputFile = new File(outputdir, changelog.getVersion() + ".html");

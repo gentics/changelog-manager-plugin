@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
+
 import com.gentics.changelogmanager.ChangelogConfiguration;
 import com.gentics.changelogmanager.ChangelogManagerException;
 import com.gentics.changelogmanager.entry.ChangelogEntry;
@@ -75,6 +77,14 @@ public class Changelog extends AbstractChangelog {
 	 */
 	public List<ChangelogEntry> getChangelogEntries() throws ChangelogManagerException {
 		return getChangelogEntries(ChangelogConfiguration.getEntriesDirectory());
+	}
+
+	/**
+	 * Check whether the changelog contains any changelog entries
+	 * @return true if the changelog contains entries, false if not
+	 */
+	public boolean hasChangelogEntries() {
+		return !CollectionUtils.isEmpty(changeLogEntryFileNames);
 	}
 
 	/**

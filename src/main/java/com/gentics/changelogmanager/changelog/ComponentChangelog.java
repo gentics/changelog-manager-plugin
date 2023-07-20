@@ -37,6 +37,19 @@ public class ComponentChangelog extends AbstractChangelog {
 	}
 
 	/**
+	 * Check whether the changelog contains any changelog entries for the component
+	 * @param component component
+	 * @return true if the changelog contains entries, false if not
+	 */
+	public boolean hasChangelogEntries(Component component) {
+		if (changelogForComponents.containsKey(component.getId())) {
+			return changelogForComponents.get(component.getId()).hasChangelogEntries();
+		} else {
+			return false;
+		}
+	}
+
+	/**
 	 * Get the component version (if available, otherwise return empty string)
 	 * @param component component
 	 * @return component version
