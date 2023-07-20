@@ -147,7 +147,7 @@ public class ChangelogUtils {
 		}
 
 		if (!StringUtils.isEmpty(prefix)) {
-			prefix = StringUtils.appendIfMissing(version, "_");
+			prefix = StringUtils.appendIfMissing(prefix, "_");
 		}
 
 		Changelog changelog = new Changelog(version);
@@ -162,7 +162,7 @@ public class ChangelogUtils {
 				logger.info("Skipping existing changelog mapping file for version " + version);
 				continue;
 			}
-			for (ChangelogEntry currentEntry : currentChangelog.getChangelogEntries()) {
+			for (ChangelogEntry currentEntry : currentChangelog.getChangelogEntries(entriesDirectory)) {
 				mappedChangelogEntryFiles.add(currentEntry.getFile());
 			}
 		}

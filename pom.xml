@@ -57,6 +57,12 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<version>3.12.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>2.13.0</version>
@@ -122,26 +128,26 @@
 				<artifactId>changelog-manager-plugin</artifactId>
 				<version>3.0.0-SNAPSHOT</version>
 				<configuration>
-					<baseDirectory>${basedir}/src/test/resources/testData</baseDirectory>
+					<baseDirectory>${basedir}/src/test/resources/component_base</baseDirectory>
 					<outputDirectory>${basedir}/target/output</outputDirectory>
-					<changelogTitle>Gentics Content.Node Changelog</changelogTitle>
+					<changelogTitle>Gentics CMP Changelog</changelogTitle>
 					<changelogTypes>manualchange,feature,enhancement,bugfix</changelogTypes>
 					<changelogVersion>20.2.112</changelogVersion>
 					<strictRenderMode>false</strictRenderMode>
 					<allowEmptyChangelog>true</allowEmptyChangelog>
 					<includeProjectProperties>false</includeProjectProperties>
-					<overviewTemplateFileNames>index.vm, merged_changelog.vm, plain_merged_changelog.vm</overviewTemplateFileNames>
+					<overviewTemplateFileNames>index.vm</overviewTemplateFileNames>
 					<components>
 						<component>
 							<id>cms</id>
 							<name>Gentics CMS</name>
-							<changelogVersion>6.0.1</changelogVersion>
+							<version>6.0.1</version>
 							<entriesDirectory>${basedir}/src/test/resources/cms/entries</entriesDirectory>
 						</component>
 						<component>
 							<id>mesh</id>
 							<name>Gentics Mesh</name>
-							<changelogVersion>2.0.1</changelogVersion>
+							<version>2.0.1</version>
 							<entriesDirectory>${basedir}/src/test/resources/mesh/entries</entriesDirectory>
 						</component>
 					</components>
