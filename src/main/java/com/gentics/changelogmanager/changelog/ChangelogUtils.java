@@ -8,13 +8,14 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
-import org.apache.log4j.Logger;
+import org.apache.maven.plugin.logging.Log;
 
 import com.gentics.changelogmanager.ChangelogConfiguration;
 import com.gentics.changelogmanager.ChangelogManagerException;
@@ -36,9 +37,13 @@ public class ChangelogUtils {
 
 	private static Pattern versionPattern = Pattern.compile("([0-9]+).([0-9]+).([0-9]+)(.*)");
 
-	private static Logger logger = Logger.getLogger(ChangelogUtils.class);
+	private static Optional<Log> logger = Optional.empty();
 
 	private static Map<Pair<File, String>, List<Changelog>> loadedChangelogs = new HashMap<>();
+
+	public static void setLogger(Log logger) {
+		ChangelogUtils.logger = Optional.ofNullable(logger);
+	}
 
 	/**
 	 * Loads all changelog mappings
@@ -69,7 +74,7 @@ public class ChangelogUtils {
 				if (prefix != null && !StringUtils.startsWith(mappingFile.getName(), prefix)) {
 					continue;
 				}
-				logger.debug("Loading mapping {" + mappingFile + "}");
+				logger.ifPresent(l -> l.debug("Loading mapping {" + mappingFile + "}"));
 				String json = FileUtils.readFileToString(mappingFile, "UTF-8");
 				Gson gson = new Gson();
 				Changelog mapping = gson.fromJson(json, Changelog.class);
@@ -159,7 +164,7 @@ public class ChangelogUtils {
 			// Skip the changelog for the version we actually want to map.
 			// This will basically lead to an update of the changelog mapping file for that particular version.
 			if (currentChangelog.getVersion().equalsIgnoreCase(version)) {
-				logger.info("Skipping existing changelog mapping file for version " + version);
+				logger.ifPresent(l -> l.info("Skipping existing changelog mapping file for version " + version));
 				continue;
 			}
 			for (ChangelogEntry currentEntry : currentChangelog.getChangelogEntries(entriesDirectory)) {
@@ -171,11 +176,13 @@ public class ChangelogUtils {
 		String versionParts[] = parseVersion(version);
 		String majorVersion = versionParts[0] + "." + versionParts[1] + ".0";
 		String skipListFilename = prefix + "skiplist_" + majorVersion + ".lst";
-		logger.debug("Build skiplist filename {" + skipListFilename + "} from version {" + version + "}");
+		logger.ifPresent(l -> l.debug("Build skiplist filename {" + skipListFilename + "} from version {" + version + "}"));
 		File skipListFile = new File(mappingsDirectory, skipListFilename);
 		List<String> skiplist = new ArrayList<String>();
 		if (skipListFile.exists()) {
 			skiplist = FileUtils.readLines(skipListFile, "UTF-8");
+			int size = skiplist.size();
+			logger.ifPresent(l -> l.debug(String.format("Skiplist contains %d entries", size)));
 		}
 
 		// TODO verify the changelog files and make sure there are no duplicates
@@ -183,19 +190,35 @@ public class ChangelogUtils {
 		// 3. Fetch all entries that can be found
 		Collection<File> allChangelogEntryFiles = ChangelogEntryUtils.getChangelogEntryFiles(entriesDirectory);
 
+		// Read the ignorelist (if one exists) and remove all files, which are mentioned in the ignorelist
+		String ignoreListFilename = prefix + "ignore.lst";
+		File ignoreListFile = new File(mappingsDirectory, ignoreListFilename);
+		List<String> ignoreList = new ArrayList<>();
+		if (ignoreListFile.exists()) {
+			ignoreList = FileUtils.readLines(ignoreListFile, "UTF-8");
+			int size = ignoreList.size();
+			logger.ifPresent(l -> l.debug(String.format("Ignorelist contains %d entries", size)));
+		}
+
 		// 4. Assume that all those entries are unmapped by adding them to the unmappedFile array
 		Map<String, File> unmappedFiles = new HashMap<String, File>();
 		for (File file : allChangelogEntryFiles) {
+			if (ignoreList.contains(file.getName())) {
+				logger.ifPresent(l -> l.debug(String.format("Ignoring file %s, because it is mentioned in the ignorelist", file.toString())));
+				continue;
+			}
 			unmappedFiles.put(file.getName(), file);
 		}
 
 		// 5. Remove all files that have already been mapped except those that were not listed on the skiplist
 		for (File file : mappedChangelogEntryFiles) {
 
+			logger.ifPresent(l -> l.debug(String.format("Checking entry %s", file.getName())));
+
 			// Check whether the file was listed in the skiplist. We skip those
 			if (skiplist.contains(file.getName())) {
-				logger.debug("Skipping file {" + file
-						+ "} because it is listed in the skiplist. It will be removed from the list of possible unmapped entries.");
+				logger.ifPresent(l -> l.debug("Skipping file {" + file
+						+ "} because it is listed in the skiplist. It will be removed from the list of possible unmapped entries."));
 				unmappedFiles.remove(file.getName());
 				continue;
 			}
@@ -206,30 +229,30 @@ public class ChangelogUtils {
 
 				if (skipListFile.exists()) {
 					// Check whether the entry has been mapped in an older changelog
-					List<Changelog> changelogsContainingEntryList = getChangelogsForEntry(mappingsDirectory, file);
+					List<Changelog> changelogsContainingEntryList = getChangelogsForEntry(entriesDirectory, file);
 					boolean entryIsMappedToNewerChangelog = false;
 					for (Changelog currentChangelog : changelogsContainingEntryList) {
 						String majorVersionParts[] = parseVersion(majorVersion);
-						logger.debug("Comparing {" + majorVersion + "} with {" + currentChangelog.getVersion() + "}");
+						logger.ifPresent(l -> l.debug("Comparing {" + majorVersion + "} with {" + currentChangelog.getVersion() + "}"));
 						int compareValue = ChangelogComparator.compareVersion(majorVersionParts, ChangelogUtils.parseVersion(currentChangelog.getVersion()));
 						if (compareValue >= 0) {
-							logger.debug("The entry {" + file.getName() + "} is mapped to an newer or equal changelog mapping for {" + majorVersion
-									+ "}");
+							logger.ifPresent(l -> l.debug("The entry {" + file.getName() + "} is mapped to an newer or equal changelog mapping for {" + majorVersion
+									+ "}"));
 							entryIsMappedToNewerChangelog = true;
 						} else {
-							logger.debug("The entry {" + file.getName() + "} is mapped to an older changelog mapping than {" + majorVersion + "}");
+							logger.ifPresent(l -> l.debug("The entry {" + file.getName() + "} is mapped to an older changelog mapping than {" + majorVersion + "}"));
 						}
 					}
 
 					if (entryIsMappedToNewerChangelog) {
-						logger.debug("Removing file {" + file
+						logger.ifPresent(l -> l.debug("Removing file {" + file
 								+ "} from the list of unmapped changelog files because it is alreay mapped a changelog mapping that is >= {"
-								+ version + "} / {" + majorVersion + "}");
+								+ version + "} / {" + majorVersion + "}"));
 						unmappedFiles.remove(file.getName());
 					}
 				} else {
-					logger.debug("Removing file {" + file
-							+ "} from the list of unmapped changelog files because it is already mapped to a changelog mapping.");
+					logger.ifPresent(l -> l.debug("Removing file {" + file
+							+ "} from the list of unmapped changelog files because it is already mapped to a changelog mapping."));
 					unmappedFiles.remove(file.getName());
 				}
 			}

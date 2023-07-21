@@ -12,11 +12,12 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.maven.plugin.logging.Log;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.MethodInvocationException;
@@ -44,7 +45,11 @@ public class ChangelogSiteGenerator {
 
 	public static final String LOGGER_NAME = "console";
 
-	private static Logger log = Logger.getLogger(ChangelogSiteGenerator.class);
+	private static Optional<Log> logger = Optional.empty();
+
+	public static void setLogger(Log logger) {
+		ChangelogSiteGenerator.logger = Optional.ofNullable(logger);
+	}
 
 	private String title;
 	private boolean strictMode = true;
@@ -161,9 +166,7 @@ public class ChangelogSiteGenerator {
 
 			for (Component component : ChangelogConfiguration.getComponents()) {
 				List<Changelog> changes = ChangelogUtils.getChangelogs(ChangelogConfiguration.getChangelogMappingDirectory(), component.getId(), true);
-				if (log.isDebugEnabled()) {
-					log.debug(String.format("Found %d changelog mappings for component %s", changes.size(), component.getName()));
-				}
+				logger.ifPresent(l -> l.debug(String.format("Found %d changelog mappings for component %s", changes.size(), component.getName())));
 				if (changes.size() == 0) {
 					throw new ChangelogManagerException(String.format(
 							"There are no changelogs to be generated for component %s. No changelog mapping was found in the mappings directory.",
@@ -190,9 +193,7 @@ public class ChangelogSiteGenerator {
 			Collections.sort(componentChangelogs, new ChangelogComparator());
 		} else {
 			changelogs = ChangelogUtils.getChangelogs(ChangelogConfiguration.getChangelogMappingDirectory(), null, true);
-			if (log.isDebugEnabled()) {
-				log.debug("Found " + changelogs.size() + " changelog mappings.");
-			}
+			logger.ifPresent(l -> l.debug("Found " + changelogs.size() + " changelog mappings."));
 			if (changelogs.size() == 0) {
 				throw new ChangelogManagerException("There are no changelogs to be generated. No changelog mapping was found in the mappings directory.");
 			}
@@ -203,7 +204,7 @@ public class ChangelogSiteGenerator {
 	 * Enable the strict rendering mode
 	 */
 	public void enableStrictMode() {
-		log.info("Enabling strict mode for velocity rendering. Buckle up!");
+		logger.ifPresent(l -> l.info("Enabling strict mode for velocity rendering. Buckle up!"));
 		strictMode = true;
 	}
 
@@ -211,7 +212,7 @@ public class ChangelogSiteGenerator {
 	 * Disable the strict rendering mode
 	 */
 	public void disableStrictMode() {
-		log.info("Disabling strict mode for velocity rendering.");
+		logger.ifPresent(l -> l.info("Disabling strict mode for velocity rendering."));
 		strictMode = false;
 	}
 

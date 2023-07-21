@@ -76,6 +76,9 @@ public class GenerateChangelogMojo extends AbstractMojo {
 	 * @throws MojoExecutionException
 	 */
 	private void configure() throws MojoExecutionException {
+		ChangelogUtils.setLogger(getLog());
+		ChangelogSiteGenerator.setLogger(getLog());
+
 		if (baseDirectory != null) {
 			ChangelogConfiguration.setBaseDirectory(baseDirectory, true);
 		}
