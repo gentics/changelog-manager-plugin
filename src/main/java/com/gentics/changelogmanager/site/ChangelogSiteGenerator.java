@@ -360,8 +360,10 @@ public class ChangelogSiteGenerator {
 	 */
 	private void copyStaticContentToOutputDirectory() throws IOException, ChangelogManagerException {
 		File staticContentDirectory = ChangelogConfiguration.getStaticContentDirectory();
-		File outputDirectory = ChangelogConfiguration.getOutputDirectory();
-		FileUtils.copyDirectoryToDirectory(staticContentDirectory, outputDirectory);
+		if (staticContentDirectory != null && staticContentDirectory.isDirectory()) {
+			File outputDirectory = ChangelogConfiguration.getOutputDirectory();
+			FileUtils.copyDirectoryToDirectory(staticContentDirectory, outputDirectory);
+		}
 	}
 
 }
