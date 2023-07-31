@@ -4,7 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 
@@ -20,16 +22,13 @@ import com.gentics.changelogmanager.parser.ChangelogFileParser;
  */
 public final class ChangelogEntryUtils {
 
-	private static Collection<File> cachedChangelogEntryFiles;
+	private static Map<File, Collection<File>> cachedChangelogEntryFiles = new HashMap<>();
 
 	public static Collection<File> getChangelogEntryFiles(File baseDirectory) {
-
-		if (cachedChangelogEntryFiles == null) {
+		return cachedChangelogEntryFiles.computeIfAbsent(baseDirectory, base -> {
 			String[] changelogTypes = ChangelogConfiguration.getChangelogTypes().toArray(new String[0]);
-			Collection<File> changelogEntryFiles = FileUtils.listFiles(baseDirectory, changelogTypes, true);
-			cachedChangelogEntryFiles = changelogEntryFiles;
-		}
-		return cachedChangelogEntryFiles;
+			return FileUtils.listFiles(base, changelogTypes, true);
+		});
 	}
 
 	/**

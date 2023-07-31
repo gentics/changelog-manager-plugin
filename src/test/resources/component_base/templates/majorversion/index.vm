@@ -1,0 +1,4 @@
+$minorversion
+#foreach($changelog in $changelogsSubset)
+    ${changelog.version}.html
+#end

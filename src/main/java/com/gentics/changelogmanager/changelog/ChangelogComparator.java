@@ -10,9 +10,9 @@ import com.gentics.changelogmanager.ChangelogManagerException;
  * @author johannes2
  * 
  */
-public class ChangelogComparator implements Comparator<Changelog> {
+public class ChangelogComparator implements Comparator<AbstractChangelog> {
 
-	private String[] getPartsFromVersion(Changelog changelog) throws ChangelogManagerException {
+	private String[] getPartsFromVersion(AbstractChangelog changelog) throws ChangelogManagerException {
 		return ChangelogUtils.parseVersion(changelog.getVersion());
 	}
 
@@ -30,7 +30,7 @@ public class ChangelogComparator implements Comparator<Changelog> {
 		}
 
 		if (i < vals1.length && i < vals2.length) {
-			int diff = new Integer(vals1[i]).compareTo(new Integer(vals2[i]));
+			int diff = Integer.compare(Integer.parseInt(vals1[i]), Integer.parseInt(vals2[i]));
 			return diff < 0 ? 1 : diff == 0 ? 0 : -1;
 		}
 		return vals1.length < vals2.length ? 1 : vals1.length == vals2.length ? 0 : -1;
@@ -39,7 +39,7 @@ public class ChangelogComparator implements Comparator<Changelog> {
 	/**
 	 * Compares the given two changelogs
 	 */
-	public int compare(Changelog o1, Changelog o2) {
+	public int compare(AbstractChangelog o1, AbstractChangelog o2) {
 		
 		try {
 			String[] vals1 = getPartsFromVersion(o1);

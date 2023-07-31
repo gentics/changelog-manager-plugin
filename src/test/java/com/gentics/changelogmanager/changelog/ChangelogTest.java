@@ -27,14 +27,18 @@ public class ChangelogTest extends AbstractChangelogTest {
 
 	@Test
 	public void testNewChangelogFromUnmappedEntries() throws ChangelogManagerException, IOException {
-		Changelog mapping = ChangelogUtils.createChangelogFromUnmappedEntries(testBaseDirectory, "1.2.5");
+		Changelog mapping = ChangelogUtils.createChangelogFromUnmappedEntries(
+				ChangelogConfiguration.getChangelogMappingDirectory(), ChangelogConfiguration.getEntriesDirectory(),
+				"1.2.5", null);
 		mapping.addGenericProperty("alohaeditor-version", "0.9.3");
-		ChangelogUtils.saveChangelogMapping(testBaseDirectory, mapping);
+		ChangelogUtils.saveChangelogMapping(mapping, null);
 	}
 
 	@Test
 	public void testChangelogSkipListUsage() throws ChangelogManagerException, IOException {
-		Changelog mapping = ChangelogUtils.createChangelogFromUnmappedEntries(testBaseDirectory, "5.13.1");
+		Changelog mapping = ChangelogUtils.createChangelogFromUnmappedEntries(
+				ChangelogConfiguration.getChangelogMappingDirectory(), ChangelogConfiguration.getEntriesDirectory(),
+				"5.13.1", null);
 		for (ChangelogEntry changelogEntry : mapping.getChangelogEntries()) {
 			System.out.println(changelogEntry.getFile());
 		}
@@ -81,7 +85,9 @@ public class ChangelogTest extends AbstractChangelogTest {
 
 	@Test
 	public void testChangelogNoSkipList() throws ChangelogManagerException, IOException {
-		Changelog mapping = ChangelogUtils.createChangelogFromUnmappedEntries(testBaseDirectory, "5.17.4222");
+		Changelog mapping = ChangelogUtils.createChangelogFromUnmappedEntries(
+				ChangelogConfiguration.getChangelogMappingDirectory(), ChangelogConfiguration.getEntriesDirectory(),
+				"5.17.4222", null);
 		for (ChangelogEntry changelogEntry : mapping.getChangelogEntries()) {
 			System.out.println(changelogEntry.getFile());
 		}
@@ -104,12 +110,12 @@ public class ChangelogTest extends AbstractChangelogTest {
 		list.add(entry);
 
 		Changelog mapping = new Changelog(version, list);
-		ChangelogUtils.saveChangelogMapping(testBaseDirectory, mapping);
+		ChangelogUtils.saveChangelogMapping(mapping, null);
 	}
 
 	@Test
 	public void testLoadChangeLogMapping() throws IOException, ChangelogManagerException {
-		List<Changelog> mappings = ChangelogUtils.getChangelogs(testBaseDirectory, false);
+		List<Changelog> mappings = ChangelogUtils.getChangelogs(testBaseDirectory, null, false);
 		assertTrue(mappings.size() > 1);
 	}
 

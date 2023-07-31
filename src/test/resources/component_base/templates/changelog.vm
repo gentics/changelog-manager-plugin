@@ -1,0 +1,11 @@
+Version: $changelog.version
+Date: $changelog.date
+#foreach($component in $components)##
+  Component: $component.name $changelog.getComponentVersion($component) ($component.id)
+#foreach($entry in $changelog.getChangelogEntries($component))##
+    id: $entry.id
+    source: $entry.source
+    ticket: $entry.ticketReference
+    ------
+#end##
+#end##
