@@ -165,12 +165,12 @@
 		<repository>
 			<id>lan.releases</id>
 			<name>Gentics Repository Stage</name>
-			<url>http://artifactory.office/repository/lan.releases</url>
+			<url>https://repo.apa-it.at/artifactory/gtx-maven-releases</url>
 		</repository>
 		<snapshotRepository>
 			<id>lan.snapshots</id>
 			<name>Gentics Snapshots Repository</name>
-			<url>http://artifactory.office/repository/lan.snapshots</url>
+			<url>https://repo.apa-it.at/artifactory/gtx-maven-snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
 </project>
