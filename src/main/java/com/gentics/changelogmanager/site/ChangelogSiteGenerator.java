@@ -248,6 +248,7 @@ public class ChangelogSiteGenerator {
 					File outputFile = new File(outputDir, outputFilename);
 					VelocityContext context = new VelocityContext();
 					context.put("changelogsSubset", minorVersions.get(minorVersion));
+					context.put("components", ChangelogConfiguration.getComponents());
 					context.put("minorversion", minorVersion);
 					renderTemplate(perMinorVersionTemplateFile, outputFile, context);
 				}
