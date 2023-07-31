@@ -74,6 +74,12 @@ public class GenerateChangelogMojo extends AbstractMojo {
 	@Parameter
 	private String outputFileExtension;
 
+	@Parameter
+	private boolean skipMapping;
+
+	@Parameter
+	private boolean skipRender;
+
 	/**
 	 * Configure the changelog generator
 	 * @throws MojoExecutionException
@@ -241,7 +247,11 @@ public class GenerateChangelogMojo extends AbstractMojo {
 	public void execute() throws MojoExecutionException, MojoFailureException {
 		configure();
 		validateConfiguration();
-		mapNewEntriesToChangelog();
-		renderTemplates();
+		if (!skipMapping) {
+			mapNewEntriesToChangelog();
+		}
+		if (!skipRender) {
+			renderTemplates();
+		}
 	}
 }
