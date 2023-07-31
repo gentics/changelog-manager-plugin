@@ -71,6 +71,9 @@ public class GenerateChangelogMojo extends AbstractMojo {
 	@Parameter(defaultValue = "${project}")
 	private MavenProject mavenProject;
 
+	@Parameter
+	private String outputFileExtension;
+
 	/**
 	 * Configure the changelog generator
 	 * @throws MojoExecutionException
@@ -85,6 +88,10 @@ public class GenerateChangelogMojo extends AbstractMojo {
 
 		if (outputDirectory != null) {
 			ChangelogConfiguration.setOutputDirectory(outputDirectory);
+		}
+
+		if (outputFileExtension != null) {
+			ChangelogConfiguration.setOutputFileExtension(outputFileExtension);
 		}
 
 		if (entriesDirectory != null) {

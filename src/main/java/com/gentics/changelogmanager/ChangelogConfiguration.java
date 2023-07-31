@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 public final class ChangelogConfiguration {
 
 	public static final String DEFAULT_BASE_DIRECTORY_PATH = "src/main/changelog";
@@ -17,6 +19,7 @@ public final class ChangelogConfiguration {
 
 	public static final String DEFAULT_CHANGELOG_INDEX_TEMPLATE_FILENAME = "index.vm";
 	public static final String DEFAULT_CHANGELOG_TEMPLATE_FILENAME = "changelog.vm";
+	public static final String DEFAULT_OUTPUT_FILE_EXTENSION = ".html";
 
 	public static enum ParserType {
 		TEXTILE, MARKDOWN
@@ -36,6 +39,8 @@ public final class ChangelogConfiguration {
 	private static List<String> overviewTemplateFileNames = new ArrayList<String>();
 	private static List<String> perMajorVersionOverviewTemplateFileNames = new ArrayList<String>();
 	private static String changelogTemplateFileName;
+
+	private static String outputFileExtension = DEFAULT_OUTPUT_FILE_EXTENSION;
 
 	private static List<Component> components;
 
@@ -351,5 +356,15 @@ public final class ChangelogConfiguration {
 
 	public static boolean hasComponents() {
 		return components != null;
+	}
+
+	public static String getOutputFileExtension() {
+		return outputFileExtension;
+	}
+
+	public static void setOutputFileExtension(String outputFileExtension) {
+		if (!StringUtils.isEmpty(outputFileExtension)) {
+			ChangelogConfiguration.outputFileExtension = StringUtils.prependIfMissing(outputFileExtension, ".");
+		}
 	}
 }

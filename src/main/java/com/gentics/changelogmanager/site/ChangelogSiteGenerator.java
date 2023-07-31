@@ -227,7 +227,7 @@ public class ChangelogSiteGenerator {
 			Map<String, List<ComponentChangelog>> minorVersions = getMinorVersionsForComponents();
 
 			for (File templateFile : ChangelogConfiguration.getOverviewTemplateFiles()) {
-				String outputFilename = FilenameUtils.removeExtension(templateFile.getName()) + ".html";
+				String outputFilename = FilenameUtils.removeExtension(templateFile.getName()) + ChangelogConfiguration.getOutputFileExtension();
 				File outputFile = new File(ChangelogConfiguration.getOutputDirectory(), outputFilename);
 				VelocityContext context = new VelocityContext();
 				context.put("components", ChangelogConfiguration.getComponents());
@@ -244,7 +244,7 @@ public class ChangelogSiteGenerator {
 				List<ComponentChangelog> changelogs = minorVersions.get(minorVersion);
 				File outputDir = new File(ChangelogConfiguration.getOutputDirectory(), minorVersion);
 				for (File perMinorVersionTemplateFile : ChangelogConfiguration.getPerMinorVersionOverviewTemplateFile()) {
-					String outputFilename = FilenameUtils.removeExtension(perMinorVersionTemplateFile.getName()) + ".html";
+					String outputFilename = FilenameUtils.removeExtension(perMinorVersionTemplateFile.getName()) + ChangelogConfiguration.getOutputFileExtension();
 					File outputFile = new File(outputDir, outputFilename);
 					VelocityContext context = new VelocityContext();
 					context.put("changelogsSubset", minorVersions.get(minorVersion));
@@ -257,7 +257,7 @@ public class ChangelogSiteGenerator {
 		} else {
 			Map<String, List<Changelog>> minorVersions = getMinorVersions();
 			for (File templateFile : ChangelogConfiguration.getOverviewTemplateFiles()) {
-				String outputFilename = FilenameUtils.removeExtension(templateFile.getName()) + ".html";
+				String outputFilename = FilenameUtils.removeExtension(templateFile.getName()) + ChangelogConfiguration.getOutputFileExtension();
 				File outputFile = new File(ChangelogConfiguration.getOutputDirectory(), outputFilename);
 				VelocityContext context = new VelocityContext();
 				context.put("changelogs", getChangelogs());
@@ -273,7 +273,7 @@ public class ChangelogSiteGenerator {
 				List<Changelog> changelogs = minorVersions.get(minorVersion);
 				File outputDir = new File(ChangelogConfiguration.getOutputDirectory(), minorVersion);
 				for (File perMinorVersionTemplateFile : ChangelogConfiguration.getPerMinorVersionOverviewTemplateFile()) {
-					String outputFilename = FilenameUtils.removeExtension(perMinorVersionTemplateFile.getName()) + ".html";
+					String outputFilename = FilenameUtils.removeExtension(perMinorVersionTemplateFile.getName()) + ChangelogConfiguration.getOutputFileExtension();
 					File outputFile = new File(outputDir, outputFilename);
 					VelocityContext context = new VelocityContext();
 					context.put("changelogsSubset", minorVersions.get(minorVersion));
@@ -347,7 +347,7 @@ public class ChangelogSiteGenerator {
 			context.put("changelogsSubset", changelogSubSet);
 			context.put("components", ChangelogConfiguration.getComponents());
 			File templateFile = ChangelogConfiguration.getChangelogTemplateFile();
-			File outputFile = new File(outputdir, changelog.getVersion() + ".html");
+			File outputFile = new File(outputdir, changelog.getVersion() + ChangelogConfiguration.getOutputFileExtension());
 			renderTemplate(templateFile, outputFile, context);
 		}
 	}
