@@ -144,14 +144,14 @@
 
 	<distributionManagement>
           <repository>
-                        <id>lan.releases</id>
-                        <name>Gentics Repository Stage</name>
-                        <url>http://artifactory.office/repository/lan.releases</url>
-          </repository>
-          <snapshotRepository>
-                        <id>lan.snapshots</id>
-                        <name>Gentics Snapshots Repository</name>
-                        <url>http://artifactory.office/repository/lan.snapshots</url>
-          </snapshotRepository>
+			<id>gentics.nexus.releases-oss</id>
+			<name>Gentics Nexus OSS Maven Repository</name>
+			<url>https://repo.gentics.com/repository/maven-releases-oss/</url>
+		</repository>
+		<snapshotRepository>
+			<id>gentics.nexus.snapshots</id>
+			<name>Gentics Snapshots Repository</name>
+			<url>https://repo.gentics.com/repository/maven-snapshots/</url>
+		</snapshotRepository>
 	</distributionManagement>
 </project>
