@@ -20,14 +20,16 @@ import com.gentics.changelogmanager.parser.ChangelogFileParser;
  */
 public final class ChangelogEntryUtils {
 
+	private static File cachedBaseDir;
 	private static Collection<File> cachedChangelogEntryFiles;
 
 	public static Collection<File> getChangelogEntryFiles(File baseDirectory) {
 
-		if (cachedChangelogEntryFiles == null) {
+		if (cachedChangelogEntryFiles == null || cachedBaseDir == null || !cachedBaseDir.equals(baseDirectory)) {
 			String[] changelogTypes = ChangelogConfiguration.getChangelogTypes().toArray(new String[0]);
 			Collection<File> changelogEntryFiles = FileUtils.listFiles(baseDirectory, changelogTypes, true);
 			cachedChangelogEntryFiles = changelogEntryFiles;
+			cachedBaseDir =  baseDirectory;
 		}
 		return cachedChangelogEntryFiles;
 	}
