@@ -45,11 +45,13 @@ public class ChangelogSiteGeneratorTest extends AbstractChangelogTest {
 		types.add("enhancement");
 		types.add("bugfix");
 
-		Changelog changelog = ChangelogUtils.createChangelogFromUnmappedEntries(testBaseDirectory, "5.14.1");
+		Changelog changelog = ChangelogUtils.createChangelogFromUnmappedEntries(
+				ChangelogConfiguration.getChangelogMappingDirectory(), ChangelogConfiguration.getEntriesDirectory(),
+				"5.14.1", null);
 
 		// Only create a new changelog mapping when the changelog contains at least one new entry and when we allow empty changelogs
 		if (changelog.getChangelogEntries().size() != 0) {
-			ChangelogUtils.saveChangelogMapping(testBaseDirectory, changelog);
+			ChangelogUtils.saveChangelogMapping(changelog, null);
 		}
 
 		ChangelogConfiguration.setChangelogTypes(types);

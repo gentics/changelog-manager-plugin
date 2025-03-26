@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 public final class ChangelogConfiguration {
 
 	public static final String DEFAULT_BASE_DIRECTORY_PATH = "src/main/changelog";
@@ -13,9 +15,11 @@ public final class ChangelogConfiguration {
 	public static final String DEFAULT_TEMPLATE_DIRECTORY_NAME = "templates";
 	public static final String DEFAULT_OUTPUT_DIRECTORY_NAME = "changelog_output";
 	public static final String DEFAULT_MAPPING_DIRECTORY_NAME = "mappings";
+	public static final String DEFAULT_ENTRIES_DIRECTORY_NAME = "entries";
 
 	public static final String DEFAULT_CHANGELOG_INDEX_TEMPLATE_FILENAME = "index.vm";
 	public static final String DEFAULT_CHANGELOG_TEMPLATE_FILENAME = "changelog.vm";
+	public static final String DEFAULT_OUTPUT_FILE_EXTENSION = ".html";
 
 	public static enum ParserType {
 		TEXTILE, MARKDOWN
@@ -29,11 +33,16 @@ public final class ChangelogConfiguration {
 	private static File templateDirectory;
 	private static File staticContentDirectory;
 	private static File changelogMappingDirectory;
+	private static File entriesDirectory;
 
 	private static List<String> changelogTypes = new ArrayList<String>();
 	private static List<String> overviewTemplateFileNames = new ArrayList<String>();
 	private static List<String> perMajorVersionOverviewTemplateFileNames = new ArrayList<String>();
 	private static String changelogTemplateFileName;
+
+	private static String outputFileExtension = DEFAULT_OUTPUT_FILE_EXTENSION;
+
+	private static List<Component> components;
 
 	public static final String TYPE_ENHANCEMENT = "enhancement";
 	public static final String TYPE_BUGFIX = "bugfix";
@@ -82,6 +91,7 @@ public final class ChangelogConfiguration {
 		staticContentDirectory = new File(baseDirectory, DEFAULT_STATIC_CONTENT_DIRECTORY_NAME);
 		changelogMappingDirectory = new File(baseDirectory, DEFAULT_MAPPING_DIRECTORY_NAME);
 		outputDirectory = new File(baseDirectory, DEFAULT_OUTPUT_DIRECTORY_NAME);
+		entriesDirectory = new File(baseDirectory, DEFAULT_ENTRIES_DIRECTORY_NAME);
 	}
 
 	/**
@@ -228,6 +238,29 @@ public final class ChangelogConfiguration {
 	}
 
 	/**
+	 * Set the entries directory
+	 * @param directory entries directory
+	 */
+	public static void setEntriesDirectory(File directory) {
+		entriesDirectory = directory;
+	}
+
+	/**
+	 * Get the entries directory. This will also check for existence and whether it is a directory (and throw a {@link ChangelogManagerException} if not)
+	 * @return entries directory
+	 * @throws ChangelogManagerException if the directory does not exist or is no directory
+	 */
+	public static File getEntriesDirectory() throws ChangelogManagerException {
+		if (!entriesDirectory.exists()) {
+			throw new ChangelogManagerException(String.format("Entries directory %s does not exist", entriesDirectory.toString()));
+		}
+		if (!entriesDirectory.isDirectory()) {
+			throw new ChangelogManagerException(String.format("Entries directory %s is no directory", entriesDirectory.toString()));
+		}
+		return entriesDirectory;
+	}
+
+	/**
 	 * Returns the list of template files
 	 * 
 	 * @return
@@ -311,5 +344,27 @@ public final class ChangelogConfiguration {
 	 */
 	public static boolean isFoldNewlinesEnabled() {
 		return isFoldNewlinesEnabled;
+	}
+
+	public static void setComponents(List<Component> components) {
+		ChangelogConfiguration.components = components;
+	}
+
+	public static List<Component> getComponents() {
+		return components;
+	}
+
+	public static boolean hasComponents() {
+		return components != null;
+	}
+
+	public static String getOutputFileExtension() {
+		return outputFileExtension;
+	}
+
+	public static void setOutputFileExtension(String outputFileExtension) {
+		if (!StringUtils.isEmpty(outputFileExtension)) {
+			ChangelogConfiguration.outputFileExtension = StringUtils.prependIfMissing(outputFileExtension, ".");
+		}
 	}
 }

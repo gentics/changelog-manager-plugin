@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.Objects;
 import java.util.Scanner;
 
 import net.sf.textile4j.Textile;
@@ -89,17 +90,20 @@ public class ChangelogEntry {
 	 * Sets the ticket reference to this changelog entry.
 	 * 
 	 * @param ticketReference
+	 * @return fluent API
 	 */
-	public void setTicketReference(String ticketReference) {
+	public ChangelogEntry setTicketReference(String ticketReference) {
 		this.ticketReference = ticketReference;
+		return this;
 	}
 
 	public long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public ChangelogEntry setId(long id) {
 		this.id = id;
+		return this;
 	}
 
 	public File getFile() {
@@ -114,9 +118,11 @@ public class ChangelogEntry {
 	 * Set the source for this changelog entry
 	 * 
 	 * @param source
+	 * @return fluent API
 	 */
-	public void setSource(String source) {
+	public ChangelogEntry setSource(String source) {
 		this.source = source;
+		return this;
 	}
 
 	/**
@@ -202,8 +208,24 @@ public class ChangelogEntry {
 		return type;
 	}
 
-	public void setType(String type) {
+	public ChangelogEntry setType(String type) {
 		this.type = type;
+		return this;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof ChangelogEntry) {
+			ChangelogEntry other = (ChangelogEntry) obj;
+			return Objects.equals(id, other.id) && Objects.equals(type, other.type)
+					&& Objects.equals(source, other.source) && Objects.equals(ticketReference, other.ticketReference);
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public String toString() {
+		return String.format("ChangelogEntry id: %d, type: %s, ticket: %s, source: %s", id, type, ticketReference, source);
+	}
 }
