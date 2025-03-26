@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.gentics</groupId>
 	<artifactId>changelog-manager-plugin</artifactId>
-	<version>3.0.2-SNAPSHOT</version>
+	<version>3.0.2</version>
 	<packaging>maven-plugin</packaging>
 
 	<name>Changelog Parser Maven Plugin</name>
@@ -121,7 +121,7 @@
 			<plugin>
 				<groupId>com.gentics</groupId>
 				<artifactId>changelog-manager-plugin</artifactId>
-				<version>3.0.2-SNAPSHOT</version>
+				<version>3.0.2</version>
 				<configuration>
 					<baseDirectory>${basedir}/src/test/resources/component_base</baseDirectory>
 					<outputDirectory>${basedir}/target/output</outputDirectory>
