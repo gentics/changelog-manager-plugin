@@ -162,15 +162,15 @@
 	</build>
 
 	<distributionManagement>
-		<repository>
-			<id>lan.releases</id>
-			<name>Gentics Repository Stage</name>
-			<url>https://repo.apa-it.at/artifactory/gtx-maven-releases</url>
+    <repository>
+			<id>gentics.nexus.releases-oss</id>
+			<name>Gentics Nexus OSS Maven Repository</name>
+			<url>https://repo.gentics.com/repository/maven-releases-oss/</url>
 		</repository>
 		<snapshotRepository>
-			<id>lan.snapshots</id>
+			<id>gentics.nexus.snapshots</id>
 			<name>Gentics Snapshots Repository</name>
-			<url>https://repo.apa-it.at/artifactory/gtx-maven-snapshots</url>
+			<url>https://repo.gentics.com/repository/maven-snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
 </project>
