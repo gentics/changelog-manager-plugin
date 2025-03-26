@@ -111,20 +111,21 @@ public class ChangelogUtils {
 
 	/**
 	 * Returns a list of changelogs that lists the given changelog entry
-	 * 
+	 *
+	 * @param entriesDirectory
+	 * @param changelogList
 	 * @param entryFile
 	 * @return
 	 * @throws ChangelogManagerException
 	 * @throws IOException
 	 */
-	private static List<Changelog> getChangelogsForEntry(File baseDirectory, File entryFile) throws ChangelogManagerException, IOException {
+	private static List<Changelog> getChangelogsForEntry(File entriesDirectory, List<Changelog> changelogList, File entryFile) throws ChangelogManagerException, IOException {
 		if (entryFile == null) {
 			throw new ChangelogManagerException("The changelog entry file can't be null");
 		}
 		List<Changelog> foundChangelogs = new ArrayList<Changelog>();
-		List<Changelog> changelogList = getChangelogs(baseDirectory, null, false);
 		for (Changelog changelog : changelogList) {
-			for (ChangelogEntry entry : changelog.getChangelogEntries()) {
+			for (ChangelogEntry entry : changelog.getChangelogEntries(entriesDirectory)) {
 				if (entryFile.getName().equalsIgnoreCase(entry.getFile().getName())) {
 					foundChangelogs.add(changelog);
 				}
@@ -229,7 +230,7 @@ public class ChangelogUtils {
 
 				if (skipListFile.exists()) {
 					// Check whether the entry has been mapped in an older changelog
-					List<Changelog> changelogsContainingEntryList = getChangelogsForEntry(entriesDirectory, file);
+					List<Changelog> changelogsContainingEntryList = getChangelogsForEntry(entriesDirectory, changelogList, file);
 					boolean entryIsMappedToNewerChangelog = false;
 					for (Changelog currentChangelog : changelogsContainingEntryList) {
 						String majorVersionParts[] = parseVersion(majorVersion);
