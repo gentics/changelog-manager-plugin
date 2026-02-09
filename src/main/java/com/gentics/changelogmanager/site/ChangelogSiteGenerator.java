@@ -307,6 +307,8 @@ public class ChangelogSiteGenerator {
 		StringWriter writer = new StringWriter();
 
 		VelocityEngine vEngine = new VelocityEngine();
+		
+		vEngine.addProperty("file.resource.loader.path", ChangelogConfiguration.getTemplateDirectory().getPath() );
 
 		// Configure the logger
 		vEngine.setProperty(RuntimeConstants.RUNTIME_LOG_LOGSYSTEM_CLASS, "org.apache.velocity.runtime.log.Log4JLogChute");
