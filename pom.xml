@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.gentics</groupId>
 	<artifactId>changelog-manager-plugin</artifactId>
-	<version>3.0.3-SNAPSHOT</version>
+	<version>3.0.3</version>
 	<packaging>maven-plugin</packaging>
 
 	<name>Changelog Parser Maven Plugin</name>
