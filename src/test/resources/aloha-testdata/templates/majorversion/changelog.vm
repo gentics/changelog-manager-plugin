@@ -54,27 +54,7 @@
 			<div id="mainCol">
 				<hr />
 				#foreach($entry in $changelog.getChangelogEntries())
-					#set($html = $entry.getHTML())
-				
-					#if ($entry.type == "note") 
-						<div class="note"><strong>$html</strong></div>
-						#set($html="")
-					#elseif ($entry.type == "bugfix") 
-						<h4 style="vertical-align:middle;"><img src="../static/images/changelog_types/bugfix_24.png" alt="" /> <strong>Bugfix $entry.ticketReference</strong></h4>
-					#elseif ($entry.type == "enhancement") 
-						<h4 style="vertical-align:middle;"><img src="../static/images/changelog_types/enhancement_24.png" alt="" /> <strong>Enhancement $entry.ticketReference</strong></h4>
-					#elseif ($entry.type == "feature") 
-						<h4 style="vertical-align:middle;"><img src="../static/images/changelog_types/feature_24.png" alt="" /> <strong>Feature $entry.ticketReference</strong></h4>
-					#elseif ($entry.type == "manualchange" || $entry.type == "optional-manualchange")
-						<div class="warning"><p><strong>Manual Change</strong> $entry.getHTMLHeadline()</p></div>
-						#set($html = $entry.getHTMLWithoutHeadline())
-					#elseif ($entry.type == "security")
-						<h4 style="vertical-align:middle;"><img src="../static/images/changelog_types/security_24.png" alt="" /> <strong>Security $entry.ticketReference</strong></h4>
-					#else
-						<h4 style="vertical-align:middle;"><strong>Unknown type: $entry.type</strong></h4>
-					#end
-					$html
-					<hr />
+					#parse("partials/singleEntry.vm")
 				#end
 				
 				#set($range = [1..2])
